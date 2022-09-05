@@ -1,0 +1,14 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+  clusterName: ""
+
+tracing:
+  jaeger:
+    proto:
+      address:
+
+monitoring:
+  prometheus:
+    rwrite:
+      address:
