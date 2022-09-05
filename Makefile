@@ -1,7 +1,7 @@
-CHARTS_DIR=plugins
-CHARTMUSEUM_ADDR=https://charts.kubegems.io/kubegems
-HELM_REPO_USERNAME=kubegems
-HELM_REPO_PASSWORD=
+CHARTS_DIR?=plugins
+HELM_REPO_USERNAME?=kubegems
+HELM_REPO_PASSWORD?=
+CHARTMUSEUM_ADDR?=https://${HELM_REPO_USERNAME}:${HELM_REPO_PASSWORD}@charts.kubegems.io/kubegems
 
 install:
 	helm plugin install https://github.com/chartmuseum/helm-push

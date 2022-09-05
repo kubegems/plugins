@@ -20,3 +20,5 @@ jobs:
 
       - name: Upload
         run: make upload
+        env:
+          HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
