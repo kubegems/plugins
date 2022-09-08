@@ -7,4 +7,4 @@ install:
 	helm plugin install https://github.com/chartmuseum/helm-push
 
 upload:
-	@$(foreach file, $(wildcard $(CHARTS_DIR)/*), helm cm-push $(file) ${CHARTMUSEUM_ADDR};)
+	@$(foreach file, $(wildcard $(CHARTS_DIR)/*), helm cm-push -d -f $(file) ${CHARTMUSEUM_ADDR};)
