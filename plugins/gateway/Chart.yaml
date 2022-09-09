@@ -3,3 +3,8 @@ name: gateway
 version: 1.0.0
 appVersion: 0.3.2
 description: KubeGems 租户网关，基于 Nginx ingress
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: kubegems-gateway
+  plugins.kubegems.io/category: core/网关
+  plugins.kubegems.io/health-check: "deployments.apps/*"

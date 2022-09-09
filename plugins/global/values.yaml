@@ -1,7 +1,6 @@
-global:
-  imageRegistry: ""
-  imageRepository: ""
-  clusterName: ""
-  storageClass: ""
-  kubegemsVersion: ""
-  runtime: ""
+imageRegistry: ""
+imageRepository: ""
+clusterName: ""
+storageClass: ""
+kubegemsVersion: ""
+runtime: ""

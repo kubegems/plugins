@@ -2,7 +2,7 @@
     namespace:{{ include "common.component.namespace" "" }}
 */}}
 {{- define "common.component.namespace" -}}
-{{- "kubegems-local" -}}
+{{- "kubegems-installer" -}}
 {{- end -}}
 
 {{/*

@@ -15,11 +15,11 @@ Plugins extend from helm charts.
 
 add custom annotations to Chart.yaml annotations field:
 
-| name                                    | example               | desc                                                      |
-| --------------------------------------- | --------------------- | --------------------------------------------------------- |
-| `plugins.kubegems.io/main-category`     | "kubernetes"          | first level of plugins category                           |
-| `plugins.kubegems.io/category`          | "devops"              | plugin category                                           |
-| `plugins.kubegems.io/install-namespace` | ""                    | where the plugin should install to by default             |
-| `plugins.kubegems.io/use-template`      | "true"                | install this plugin use 'template' engine instead of helm |
-| `plugins.kubegems.io/health-check`      | "deployments.apps/\*" | health check targets                                      |
-| `plugins.kubegems.io/required`          | "true"                | this plugin is required for init installation             |
+| name                                    | example                          | desc                                          |
+| --------------------------------------- | -------------------------------- | --------------------------------------------- |
+| `plugins.kubegems.io/is-plugin`         | (required) "true"                | mark this chart is a kubegems plugin          |
+| `plugins.kubegems.io/install-namespace` | (required) "kubegems-installer"  | plugin install namespace                      |
+| `plugins.kubegems.io/category`          | (required) "core/devops"         | 'core' is top category, 'devops' is category  |
+| `plugins.kubegems.io/values-from`       | (optional) "logging,tracing"     | use values from other plugins                 |
+| `plugins.kubegems.io/health-check`      | (optional) "deployments.apps/\*" | health check targets                          |
+| `plugins.kubegems.io/required`          | (optional) "true"                | this plugin is required for init installation |

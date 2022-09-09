@@ -3,3 +3,7 @@ name: volume-snapshoter
 version: 1.0.0
 appVersion: 5.0.1
 description: KubeGems平台存储卷快照CRD
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: kube-system
+  plugins.kubegems.io/category: kubernetes/存储插件

@@ -386,7 +386,7 @@ agent:
   metrics:
     ## @param agent.metrics.enabled Create a service for accessing the metrics endpoint
     ##
-    enabled: false
+    enabled: true
     ## Metrics service parameters
     ##
 
@@ -433,7 +433,7 @@ agent:
     serviceMonitor:
       ## @param agent.metrics.serviceMonitor.enabled Specify if a servicemonitor will be deployed for prometheus-operator
       ##
-      enabled: true
+      enabled: false
       ## @param agent.metrics.serviceMonitor.jobLabel Specify the jobLabel to use for the prometheus-operator
       ##
       jobLabel: app.kubernetes.io/name

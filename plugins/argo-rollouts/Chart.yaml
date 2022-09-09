@@ -7,3 +7,8 @@ dependencies:
     repository: file://../common
     version: 1.x.x
 appVersion: 2.14.0
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: argo-rollouts
+  plugins.kubegems.io/values-from: "monitoring"
+  plugins.kubegems.io/category: core/应用管理

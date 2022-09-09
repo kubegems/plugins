@@ -7,3 +7,7 @@ dependencies:
     version: 1.x.x
 appVersion: 1.30.0
 description: KubeGems平台应用链路追踪套件(Jaeger)
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: observability
+  plugins.kubegems.io/category: core/可观测性

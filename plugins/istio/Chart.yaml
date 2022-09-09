@@ -7,3 +7,9 @@ dependencies:
     repository: file://../common
     version: 1.x.x
 description: KubeGems 平台 Istio 服务治理套件
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: istio-system
+  plugins.kubegems.io/values-from: "monitoring,tracing"
+  plugins.kubegems.io/category: core/服务网格
+  plugins.kubegems.io/health-check: "deployments.apps/*"

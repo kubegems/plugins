@@ -7,3 +7,7 @@ dependencies:
     repository: file://../common
     version: 1.x.x
 description: MetalLB 是为 Kubernetes 集群实现的网络负载均衡器(ARP 或 BGP 模式)
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: metallb
+  plugins.kubegems.io/category: kubernetes/网络

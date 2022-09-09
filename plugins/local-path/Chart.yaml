@@ -7,3 +7,8 @@ dependencies:
     repository: file://../common
     version: 1.x.x
 description: Rancher 开源的一款采用主机本地文件系统的Kubernetes存储控制器
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: local-path-storage
+  plugins.kubegems.io/category: kubernetes/存储插件
+
