@@ -1,3 +1,0 @@
-{{ include "common.component.configmap" . }}
-data:
-  alert.address: {{ include "alert.address" .}}
