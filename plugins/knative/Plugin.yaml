@@ -1,0 +1,77 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: knative-serving
+  annotations:
+    plugins.kubegems.io/category: 网络
+    plugins.kubegems.io/main-category: kubernetes
+spec:
+  disabled: false # 默认启用
+  kind: helm
+  installNamespace: knative-serving
+  url: https://charts.kubegems.io/kubegems
+  chart: knative-serving
+  version: 1.0.1
+  values:
+    core:
+      domain: "openai.harix.cloudminds.com"
+      activator:
+        podDisruptionBudget:
+          enabled: false
+        priorityClassName: ""
+        name: "activator"
+        autoscaling:
+          minReplicas: 1
+          maxReplicas: 20
+          targetCPUUtilizationPercentage: 100
+        resources: {}
+      autoscaler:
+        podDisruptionBudget:
+          enabled: false
+        priorityClassName: ""
+        replicaCount: 1
+        name: "autoscaler"
+        resources: {}
+        podAnnotations: {}
+      controller:
+        podDisruptionBudget:
+          enabled: false
+        priorityClassName: ""
+        name: "controller"
+        resources: {}
+        podAnnotations: {}
+      webhook:
+        podDisruptionBudget:
+          enabled: false
+        priorityClassName: ""
+        name: "webhook"
+        resources: {}
+        podAnnotations: {}
+      domain-mapping:
+        podDisruptionBudget:
+          enabled: false
+        priorityClassName: ""
+        name: "domain-mapping"
+        resources: {}
+        podAnnotations: {}
+      podLabels: {}
+      podAnnotations: {}
+      tolerations: []
+      nodeSelector: {}
+      lifecycle: {}
+      affinity: {}
+    net:
+      name: "net-kourier"
+    certmanager:
+      resouces:
+        requests:
+          cpu: 30m
+          memory: 40Mi
+        limits:
+          cpu: 300m
+          memory: 400Mi
+      enabled: false
+      httpProtocol: Enabled
+      typeissuer: ClusterIssuer
+      clusterissuer: ""
+      provider: "cert-manager"
