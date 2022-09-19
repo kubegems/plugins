@@ -9,9 +9,13 @@ spec:
   path: helm
   version: master
   values:
+    namespace: {{ .Release.Namespace }}
+    global:
+      mode: cluster
     service:
       type: ClusterIP
     nacos:
+      replicaCount: 1
       image:
         # repository: nacos/nacos-server
         {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "nacos/nacos-server" "context" .) }}
@@ -24,3 +28,6 @@ spec:
       enabled: true
       data:
         storageClassName: {{ .Values.global.storageClass }}
+      resources:
+        requests:
+          storage: 5Gi
