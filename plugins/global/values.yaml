@@ -1,6 +1,14 @@
+## @section Global parameters
+#
+## @param imageRegistry image registry
+## @param imageRepository image repository
+## @param clusterName cluster name
+## @param storageClass default storage class name
+## @param kubegemsVersion kubegemsVersion
+## @param runtime runtime
 imageRegistry: ""
 imageRepository: ""
-clusterName: ""
-storageClass: ""
+clusterName: "manager-cluster"
+storageClass: "local-path"
 kubegemsVersion: ""
 runtime: ""

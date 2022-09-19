@@ -1,0 +1,36 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "imageRegistry": {
+            "type": "string",
+            "default": "docker.io",
+            "description": "image registry"
+        },
+        "imageRepository": {
+            "type": "string",
+            "default": "kubegems",
+            "description": "image repository"
+        },
+        "clusterName": {
+            "type": "string",
+            "default": "manager-cluster",
+            "description": "cluster name"
+        },
+        "storageClass": {
+            "type": "string",
+            "default": "local-path",
+            "description": "default storage class name"
+        },
+        "kubegemsVersion": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "kubegemsVersion"
+        },
+        "runtime": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "runtime"
+        }
+    }
+}
