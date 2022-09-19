@@ -1,9 +1,15 @@
+annotations:
+  plugins.kubegems.io/category: core/可观测性
+  plugins.kubegems.io/health-check: statefulsets.apps/loki-*,deployments.apps/logging-*
+  plugins.kubegems.io/install-namespace: kubegems-logging
+  plugins.kubegems.io/is-plugin: 'true'
+  plugins.kubegems.io/values-from: monitoring
 apiVersion: v2
+appVersion: 3.17.6
+dependencies:
+- name: common
+  repository: file://../common
+  version: 1.x.x
+description: KubeGems平台管理容器日志框架,包含控制器、Loki Stack等服务
 name: logging
 version: 1.0.0
-dependencies:
-  - name: common
-    repository: file://../common
-    version: 1.x.x
-appVersion: 3.17.6 # logging-operator version
-description: KubeGems平台管理容器日志框架,包含控制器、Loki Stack等服务

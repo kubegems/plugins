@@ -1,9 +1,15 @@
+annotations:
+  plugins.kubegems.io/category: core/可观测性
+  plugins.kubegems.io/health-check: deployments.apps/*
+  plugins.kubegems.io/install-namespace: kubegems-eventer
+  plugins.kubegems.io/is-plugin: 'true'
+  plugins.kubegems.io/values-from: logging
 apiVersion: v2
+appVersion: 1.4.12
+dependencies:
+- name: common
+  repository: file://../common
+  version: 1.x.x
+description: Kubernetes集群事件收集器(需开启 logging 套件)
 name: eventer
 version: 1.0.0
-dependencies:
-  - name: common
-    repository: file://../common
-    version: 1.x.x
-appVersion: 1.4.12
-description: Kubernetes集群事件收集器(需开启 logging 套件)

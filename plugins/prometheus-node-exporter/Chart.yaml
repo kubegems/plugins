@@ -1,9 +1,13 @@
+annotations:
+  plugins.kubegems.io/category: kubernetes/可观测性
+  plugins.kubegems.io/install-namespace: kubegems-monitoring
+  plugins.kubegems.io/is-plugin: 'true'
 apiVersion: v2
+appVersion: 3.3.0
+dependencies:
+- name: common
+  repository: file://../common
+  version: 1.x.x
+description: Prometheus 下的一个可用于收集主机指标数据(包括CPU、内存和磁盘)的服务
 name: prometheus-node-exporter
 version: 1.0.0
-dependencies:
-  - name: common
-    repository: file://../common
-    version: 1.x.x
-appVersion: 3.3.0
-description: Prometheus 下的一个可用于收集主机指标数据(包括CPU、内存和磁盘)的服务

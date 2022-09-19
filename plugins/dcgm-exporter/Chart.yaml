@@ -1,9 +1,14 @@
+annotations:
+  plugins.kubegems.io/category: kubernetes/GPU
+  plugins.kubegems.io/health-check: daemonsets.apps/dcgm-exporter
+  plugins.kubegems.io/install-namespace: kubegems-monitoring
+  plugins.kubegems.io/is-plugin: 'true'
 apiVersion: v2
+appVersion: 2.6.9
+dependencies:
+- name: common
+  repository: file://../common
+  version: 1.x.x
+description: 用于采集Nvidia gpu设备监控指标的prometheus exporter
 name: dcgm-exporter
 version: 1.0.0
-dependencies:
-  - name: common
-    repository: file://../common
-    version: 1.x.x
-appVersion: 2.6.9
-description: 用于采集Nvidia gpu设备监控指标的prometheus exporter

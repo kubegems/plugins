@@ -1,9 +1,14 @@
+annotations:
+  plugins.kubegems.io/category: core/应用管理
+  plugins.kubegems.io/health-check: deployments.apps/*
+  plugins.kubegems.io/install-namespace: nacos
+  plugins.kubegems.io/is-plugin: 'true'
 apiVersion: v2
+appVersion: 2.1.1
+dependencies:
+- name: common
+  repository: file://../common
+  version: 1.x.x
+description: KubeGems 基于 Nacos 的应用配置和服务发现中心
 name: nacos
 version: 1.0.0
-description: KubeGems 基于 Nacos 的应用配置和服务发现中心
-appVersion: 2.1.0
-dependencies:
-  - name: common
-    repository: file://../common
-    version: 1.x.x
