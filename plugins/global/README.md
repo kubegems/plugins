@@ -6,9 +6,11 @@
 
 | Name              | Description                | Value             |
 | ----------------- | -------------------------- | ----------------- |
-| `imageRegistry`   | image registry             | `docker.io`       |
-| `imageRepository` | image repository           | `kubegems`        |
+| `imageRegistry`   | image registry             | `""`              |
+| `imageRepository` | image repository           | `""`              |
 | `clusterName`     | cluster name               | `manager-cluster` |
 | `storageClass`    | default storage class name | `local-path`      |
 | `kubegemsVersion` | kubegemsVersion            | `""`              |
 | `runtime`         | runtime                    | `""`              |
+
+

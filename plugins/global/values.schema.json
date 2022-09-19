@@ -4,12 +4,12 @@
     "properties": {
         "imageRegistry": {
             "type": "string",
-            "default": "docker.io",
+            "default": "\"\"",
             "description": "image registry"
         },
         "imageRepository": {
             "type": "string",
-            "default": "kubegems",
+            "default": "\"\"",
             "description": "image repository"
         },
         "clusterName": {

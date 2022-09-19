@@ -15,10 +15,8 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v1
 
-      - name: Install helm-push
-        run: make install
-
       - name: Upload
-        run: make upload
+        run: make package push
         env:
           HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
+         
