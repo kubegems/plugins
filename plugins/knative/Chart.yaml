@@ -1,0 +1,9 @@
+annotations:
+  plugins.kubegems.io/category: kubernetes/Serverless
+  plugins.kubegems.io/install-namespace: knative-serving
+  plugins.kubegems.io/is-plugin: "true"
+apiVersion: v2
+appVersion: 1.0.0
+description: Knative is an Open-Source Enterprise-level solution to build Serverless and Event Driven Applications
+name: knative
+version: 1.0.0
