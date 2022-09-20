@@ -1,3 +1,34 @@
 global:
   imageRegistry: ""
   imageRepository: ""
+
+nacos:
+  mode: cluster
+  replicaCount: 1
+  domainName: cluster.local
+
+  storage:
+    type: embedded
+    #mysql:
+    #  host: localhost
+    #  name: nacos
+    #  port: 3306
+    #  username: username
+    #  password: password
+    #  param: characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
+
+  resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  requests:
+    cpu: 500m
+    memory: 2Gi
+
+  persistene:
+    enable: true
+    size: 5Gi

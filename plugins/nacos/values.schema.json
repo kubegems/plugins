@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "nacos": {
+      "type": "object",
+      "title": "Nacos插件自定义设置",
+      "form": true,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "title": "集群模式",
+          "form": true,
+          "default": "cluster"
+        },
+        "replicaCount": {
+          "type": "integer",
+          "hidden": {
+            "path": "nacos/mode",
+            "value": "standalone"
+          },
+          "title": "集群副本数",
+          "form": true,
+          "default": 1
+        },
+        "domainName": {
+          "type": "string",
+          "title": "DNS 域,默认cluster.local",
+          "form": true,
+          "default": "cluster.local"
+        },
+        "storage": {
+          "type": "object",
+          "title": "Nacos 数据设置",
+          "form": true,
+          "properties": {
+            "type": {
+              "type": "string",
+              "titile": "数据存储类型,默认使用内置数据",
+              "form": true,
+              "default": "embedded"
+            }
+          }
+        },
+        "persistence": {
+          "type": "object",
+          "title": "Nacos 存储卷设置",
+          "form": true,
+          "properties": {
+            "enable": {
+              "type": "boolean",
+              "titile": "启用PVC 存储卷",
+              "form": true,
+              "default": true
+            },
+            "size": {
+              "type": "string",
+              "title": "存储卷容量",
+              "form": true,
+              "default": "5Gi",
+              "hidden": {
+                "path": "nacos/persistence/enable",
+                "value": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
