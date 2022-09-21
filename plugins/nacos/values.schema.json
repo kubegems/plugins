@@ -39,6 +39,47 @@
               "titile": "数据存储类型,默认使用内置数据",
               "form": true,
               "default": "embedded"
+            },
+            "db": {
+              "type": "object",
+              "title": "MySQL 配置",
+              "form": true,
+              "hidden": {
+                "path": "nacos/storage/type",
+                "value": "mysql"
+              },
+              "properties": {
+                "host": {
+                  "type": "string",
+                  "title": "MySQL 连接地址",
+                  "form": true,
+                  "default": "localhost"
+                },
+                "name": {
+                  "type": "string",
+                  "title": "MySQL Database",
+                  "form": true,
+                  "default": "nacos"
+                },
+                "port": {
+                  "type": "integer",
+                  "title": "Mysql 端口",
+                  "form": true,
+                  "default": 3306
+                },
+                "username": {
+                  "type": "string",
+                  "title": "Mysql 用户名",
+                  "form": true,
+                  "default": "nacos"
+                },
+                "password": {
+                  "type": "string",
+                  "title": "Mysql 密码",
+                  "form": true,
+                  "default": "password"
+                }
+              }
             }
           }
         },
