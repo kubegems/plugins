@@ -51,7 +51,7 @@ spec:
     image:
       {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "otel/opentelemetry-collector-contrib" "context" .) }}
     mode: deployment
-    replicaCount: 2
+    replicaCount: {{ .Values.opentelemetry.replicaCount }}
     #extraVolumeMounts:
     #- name: wal
     #  mountPath: /wal
@@ -75,8 +75,8 @@ spec:
         - 'watch'
     resources:
       limits:
-        cpu: 1
-        memory: 2Gi
+        cpu: {{ .Values.opentelemetry.resources.limits.cpu }}
+        memory: {{ .Values.opentelemetry.resources.limits.memory }}
       requests:
         cpu: 100m
         memory: 128Mi

@@ -11,3 +11,7 @@ spec:
     runtime: {{ .Values.global.runtime }}
     image:
       {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "tkestack/gpu-manager" "context" .) }}
+    {{- if .Values.monitoring.enabled }}
+    serviceMonitor:
+      enabled: true
+    {{- endif }}

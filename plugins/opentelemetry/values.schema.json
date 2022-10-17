@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "opentelemetry": {
+      "type": "object",
+      "title": "OpenTelemetry 插件自定义设置",
+      "form": true,
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "title": "OpenTelemetry Collector 副本数",
+          "form": true,
+          "default": 2
+        },
+        "resources": {
+          "type": "object",
+          "title": "OpenTelemetry Collector 资源配置",
+          "form": true,
+          "properties": {
+            "limits": {
+              "type": "object",
+              "title": "最大使用资源",
+              "form": true,
+              "properties": {
+                "cpu": {
+                  "title": "最大限制 cpu (1000m = 1 Core)",
+                  "type": "string",
+                  "form": true,
+                  "default": "1"
+                },
+                "memory": {
+                  "title": "最大限制 memory  (1Gi = 1 GB)",
+                  "type": "string",
+                  "form": true,
+                  "default": "2Gi"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

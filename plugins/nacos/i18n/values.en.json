@@ -4,12 +4,12 @@
   "properties": {
     "nacos": {
       "type": "object",
-      "title": "Nacos插件自定义设置",
+      "title": "Nacos Configuration",
       "form": true,
       "properties": {
         "mode": {
           "type": "string",
-          "title": "集群模式，默认为集群模式",
+          "title": "cluster Mode, default is cluster",
           "form": true,
           "default": "cluster"
         },
@@ -19,30 +19,30 @@
             "path": "nacos/mode",
             "value": "standalone"
           },
-          "title": "集群副本数,至少需要 2 个副本",
+          "title": "replicaCount",
           "form": true,
-          "default": 2
+          "default": 1
         },
         "domainName": {
           "type": "string",
-          "title": "DNS 域,默认cluster.local",
+          "title": "DNS domainName, cluster.local is default",
           "form": true,
           "default": "cluster.local"
         },
         "storage": {
           "type": "object",
-          "title": "Nacos 数据设置",
+          "title": "Nacos DB Configuration",
           "form": true,
           "properties": {
             "type": {
               "type": "string",
-              "titile": "数据存储类型,默认使用内置数据",
+              "titile": "DB type,embedded is default, or db",
               "form": true,
               "default": "embedded"
             },
             "db": {
               "type": "object",
-              "title": "MySQL 配置",
+              "title": "MySQL Configuration",
               "form": true,
               "hidden": {
                 "path": "nacos/storage/type",
@@ -51,7 +51,7 @@
               "properties": {
                 "host": {
                   "type": "string",
-                  "title": "MySQL 连接地址",
+                  "title": "MySQL Address",
                   "form": true,
                   "default": "localhost"
                 },
@@ -63,19 +63,19 @@
                 },
                 "port": {
                   "type": "integer",
-                  "title": "Mysql 端口",
+                  "title": "Mysql Port",
                   "form": true,
                   "default": 3306
                 },
                 "username": {
                   "type": "string",
-                  "title": "Mysql 用户名",
+                  "title": "Mysql username",
                   "form": true,
                   "default": "nacos"
                 },
                 "password": {
                   "type": "string",
-                  "title": "Mysql 密码",
+                  "title": "Mysql password",
                   "form": true,
                   "default": "password"
                 }
@@ -85,18 +85,18 @@
         },
         "persistence": {
           "type": "object",
-          "title": "Nacos 存储卷设置",
+          "title": "Nacos Persistence data",
           "form": true,
           "properties": {
             "enable": {
               "type": "boolean",
-              "titile": "启用 PVC 存储卷",
+              "titile": "Enable PersistenceVolume",
               "form": true,
               "default": true
             },
             "size": {
               "type": "string",
-              "title": "存储卷容量",
+              "title": "capabilities",
               "form": true,
               "default": "5Gi",
               "hidden": {

@@ -1,4 +1,9 @@
 global:
   imageRegistry: ""
   imageRepository: ""
-  runtime: "" # required
+  clusterName: ""
+  storageClass: ""
+  runtime: ""
+
+monitoring:
+  enabled:

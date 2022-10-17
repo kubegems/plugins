@@ -1,6 +1,9 @@
 global:
   imageRegistry: ""
   imageRepository: ""
+  clusterName: ""
+  storageClass: ""
+  runtime: ""
 
 nacos:
   mode: cluster

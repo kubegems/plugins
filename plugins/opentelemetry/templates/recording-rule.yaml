@@ -1,3 +1,4 @@
+{{- if .Values.monitoring.enabeld }}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -15,3 +16,4 @@ spec:
         - record: gems_otel_latency_bucket
           expr: |
             sum(label_replace(label_replace(label_replace(latency_bucket, "namespace", "$1", "k8s_namespace_name", "(.*)"), "service", "$1", "service_name", "(.*)"), "pod", "$1", "k8s_pod_name", "(.*)"))without(k8s_namespace_name, k8s_pod_name, service_name)
+{{- end }}
