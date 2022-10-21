@@ -3,22 +3,23 @@ HELM_REPO_USERNAME?=kubegems
 HELM_REPO_PASSWORD?=
 CHARTMUSEUM_ADDR?=https://${HELM_REPO_USERNAME}:${HELM_REPO_PASSWORD}@charts.kubegems.io/kubegems
 
+
+all: package check push
+
 generate:
-	@$(foreach dir, $(wildcard $(CHARTS_DIR)/*), \
-	readme-generator -v $(dir)/values.yaml -r $(dir)/README.md -m $(dir)/values.schema.json \
-	;)
+	find ${CHARTS_DIR} -mindepth 1 -maxdepth 1 -type d -exec \
+	readme-generator -v {}/values.yaml -r {}/README.md -m {}/values.schema.json \;
 
 TEMP_CHARTS_DIR := tmp
 package:
-	$(foreach dir, $(wildcard $(CHARTS_DIR)/*/), \
-	helm package -u -d ${TEMP_CHARTS_DIR} $(dir) \
-	;)
+	find ${CHARTS_DIR} -mindepth 1 -maxdepth 1 -type d -exec helm package -u -d ${TEMP_CHARTS_DIR} {} +
+
+check:
+	find ${TEMP_CHARTS_DIR}/*.tgz -not -name 'common*' -exec helm template -g {} \; 1>/dev/null
 
 .PHONY: helm-push
 push:
-	$(foreach file, $(wildcard $(TEMP_CHARTS_DIR)/*.tgz), \
-	curl --data-binary "@$(file)" ${CHARTMUSEUM_ADDR}/api/charts \
-	;)
+	find ${TEMP_CHARTS_DIR}/*.tgz -exec curl --data-binary "@{}" ${CHARTMUSEUM_ADDR}/api/charts \;
 
 .PHONY: readme-generator
 readme-generator:

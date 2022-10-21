@@ -27,9 +27,9 @@ spec:
           # repository: nacos/nacos-peer-finder-plugin
           {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "nacos/nacos-peer-finder-plugin" "context" .) }}
       storage: 
-        type: {{ .Values.storage.type }}
+        type: {{ .Values.nacos.storage.type }}
         db:
-          {{- toyaml .Values.nacos.storage.db | nindent 10 }}
+          {{- toYaml .Values.nacos.storage.db | nindent 10 }}
       resources:
         {{- toYaml .Values.nacos.resources | nindent 8 }}
       persistence:
