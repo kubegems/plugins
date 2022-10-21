@@ -1,0 +1,76 @@
+listen: ":9094"
+proxyTemplates:
+  - type: feishu
+    template: |
+      {
+        {{ if ne .Sign "" }}
+        "timestamp": "{{ .Timestamp }}",
+        "sign": "{{ .Sign }}",
+        {{ end }}
+        "msg_type": "interactive",
+        "card": {
+          "config": {
+            "wide_screen_mode": true
+          },
+          "elements": [
+            {
+              "fields": [
+                {
+                  "is_short": true,
+                  "text": {
+                    "content": "**🕐 开始时间: **{{ .Alert.StartsAt.Format "2006 01 02 15:04:05" }}",
+                    "tag": "lark_md"
+                  }
+                },
+                {
+                  "is_short": true,
+                  "text": {
+                    "content": "**{{ if eq .Alert.Labels.severity "critical" }}🟣{{ else }}🔴{{ end }} 级别: **{{ .Alert.Labels.severity }}",
+                    "tag": "lark_md"
+                  }
+                },
+                {
+                  "is_short": true,
+                  "text": {
+                    "content": "**☸️ 集群: **{{ .Alert.Labels.cluster }}",
+                    "tag": "lark_md"
+                  }
+                },
+                {
+                  "is_short": true,
+                  "text": {
+                    "content": "**🏠 命名空间: **{{ .Alert.Labels.gems_namespace }}",
+                    "tag": "lark_md"
+                  }
+                }{{ $length := len .At }}{{ if gt $length 0 }},
+                {
+                  "is_short": true,
+                  "text": {
+                    "content": "**👤 责任人: **{{ range .At }}<at id={{ . }}></at>{{ end }}",
+                    "tag": "lark_md"
+                  }
+                }
+                {{- end -}}
+              ],
+              "tag": "div"
+            },          
+            {
+              "tag": "hr"
+            },
+            {
+              "tag": "div",
+              "text": {
+                "content": "{{ .Alert.Annotations.message }}",
+                "tag": "lark_md"
+              }
+            }
+          ],
+          "header": {
+            "template": "red",
+            "title": {
+              "content": "🔥 [KubeGems告警中心] - {{ .Alert.Labels.gems_alertname }}",
+              "tag": "plain_text"
+            }
+          }
+        }
+      }
