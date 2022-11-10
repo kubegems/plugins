@@ -5,7 +5,7 @@ annotations:
   plugins.kubegems.io/is-plugin: 'true'
   plugins.kubegems.io/values-from: kubegems-local
 apiVersion: v2
-appVersion: 35.2.0
+appVersion: 41.3.2 # monitoring operator version
 dependencies:
 - name: common
   repository: file://../common
