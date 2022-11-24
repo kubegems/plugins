@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "nacos": {
+      "type": "object",
+      "title": "KubeGems Dial Setting",
+      "form": true,
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "title": "Dial node replicas",
+          "form": true,
+          "default": 1
+        },
+        "hostNetwork": {
+          "type": "boolean",
+          "title": "Enable Host Network",
+          "form": true,
+          "default": false
+        }
+      }
+    }
+  }
+}

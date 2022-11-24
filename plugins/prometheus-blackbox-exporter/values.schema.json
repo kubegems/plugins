@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "nacos": {
+      "type": "object",
+      "title": "拨测节点配置",
+      "form": true,
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "title": "拨测节点副本数",
+          "form": true,
+          "default": 1
+        },
+        "hostNetwork": {
+          "type": "boolean",
+          "title": "启用 host 网络",
+          "form": true,
+          "default": false
+        }
+      }
+    }
+  }
+}

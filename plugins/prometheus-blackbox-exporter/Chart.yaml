@@ -1,0 +1,13 @@
+annotations:
+  plugins.kubegems.io/category: kubernetes/可观测性
+  plugins.kubegems.io/install-namespace: kubegems-monitoring
+  plugins.kubegems.io/is-plugin: 'true'
+apiVersion: v2
+appVersion: 0.22.0
+dependencies:
+- name: common
+  repository: file://../common
+  version: 1.x.x
+description: The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP, ICMP and gRPC.
+name: prometheus-blackbox-exporter
+version: 7.1.3
