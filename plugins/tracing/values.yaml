@@ -1,12 +1,11 @@
 global:
   imageRegistry: ""
   imageRepository: ""
-chartVersion: 2.34.0
 elasticsearch:
   address: "" # override the default address
-  num-shards: ""
-  num-replicas: ""
-  timeout: ""
+  num-shards: 5
+  num-replicas: 1 
+  timeout: 30s
 
 monitoring:
   prometheus:

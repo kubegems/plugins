@@ -8,7 +8,7 @@ metadata:
 spec:
   kind: helm
   url: https://jaegertracing.github.io/helm-charts
-  version: {{ .Values.chartVersion }}
+  version: {{ .Chart.AppVersion }}
   values:
     image:
       # repository: docker.io/jaegertracing/jaeger-operator

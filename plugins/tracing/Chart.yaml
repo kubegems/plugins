@@ -1,11 +1,11 @@
 apiVersion: v2
 name: tracing
-version: 1.0.0
+version: 1.22
 dependencies:
   - name: common
     repository: file://../common
     version: 1.x.x
-appVersion: 1.30.0
+appVersion: 2.34.0
 description: KubeGems平台应用链路追踪套件(Jaeger)
 annotations:
   plugins.kubegems.io/is-plugin: "true"

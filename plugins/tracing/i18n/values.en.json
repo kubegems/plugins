@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "elasticsearch": {
+      "type": "object",
+      "title": "Jaeger Elasticsearch Setting",
+      "form": true,
+      "properties": {
+        "embedded": {
+          "type": "boolean",
+          "title": "Embedded Elastisearch Service, don't use for product envrioment",
+          "form": true,
+          "default": true
+        },
+        "address": {
+          "type": "string",
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          },
+          "title": "Elastisearch Address",
+          "form": true
+        },
+        "num-shards": {
+          "type": "integer",
+          "title": "elasticsearch index shards",
+          "form": true,
+          "default": 5,
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          }
+        },
+        "num-replicas": {
+          "type": "integer",
+          "title": "elasticsearch index replicas",
+          "form": true,
+          "default": 1,
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          }
+        },
+        "timeout": {
+          "type": "string",
+          "title": "elasticsearch connect timeout",
+          "form": true,
+          "default": "30s",
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          }
+        }
+      }
+    }
+  }
+}

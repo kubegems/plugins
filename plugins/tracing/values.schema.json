@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "elasticsearch": {
+      "type": "object",
+      "title": "elasticsearch 设置",
+      "form": true,
+      "properties": {
+        "embedded": {
+          "type": "boolean",
+          "title": "内置 Elastisearch,注意这仅用于测试，不要用于生产环境",
+          "form": true,
+          "default": true
+        },
+        "address": {
+          "type": "string",
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          },
+          "title": "Elastisearch 地址",
+          "form": true
+        },
+        "num-shards": {
+          "type": "integer",
+          "title": "elasticsearch index 分片数",
+          "form": true,
+          "default": 5,
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          }
+        },
+        "num-replicas": {
+          "type": "integer",
+          "title": "elasticsearch index 副本数",
+          "form": true,
+          "default": 1,
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          }
+        },
+        "timeout": {
+          "type": "string",
+          "title": "elasticsearch 连接超时时间",
+          "form": true,
+          "default": "30s",
+          "hidden": {
+            "path": "embedded",
+            "value": true
+          }
+        }
+      }
+    }
+  }
+}
