@@ -10,6 +10,11 @@ spec:
   version: "{{ .Chart.AppVersion }}"
   values:
     config:
+      extensions:
+        health_check: {}
+        memory_ballast: {}
+        pprof:
+          endpoint: 0.0.0.0:1777
       processors:
         k8sattributes:
           passthrough: true
@@ -36,6 +41,10 @@ spec:
           resource_to_telemetry_conversion:
             enabled: true
       service:
+        extensions:
+        - health_check
+        - memory_ballast
+        - pprof
         pipelines:
           traces:
             processors:
@@ -61,6 +70,12 @@ spec:
     ports:
       metrics:
         enabled: true
+      pprof:
+        enabled: true
+        containerPort: 1777
+        servicePort: 1777
+        hostPort: 1777
+        protocol: TCP
     clusterRole:
       create: true
       rules:
