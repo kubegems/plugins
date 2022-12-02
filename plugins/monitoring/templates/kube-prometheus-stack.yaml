@@ -23,6 +23,13 @@ spec:
         {{ include "common.images.repository" ( dict "registry" "k8s.gcr.io" "repository" "kube-state-metrics/kube-state-metrics" "context" .) }}
       metricLabelsAllowlist:
         - namespaces=[*] # scrape namespace labels
+      prometheus:
+        monitor:
+          metricRelabelings:
+            # drop this becase it has label service_name, which affect otel dashboard variables
+            - sourceLabels: [__name__]
+              regex: kube_ingress_path
+              action: drop
     grafana:
       enabled: false
     prometheusOperator:
