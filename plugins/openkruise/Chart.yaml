@@ -11,4 +11,4 @@ dependencies:
   version: 1.x.x
 description: OpenKruise是一个基于 Kubernetes 的扩展套件，主要聚焦于云原生应用的自动化，比如部署、发布、运维以及可用性防护
 name: openkruise
-version: 1.0.0
+version: 1.2.0

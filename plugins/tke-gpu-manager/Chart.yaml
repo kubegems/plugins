@@ -10,4 +10,4 @@ dependencies:
   version: 1.x.x
 description: 腾讯云(TKE)开源的Kubenretes集群GPU显卡资源虚拟化插件
 name: tke-gpu-manager
-version: 1.0.0
+version: 1.1.5

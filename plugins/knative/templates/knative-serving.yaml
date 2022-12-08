@@ -10,7 +10,7 @@ spec:
   version: 1.0.1
   values:
     core:
-      domain: "openai.harix.cloudminds.com"
+      domain: "serverless.kubegems.io"
       activator:
         podDisruptionBudget:
           enabled: false

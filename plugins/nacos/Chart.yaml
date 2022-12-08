@@ -11,4 +11,4 @@ dependencies:
   version: 1.x.x
 description: KubeGems 基于 Nacos 的应用配置和服务发现中心
 name: nacos
-version: 1.0.0
+version: 2.1.1

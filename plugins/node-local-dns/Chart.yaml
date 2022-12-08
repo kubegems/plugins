@@ -11,4 +11,4 @@ dependencies:
   version: 1.x.x
 description: Kubernetes 集群下的DNS缓存代理服务，用户提高集群下DNS性能(IPVS模式)
 name: node-local-dns
-version: 1.0.0
+version: 0.1.1

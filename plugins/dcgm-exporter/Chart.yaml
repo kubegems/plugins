@@ -11,4 +11,4 @@ dependencies:
   version: 1.x.x
 description: 用于采集Nvidia gpu设备监控指标的prometheus exporter
 name: dcgm-exporter
-version: 1.0.0
+version: 2.6.9

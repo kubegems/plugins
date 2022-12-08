@@ -11,4 +11,4 @@ dependencies:
   version: 1.x.x
 description: 开源的监控数据查询和可视化平台
 name: grafana
-version: 1.0.0
+version: 6.29.5

@@ -11,4 +11,4 @@ dependencies:
   version: 1.x.x
 description: Kubernetes 节点问题检测器是一个守护程序，用于监视和报告节点(内核)的健康状况
 name: node-problem-detector
-version: 1.0.0
+version: 2.2.2

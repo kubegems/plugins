@@ -10,4 +10,4 @@ dependencies:
   version: 1.x.x
 description: The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP, ICMP and gRPC.
 name: prometheus-blackbox-exporter
-version: 7.1.3
+version: 0.22.0

@@ -12,4 +12,4 @@ dependencies:
   version: 1.x.x
 description: Kubernetes集群事件收集器(需开启 logging 套件)
 name: eventer
-version: 1.0.0
+version: 1.4.12

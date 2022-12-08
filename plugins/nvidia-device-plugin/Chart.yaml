@@ -10,4 +10,4 @@ dependencies:
   version: 1.x.x
 description: Nvidia GPU显卡设备管理插件
 name: nvidia-device-plugin
-version: 1.0.0
+version: 0.11.0
