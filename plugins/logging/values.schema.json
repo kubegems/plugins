@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "logging-operator": {
+      "type": "object",
+      "title": "Logging Operator 配置",
+      "form": true,
+      "properties": {
+        "contorller": {
+          "type": "object",
+          "title": "日志 Controller 配置",
+          "form": true,
+          "properties": {
+            "maxCpu": {
+              "type": "string",
+              "title": "最大限制 CPU",
+              "default": "1",
+              "form": true
+            },
+            "maxMemory": {
+              "type": "string",
+              "title": "最大限制内存",
+              "default": "512Mi",
+              "form": true
+            }
+          }
+        },
+        "fluentbit": {
+          "type": "object",
+          "title": "Fluent-Bit 配置",
+          "form": true,
+          "properties": {
+            "containerLogPath": {
+              "type": "string",
+              "title": "容器日志路径",
+              "default": "/var/log/pod",
+              "form": true
+            },
+            "enableUpstream": {
+              "type": "boolean",
+              "title": "启用Upstream 负载均衡模式(实验性质)",
+              "default": false,
+              "form": true
+            },
+            "maxCpu": {
+              "type": "string",
+              "title": "最大限制 CPU",
+              "default": "1",
+              "form": true
+            },
+            "maxMemory": {
+              "type": "string",
+              "title": "最大限制内存",
+              "default": "1Gi",
+              "form": true
+            }
+          }
+        },
+        "fluentd": {
+          "type": "object",
+          "title": "Fluentd 配置",
+          "form": true,
+          "properties": {
+            "replicas": {
+              "type": "integer",
+              "title": "实例副本数",
+              "default": 2,
+              "form": true
+            },
+            "volumeCapacity": {
+              "type": "string",
+              "title": "日志据盘容量,用于持久化缓存日志数据",
+              "default": "20Gi",
+              "form": true
+            },
+            "maxCpu": {
+              "type": "string",
+              "title": "最大限制 CPU",
+              "default": "1",
+              "form": true
+            },
+            "maxMemory": {
+              "type": "string",
+              "title": "最大限制内存",
+              "default": "2Gi",
+              "form": true
+            }
+          }
+        }
+      }
+    },
+    "loki": {
+      "type": "object",
+      "title": "Loki 配置",
+      "form": true,
+      "properties": {
+        "storage": {
+          "type": "object",
+          "title": "日志存储配置,默认使用本地盘, 使用 s3 请参考官方文档(https://kubegems.io)",
+          "form": true,
+          "properties": {
+            "volumeCapacity": {
+              "type": "string",
+              "title": "日志数据磁盘容量, 默认 100Gi (根据实际日志产生规划容量)",
+              "default": "100Gi",
+              "form": true
+            }
+          }
+        },
+        "maxCpu": {
+          "type": "string",
+          "title": "最大限制 CPU",
+          "default": "4",
+          "form": true
+        },
+        "maxMemory": {
+          "type": "string",
+          "title": "最大限制内存",
+          "default": "8Gi",
+          "form": true
+        }
+      }
+    }
+  }
+}

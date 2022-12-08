@@ -63,14 +63,14 @@ spec:
             - key: prometheusrule.kubegems.io/name
               operator: Exists
         probeSelectorNilUsesHelmValues: false
-        retention: 30d
+        retention: {{ .Values.prometheus.retention }}
         resources:
           limits:
-            cpu: 4
-            memory: 8Gi
+            cpu: {{ .Values.prometheus.maxCpu }}
+            memory: {{ .Values.prometheus.maxMemory }}
           requests:
-            cpu: 2
-            memory: 4Gi
+            cpu: 100m
+            memory: 128Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -79,7 +79,7 @@ spec:
               storageClassName: {{ .Values.global.storageClass }}
               resources:
                 requests:
-                  storage: 200Gi
+                  storage: {{ .Values.prometheus.volumeCapacity }}
               volumeMode: Filesystem
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
@@ -130,7 +130,8 @@ spec:
           - configMap:
               key: kubegems-email.tmpl
               name: kubegems-email-template
-        retention: 240h
+        replicas: {{ .Values.alertmanager.replicas }}
+        retention: {{ .Values.alertmanager.retention }}
         storage:
           volumeClaimTemplate:
             spec:
@@ -139,17 +140,17 @@ spec:
               storageClassName: {{ .Values.global.storageClass }}
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: {{ .Values.alertmanager.volumeCapacity }}
               volumeMode: Filesystem
         # TODO: use correct port when we can get default-gateway's nodeport
         externalUrl: http://alertmanager.{{ .Values.global.clusterName }}.kubegems.io:9093
         resources:
           limits:
-            cpu: 500m
-            memory: 512Mi
+            cpu: {{ .Values.alertmanager.maxCpu }}
+            memory: {{ .Values.alertmanager.maxMemory }}
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 50m
+            memory: 64Mi
       ingress:
         enabled: true
         ingressClassName: default-gateway

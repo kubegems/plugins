@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "logging-operator": {
+      "type": "object",
+      "title": "Logging Operator Configuration",
+      "form": true,
+      "properties": {
+        "contorller": {
+          "type": "object",
+          "title": "Controller Configuration",
+          "form": true,
+          "properties": {
+            "maxCpu": {
+              "type": "string",
+              "title": "Max Limit CPU",
+              "default": "1",
+              "form": true
+            },
+            "maxMemory": {
+              "type": "string",
+              "title": "Max Limit Memory",
+              "default": "512Mi",
+              "form": true
+            }
+          }
+        },
+        "fluentbit": {
+          "type": "object",
+          "title": "Fluent-Bit Configuration",
+          "form": true,
+          "properties": {
+            "containerLogPath": {
+              "type": "string",
+              "title": "Pod or Containerd log path, default '/var/log/pod'",
+              "default": "/var/log/pod",
+              "form": true
+            },
+            "enableUpstream": {
+              "type": "boolean",
+              "title": "Enable Upstream loadbalance (Experimental)",
+              "default": false,
+              "form": true
+            },
+            "maxCpu": {
+              "type": "string",
+              "title": "Max Limit CPU",
+              "default": "1",
+              "form": true
+            },
+            "maxMemory": {
+              "type": "string",
+              "title": "Max Limit Memory",
+              "default": "1Gi",
+              "form": true
+            }
+          }
+        },
+        "fluentd": {
+          "type": "object",
+          "title": "Fluentd Configuration",
+          "form": true,
+          "properties": {
+            "replicas": {
+              "type": "integer",
+              "title": "Replicas",
+              "default": 2,
+              "form": true
+            },
+            "volumeCapacity": {
+              "type": "string",
+              "title": "PersistentVolume Capacity",
+              "default": "20Gi",
+              "form": true
+            },
+            "maxCpu": {
+              "type": "string",
+              "title": "Max Limit CPU",
+              "default": "1",
+              "form": true
+            },
+            "maxMemory": {
+              "type": "string",
+              "title": "Max Limit Memory",
+              "default": "2Gi",
+              "form": true
+            }
+          }
+        }
+      }
+    },
+    "loki": {
+      "type": "object",
+      "title": "Loki Configuration",
+      "form": true,
+      "properties": {
+        "storage": {
+          "type": "object",
+          "title": "Persistent data configuration, if s3 refer to https://kubegems.io",
+          "form": true,
+          "properties": {
+            "volumeCapacity": {
+              "type": "string",
+              "title": "PersistentVolume Capacity, default 100Gi",
+              "default": "100Gi",
+              "form": true
+            }
+          }
+        },
+        "maxCpu": {
+          "type": "string",
+          "title": "Max Limit CPU",
+          "default": "4",
+          "form": true
+        },
+        "maxMemory": {
+          "type": "string",
+          "title": "Max Limit Memory",
+          "default": "8Gi",
+          "form": true
+        }
+      }
+    }
+  }
+}

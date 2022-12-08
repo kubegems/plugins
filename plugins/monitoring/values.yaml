@@ -2,8 +2,17 @@ global:
   imageRegistry: ""
 prometheus:
   address: "" # set to override default
+  retention: 30d
+  volumeCapacity: 200Gi
+  maxCpu: "4"
+  maxMemory: "8Gi"
 alertmanager:
   address: "" # set to override default
+  replicas: 1
+  retention: 168h
+  volumeCapacity: 10Gi
+  maxCpu: "500m"
+  maxMemory: "256Mi"
 kubegems-local:
   alert:
     address: ""
@@ -11,3 +20,4 @@ alertproxy:
   image:
     repository: kubegems/alertproxy
     tag: v0.3.0
+

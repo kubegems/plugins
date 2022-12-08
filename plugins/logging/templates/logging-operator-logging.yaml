@@ -17,13 +17,13 @@ spec:
         storage.backlog.mem_limit: 5M 
         storage.path: /var/log/log-buffer
       extraVolumeMounts:
-      - source: /data
-        destination: /data
+      - source: {{ .Values.logging-operator.fluentbit.containerLogPath }}
+        destination: {{ .Values.logging-operator.fluentbit.containerLogPath }}
         readOnly: true
       bufferStorageVolume:
         hostPath:
           path: /var/log/log-buffer
-      enableUpstream: false
+      enableUpstream: {{ .Values.logging-operator.fluentbit.enableUpstream }}
       filterKubernetes:
         Use_Kubelet: "false"
       forwardOptions:
@@ -59,8 +59,8 @@ spec:
           path: /var/log/positiondb
       resources:
         limits:
-          cpu: 1
-          memory: 1Gi
+          cpu: {{ .Values.logging-operator.fluentbit.maxCpu }}
+          memory: {{ .Values.logging-operator.fluentbit.maxMemory }}
         requests:
           cpu: 100m
           memory: 128Mi
@@ -83,7 +83,7 @@ spec:
             - ReadWriteOnce
             resources:
               requests:
-                storage: 40Gi
+                storage: {{ .Values.logging-operator.fluentd.volumeCapacity }}
             volumeMode: Filesystem
             storageClassName: {{ .Values.global.storageClass }}
       configReloaderImage:
@@ -116,13 +116,13 @@ spec:
         {{- end }}
       resources:
         limits:
-          cpu: 2
-          memory: 4Gi
+          cpu: {{ .Values.logging-operator.fluentd.maxCpu }}
+          memory: {{ .Values.logging-operator.fluentd.maxMemory }}
         requests:
           cpu: 100m
-          memory: 256Mi
+          memory: 128Mi
       scaling:
-        replicas: 1
+        replicas: {{ .Values.logging-operator.fluentd.replicas }}
       security:
         podSecurityContext:
           fsGroup: 101

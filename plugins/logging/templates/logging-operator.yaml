@@ -14,8 +14,8 @@ spec:
       {{ include "common.images.repository" ( dict "registry" "ghcr.io" "repository" "banzaicloud/logging-operator" "context" .) }}
     resources:
       requests:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 50m
+        memory: 64Mi
       limits:
-        cpu: 500m
-        memory: 512Mi
+        cpu: {{ .Values.logging-operator.contorller.maxCpu }}
+        memory: {{ .Values.logging-operator.contorller.maxMemory }}

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "pillar_dns_domain": {
+      "type": "string",
+      "title": "Internal k8s internal domain",
+      "form": true,
+      "default": "cluster.local"
+    },
+    "pillar_dns_server": {
+      "type": "string",
+      "title": "Upstream DNS Service, default is 10.96.0.10",
+      "form": true,
+      "default": "10.96.0.10"
+    },
+    "resources": {
+      "type": "object",
+      "title": "Resources Configuration",
+      "form": true,
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "title": "Max limit CPU, default 100m",
+          "form": true,
+          "default": "100m"
+        },
+        "memory": {
+          "title": "Max Limit Memory, default 128mi",
+          "type": "strinm",
+          "form": true,
+          "default": "128mi"
+        }
+      }
+    }
+  }
+}

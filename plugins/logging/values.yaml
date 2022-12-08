@@ -4,7 +4,30 @@ global:
   clusterName: ""
   storageClass: ""
   runtime: "containerd" #  "containerd" or "docker"
+logging-operator:
+  contorller:
+    maxCpu: "1"
+    maxMemory: "512Mi"
+  fluentbit:
+    containerLogPath: /data
+    enableUpstream: false
+    maxCpu: "1"
+    maxMemory: "1Gi"
+  fluentd:
+    replicas: 2
+    volumeCapacity: "20Gi"
+    maxCpu: "2"
+    maxMemory: "1Gi"
 loki:
+  maxCpu: "4"
+  maxMemory: "8Gi"
+  storage:
+    volumeCapacity: 100Gi
+    aws:
+      enabled: false
+      insecure: false
+      s3: 
+      s3forcepathstyle:
   version: 2.11.1
   address: "" # set to override default
 monitoring:

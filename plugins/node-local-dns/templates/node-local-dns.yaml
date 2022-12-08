@@ -5,9 +5,20 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   kind: helm
-  url: https://charts.kubegems.io/kubegems
+  url: https://charts.deliveryhero.io
   version: {{ .Chart.AppVersion }}
   values:
     image:
       # repository: k8s.gcr.io/dns/k8s-dns-node-cache
       {{ include "common.images.repository" ( dict "registry" "k8s.gcr.io" "repository" "dns/k8s-dns-node-cache" "context" .) }}
+    pillar_dns_domain: {{ .Values.pillar_dns_domain }}
+    pillar_dns_server: {{ .Values.pillar_dns_domain }}
+    serviceAccount:
+      create: false
+    resources:
+      requests:
+        cpu: {{ .Values.cpu }}
+        memory: {{ .Values.memory }}
+      limits:
+        cpu: {{ .Values.cpu }}
+        memory: {{ .Values.memory }}

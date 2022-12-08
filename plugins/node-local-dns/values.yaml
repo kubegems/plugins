@@ -1,3 +1,10 @@
 global:
   imageRegistry: ""
   imageRepository: ""
+
+
+pillar_dns_domain: cluster.local
+pillar_dns_server: "10.96.0.10"
+resources:
+  cpu: 100m
+  memory: 128Mi

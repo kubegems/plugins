@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "prometheus": {
+      "type": "object",
+      "title": "Prometheus 配置",
+      "form": true,
+      "properties": {
+        "retention": {
+          "type": "string",
+          "title": "Prometheus 数据保存时间，默认 30 天",
+          "default": "30d",
+          "form": true
+        },
+        "volumeCapacity": {
+          "type": "string",
+          "title": "数据卷容量, 默认 200GB",
+          "default": "200Gi",
+          "form": true
+        },
+        "maxCpu": {
+          "type": "string",
+          "title": "最大限制 CPU",
+          "default": "8",
+          "form": true
+        },
+        "maxMemory": {
+          "type": "string",
+          "title": "最大限制内存",
+          "default": "16Gi",
+          "form": true
+        }
+      }
+    },
+    "alertmanager": {
+      "type": "object",
+      "title": "AlertManager 配置",
+      "form": true,
+      "properties": {
+        "replicas": {
+          "type": "ingter",
+          "title": "实例副本数",
+          "default": 1,
+          "form": true
+        },
+        "retention": {
+          "type": "string",
+          "title": "告警数据保存时间，默认 7 天",
+          "default": "168h",
+          "form": true
+        },
+        "volumeCapacity": {
+          "type": "string",
+          "title": "数据卷容量, 默认 10GB",
+          "default": "10Gi",
+          "form": true
+        },
+        "maxCpu": {
+          "type": "string",
+          "title": "最大限制 CPU",
+          "default": "500m",
+          "form": true
+        },
+        "maxMemory": {
+          "type": "string",
+          "title": "最大限制内存",
+          "default": "256Mi",
+          "form": true
+        }
+      }
+    }
+  }
+}

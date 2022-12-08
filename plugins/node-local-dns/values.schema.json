@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "pillar_dns_domain": {
+      "type": "string",
+      "title": "DNS 缓存域",
+      "form": true,
+      "default": "cluster.local"
+    },
+    "pillar_dns_server": {
+      "type": "string",
+      "title": "上游 DNS 服务器，默认是 Kubernetes 内 CoreDNS 服务地址 (10.96.0.10)",
+      "form": true,
+      "default": "10.96.0.10"
+    },
+    "resources": {
+      "type": "object",
+      "title": "资源配置",
+      "form": true,
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "title": "最大限制 CPU",
+          "form": true,
+          "default": "100m"
+        },
+        "memory": {
+          "title": "最大限制 memory",
+          "type": "string",
+          "form": true,
+          "default": "128mi"
+        }
+      }
+    }
+  }
+}
