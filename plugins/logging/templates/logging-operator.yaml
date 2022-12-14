@@ -17,5 +17,5 @@ spec:
         cpu: 50m
         memory: 64Mi
       limits:
-        cpu: {{ .Values.logging-operator.contorller.maxCpu }}
-        memory: {{ .Values.logging-operator.contorller.maxMemory }}
+        cpu: {{ index .Values "logging-operator" "contorller" "maxCpu" }}
+        memory: {{ index .Values "logging-operator" "contorller" "maxMemory" }}
