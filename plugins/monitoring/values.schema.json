@@ -39,7 +39,7 @@
       "form": true,
       "properties": {
         "replicas": {
-          "type": "ingter",
+          "type": "integer",
           "title": "实例副本数",
           "default": 1,
           "form": true
