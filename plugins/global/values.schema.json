@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "clusterName": {
+      "type": "string",
+      "default": "manager-cluster",
+      "form": true,
+      "title": "集群名称"
+    },
+    "imageRegistry": {
+      "type": "string",
+      "form": true,
+      "title": "镜像仓库地址"
+    },
+    "imageRepository": {
+      "type": "string",
+      "form": true,
+      "title": "镜像路径"
+    },
+    "kubegemsVersion": {
+      "type": "string",
+      "form": true,
+      "title": "kubegems 版本"
+    },
+    "runtime": {
+      "type": "string",
+      "enum": [
+        "docker",
+        "containerd",
+        ""
+      ],
+      "form": true,
+      "title": "运行时"
+    },
+    "storageClass": {
+      "type": "string",
+      "default": "local-path",
+      "form": true,
+      "title": "存储类名称"
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

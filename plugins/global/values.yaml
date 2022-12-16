@@ -1,14 +1,19 @@
-## @section Global parameters
-#
-## @param imageRegistry image registry
-## @param imageRepository image repository
-## @param clusterName cluster name
-## @param storageClass default storage class name
-## @param kubegemsVersion kubegemsVersion
-## @param runtime runtime
+# @title 镜像仓库地址
+# @form true
 imageRegistry: ""
+# @title 镜像路径
+# @form true
 imageRepository: ""
+# @title 集群名称
+# @form true
 clusterName: "manager-cluster"
+# @title 存储类名称
+# @form true
 storageClass: "local-path"
+# @title kubegems 版本
+# @form true
 kubegemsVersion: ""
+# @title 运行时
+# @schema enum=docker,containerd,""
+# @form true
 runtime: ""
