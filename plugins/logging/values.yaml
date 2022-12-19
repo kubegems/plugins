@@ -26,8 +26,8 @@ loki:
     aws:
       enabled: false
       insecure: false
-      s3: 
-      s3forcepathstyle:
+      s3: ""
+      s3forcepathstyle: "true"
   version: 2.11.1
   address: "" # set to override default
 monitoring:
