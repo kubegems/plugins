@@ -10,12 +10,6 @@ tracing:
     proto:
       address:
 
-monitoring:
-  enabled: 
-  prometheus:
-    rwrite:
-      address:
-
 opentelemetry:
   replicaCount: 2
   resources:
