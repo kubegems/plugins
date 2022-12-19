@@ -13,7 +13,7 @@ spec:
     image:
       # repository: docker.io/jaegertracing/jaeger-operator
       {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "jaegertracing/jaeger-operator" "context" .) }}
-      tag: {{ .Chart.AppVersion }}
+      tag: {{ .Values.jaeger.tag }}
     rbac:
       clusterRole: true
     jaeger:

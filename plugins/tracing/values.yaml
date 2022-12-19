@@ -6,7 +6,8 @@ elasticsearch:
   num-shards: 5
   num-replicas: 1 
   timeout: 30s
-
+jaeger:
+  tag: 1.36.0
 monitoring:
   prometheus:
     address: ""
