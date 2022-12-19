@@ -16,7 +16,7 @@
         "address": {
           "type": "string",
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           },
           "title": "Elastisearch Address",
@@ -28,7 +28,7 @@
           "form": true,
           "default": 5,
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           }
         },
@@ -38,7 +38,7 @@
           "form": true,
           "default": 1,
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           }
         },
@@ -48,7 +48,7 @@
           "form": true,
           "default": "30s",
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           }
         }

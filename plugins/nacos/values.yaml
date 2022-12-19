@@ -5,38 +5,37 @@ global:
   storageClass: ""
   runtime: ""
 
-nacos:
-  mode: cluster
-  replicaCount: 1
-  domainName: cluster.local
+mode: cluster
+replicaCount: 1
+domainName: cluster.local
 
-  storage: 
-    type: embedded
-    #type: mysql
-    db:
-      host: localhost
-      name: nacos
-      port: 3306
-      username: username
-      password: password
-  service:
-    type: ClusterIP
-    #type: NodePort
-    port: 8848
-    nodePort: 30000
+storage: 
+  type: embedded
+  #type: mysql
+  db:
+    host: localhost
+    name: nacos
+    port: 3306
+    username: username
+    password: password
+service:
+  type: ClusterIP
+  #type: NodePort
+  port: 8848
+  nodePort: 30000
 
-  resources:
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    requests:
-      cpu: 500m
-      memory: 2Gi
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  requests:
+    cpu: 500m
+    memory: 2Gi
 
-  persistence:
-    enabled: true
-    size: 5Gi
+persistence:
+  enabled: true
+  size: 5Gi

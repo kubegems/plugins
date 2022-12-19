@@ -2,108 +2,109 @@
   "$schema": "http://json-schema.org/schema#",
   "type": "object",
   "properties": {
-    "nacos": {
+    "mode": {
+      "type": "string",
+      "title": "Cluster Mode, \"cluster\" is default",
+      "form": true,
+      "default": "cluster",
+      "enum": [
+        "cluster",
+        "standalone"
+      ]
+    },
+    "replicaCount": {
+      "type": "integer",
+      "hidden": {
+        "path": "nacos/mode",
+        "value": "standalone"
+      },
+      "title": "Replicas (at least 2 instances in cluster mode)",
+      "form": true,
+      "default": 2
+    },
+    "domainName": {
+      "type": "string",
+      "title": "DND Domain (\"cluster.local\" in kubernetes dns domain)",
+      "form": true,
+      "default": "cluster.local"
+    },
+    "storage": {
       "type": "object",
-      "title": "Nacos Configuration",
+      "title": "Nacos DB Configurations",
       "form": true,
       "properties": {
-        "mode": {
+        "type": {
           "type": "string",
-          "title": "cluster Mode, default is cluster",
+          "titile": "DB type",
           "form": true,
-          "default": "cluster"
+          "default": "embedded",
+          "enum": [
+            "embedded",
+            "mysql"
+          ]
         },
-        "replicaCount": {
-          "type": "integer",
-          "hidden": {
-            "path": "nacos/mode",
-            "value": "standalone"
-          },
-          "title": "replicaCount",
-          "form": true,
-          "default": 1
-        },
-        "domainName": {
-          "type": "string",
-          "title": "DNS domainName, cluster.local is default",
-          "form": true,
-          "default": "cluster.local"
-        },
-        "storage": {
+        "db": {
           "type": "object",
-          "title": "Nacos DB Configuration",
+          "title": "MySQL Configurations",
           "form": true,
+          "hidden": {
+            "path": "nacos/storage/type",
+            "value": "embedded"
+          },
           "properties": {
-            "type": {
+            "host": {
               "type": "string",
-              "titile": "DB type,embedded is default, or db",
+              "title": "MySQL Host",
               "form": true,
-              "default": "embedded"
+              "default": "localhost"
             },
-            "db": {
-              "type": "object",
-              "title": "MySQL Configuration",
+            "name": {
+              "type": "string",
+              "title": "MySQL Database",
               "form": true,
-              "hidden": {
-                "path": "nacos/storage/type",
-                "value": "mysql"
-              },
-              "properties": {
-                "host": {
-                  "type": "string",
-                  "title": "MySQL Address",
-                  "form": true,
-                  "default": "localhost"
-                },
-                "name": {
-                  "type": "string",
-                  "title": "MySQL Database",
-                  "form": true,
-                  "default": "nacos"
-                },
-                "port": {
-                  "type": "integer",
-                  "title": "Mysql Port",
-                  "form": true,
-                  "default": 3306
-                },
-                "username": {
-                  "type": "string",
-                  "title": "Mysql username",
-                  "form": true,
-                  "default": "nacos"
-                },
-                "password": {
-                  "type": "string",
-                  "title": "Mysql password",
-                  "form": true,
-                  "default": "password"
-                }
-              }
+              "default": "nacos"
+            },
+            "port": {
+              "type": "integer",
+              "title": "Mysql Port",
+              "form": true,
+              "default": 3306
+            },
+            "username": {
+              "type": "string",
+              "title": "Mysql User",
+              "form": true,
+              "default": "nacos"
+            },
+            "password": {
+              "type": "string",
+              "title": "Mysql PassWord",
+              "form": true,
+              "default": "password"
             }
           }
-        },
-        "persistence": {
-          "type": "object",
-          "title": "Nacos Persistence data",
+        }
+      }
+    },
+    "persistence": {
+      "type": "object",
+      "title": "PersistentVolume Configurations",
+      "form": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "titile": "Enable PersistentVolume",
           "form": true,
-          "properties": {
-            "enable": {
-              "type": "boolean",
-              "titile": "Enable PersistenceVolume",
-              "form": true,
-              "default": true
-            },
-            "size": {
-              "type": "string",
-              "title": "capabilities",
-              "form": true,
-              "default": "5Gi",
-              "hidden": {
-                "path": "nacos/persistence/enable",
-                "value": false
-              }
-            }
+          "default": true
+        },
+        "size": {
+          "type": "string",
+          "title": "PersistentVolume Capacity",
+          "form": true,
+          "default": "5Gi",
+          "hidden": {
+            "path": "persistence/enabled",
+            "value": false
           }
         }
       }

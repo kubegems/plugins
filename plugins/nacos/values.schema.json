@@ -2,108 +2,109 @@
   "$schema": "http://json-schema.org/schema#",
   "type": "object",
   "properties": {
-    "nacos": {
+    "mode": {
+      "type": "string",
+      "title": "集群模式，默认为集群模式",
+      "form": true,
+      "default": "cluster",
+      "enum": [
+        "cluster",
+        "standalone"
+      ]
+    },
+    "replicaCount": {
+      "type": "integer",
+      "hidden": {
+        "path": "nacos/mode",
+        "value": "standalone"
+      },
+      "title": "集群副本数,至少需要 2 个副本",
+      "form": true,
+      "default": 2
+    },
+    "domainName": {
+      "type": "string",
+      "title": "DNS 域,默认cluster.local",
+      "form": true,
+      "default": "cluster.local"
+    },
+    "storage": {
       "type": "object",
-      "title": "Nacos插件自定义设置",
+      "title": "Nacos 数据设置",
       "form": true,
       "properties": {
-        "mode": {
+        "type": {
           "type": "string",
-          "title": "集群模式，默认为集群模式",
+          "titile": "数据存储类型,默认使用内置数据",
           "form": true,
-          "default": "cluster"
+          "default": "embedded",
+          "enum": [
+            "embedded",
+            "mysql"
+          ]
         },
-        "replicaCount": {
-          "type": "integer",
-          "hidden": {
-            "path": "nacos/mode",
-            "value": "standalone"
-          },
-          "title": "集群副本数,至少需要 2 个副本",
-          "form": true,
-          "default": 2
-        },
-        "domainName": {
-          "type": "string",
-          "title": "DNS 域,默认cluster.local",
-          "form": true,
-          "default": "cluster.local"
-        },
-        "storage": {
+        "db": {
           "type": "object",
-          "title": "Nacos 数据设置",
+          "title": "MySQL 配置",
           "form": true,
+          "hidden": {
+            "path": "nacos/storage/type",
+            "value": "embedded"
+          },
           "properties": {
-            "type": {
+            "host": {
               "type": "string",
-              "titile": "数据存储类型,默认使用内置数据",
+              "title": "MySQL 连接地址",
               "form": true,
-              "default": "embedded"
+              "default": "localhost"
             },
-            "db": {
-              "type": "object",
-              "title": "MySQL 配置",
+            "name": {
+              "type": "string",
+              "title": "MySQL Database",
               "form": true,
-              "hidden": {
-                "path": "nacos/storage/type",
-                "value": "mysql"
-              },
-              "properties": {
-                "host": {
-                  "type": "string",
-                  "title": "MySQL 连接地址",
-                  "form": true,
-                  "default": "localhost"
-                },
-                "name": {
-                  "type": "string",
-                  "title": "MySQL Database",
-                  "form": true,
-                  "default": "nacos"
-                },
-                "port": {
-                  "type": "integer",
-                  "title": "Mysql 端口",
-                  "form": true,
-                  "default": 3306
-                },
-                "username": {
-                  "type": "string",
-                  "title": "Mysql 用户名",
-                  "form": true,
-                  "default": "nacos"
-                },
-                "password": {
-                  "type": "string",
-                  "title": "Mysql 密码",
-                  "form": true,
-                  "default": "password"
-                }
-              }
+              "default": "nacos"
+            },
+            "port": {
+              "type": "integer",
+              "title": "Mysql 端口",
+              "form": true,
+              "default": 3306
+            },
+            "username": {
+              "type": "string",
+              "title": "Mysql 用户名",
+              "form": true,
+              "default": "nacos"
+            },
+            "password": {
+              "type": "string",
+              "title": "Mysql 密码",
+              "form": true,
+              "default": "password"
             }
           }
-        },
-        "persistence": {
-          "type": "object",
-          "title": "Nacos 存储卷设置",
+        }
+      }
+    },
+    "persistence": {
+      "type": "object",
+      "title": "Nacos 存储卷设置",
+      "form": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "titile": "启用 PVC 存储卷",
           "form": true,
-          "properties": {
-            "enable": {
-              "type": "boolean",
-              "titile": "启用 PVC 存储卷",
-              "form": true,
-              "default": true
-            },
-            "size": {
-              "type": "string",
-              "title": "存储卷容量",
-              "form": true,
-              "default": "5Gi",
-              "hidden": {
-                "path": "nacos/persistence/enable",
-                "value": false
-              }
-            }
+          "default": true
+        },
+        "size": {
+          "type": "string",
+          "title": "存储卷容量",
+          "form": true,
+          "default": "5Gi",
+          "hidden": {
+            "path": "persistence/enabled",
+            "value": false
           }
         }
       }

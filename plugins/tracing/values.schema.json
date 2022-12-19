@@ -9,17 +9,17 @@
       "properties": {
         "embedded": {
           "type": "boolean",
-          "title": "内置 Elastisearch,注意这仅用于测试，不要用于生产环境",
+          "title": "内置 Elastisearch单实例,注意这仅用于测试，不要用于生产环境",
           "form": true,
           "default": true
         },
         "address": {
           "type": "string",
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           },
-          "title": "Elastisearch 地址",
+          "title": "Elastisearch 地址,例如: http://elasticsearch:9200",
           "form": true
         },
         "num-shards": {
@@ -28,7 +28,7 @@
           "form": true,
           "default": 5,
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           }
         },
@@ -38,7 +38,7 @@
           "form": true,
           "default": 1,
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           }
         },
@@ -48,7 +48,7 @@
           "form": true,
           "default": "30s",
           "hidden": {
-            "path": "embedded",
+            "path": "elasticsearch/embedded",
             "value": true
           }
         }

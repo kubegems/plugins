@@ -11,13 +11,13 @@ spec:
   values:
     namespace: {{ .Release.Namespace }}
     global:
-      mode: {{ .Values.nacos.mode }}
+      mode: {{ .Values.mode }}
     service:
-      type: {{ .Values.nacos.service.type }}
-      port: {{ .Values.nacos.service.port }}
-      nodePort: {{ .Values.nacos.service.nodePort }}
+      type: {{ .Values.service.type }}
+      port: {{ .Values.service.port }}
+      nodePort: {{ .Values.service.nodePort }}
     nacos:
-      replicaCount: {{ .Values.nacos.replicasCount }}
+      replicaCount: {{ .Values.replicasCount }}
       image:
         # repository: nacos/nacos-server
         {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "nacos/nacos-server" "context" .) }}
@@ -27,15 +27,15 @@ spec:
           # repository: nacos/nacos-peer-finder-plugin
           {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "nacos/nacos-peer-finder-plugin" "context" .) }}
       storage: 
-        type: {{ .Values.nacos.storage.type }}
+        type: {{ .Values.storage.type }}
         db:
-          {{- toYaml .Values.nacos.storage.db | nindent 10 }}
+          {{- toYaml .Values.storage.db | nindent 10 }}
       resources:
-        {{- toYaml .Values.nacos.resources | nindent 8 }}
+        {{- toYaml .Values.resources | nindent 8 }}
       persistence:
-        enabled: {{ .Values.nacos.persistence.enabled}}
+        enabled: {{ .Values.persistence.enabled}}
         data:
           storageClassName: {{ .Values.global.storageClass }}
         resources:
           requests:
-            storage: {{ .Values.nacos.persistence.size }}
+            storage: {{ .Values.persistence.size }}
