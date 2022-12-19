@@ -1,3 +1,6 @@
 global:
   imageRegistry: ""
   imageRepository: ""
+
+replicas: 1
+hostNetwork: false

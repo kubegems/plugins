@@ -19,7 +19,7 @@ spec:
     jaeger:
       create: true
       spec: 
-        {{- $version := .Chart.AppVersion }}
+        {{- $version := "1.36.0" }}
         strategy: production
         ingress:
           enabled: false

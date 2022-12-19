@@ -15,7 +15,7 @@
     "replicaCount": {
       "type": "integer",
       "hidden": {
-        "path": "nacos/mode",
+        "path": "mode",
         "value": "standalone"
       },
       "title": "集群副本数,至少需要 2 个副本",
@@ -48,7 +48,7 @@
           "title": "MySQL 配置",
           "form": true,
           "hidden": {
-            "path": "nacos/storage/type",
+            "path": "storage/type",
             "value": "embedded"
           },
           "properties": {

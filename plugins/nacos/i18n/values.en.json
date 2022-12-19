@@ -15,7 +15,7 @@
     "replicaCount": {
       "type": "integer",
       "hidden": {
-        "path": "nacos/mode",
+        "path": "mode",
         "value": "standalone"
       },
       "title": "Replicas (at least 2 instances in cluster mode)",
@@ -48,7 +48,7 @@
           "title": "MySQL Configurations",
           "form": true,
           "hidden": {
-            "path": "nacos/storage/type",
+            "path": "storage/type",
             "value": "embedded"
           },
           "properties": {
