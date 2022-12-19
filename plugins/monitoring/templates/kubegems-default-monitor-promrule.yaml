@@ -23,7 +23,7 @@ spec:
           $value | printf "%.1f" }}'
         value: '{{"{{"}} $value | printf "%.1f" }}'
       expr: kube_node_status_condition{condition=~"Ready",status=~"true"}==0
-      for: 5m
+      for: 0m
       labels:
         gems_alert_from: monitor
         gems_alert_scope: system-admin
