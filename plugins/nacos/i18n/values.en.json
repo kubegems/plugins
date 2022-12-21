@@ -20,7 +20,7 @@
       },
       "title": "Replicas (at least 2 instances in cluster mode)",
       "form": true,
-      "default": 2
+      "default": 3
     },
     "domainName": {
       "type": "string",

@@ -20,7 +20,7 @@
       },
       "title": "集群副本数,至少需要 2 个副本",
       "form": true,
-      "default": 2
+      "default": 3
     },
     "domainName": {
       "type": "string",

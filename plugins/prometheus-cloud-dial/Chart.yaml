@@ -8,6 +8,6 @@ dependencies:
 - name: common
   repository: file://../common
   version: 1.x.x
-description: The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP, ICMP and gRPC.
-name: prometheus-blackbox-exporter
+description: 基于 blackbox-exporter的云拨测插件,支持协议 HTTP, HTTPS, DNS, TCP, ICMP and gRPC.
+name: prometheus-cloud-dial 
 version: 0.22.0
