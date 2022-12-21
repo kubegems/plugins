@@ -1,0 +1,14 @@
+annotations:
+  plugins.kubegems.io/category: kubernetes/intel
+  plugins.kubegems.io/health-check: statefulsets.apps/*,deployments.apps/*
+  plugins.kubegems.io/install-namespace: intel-system
+  plugins.kubegems.io/is-plugin: 'true'
+apiVersion: v2
+appVersion: 0.25.1
+dependencies:
+- name: common
+  repository: file://../common
+  version: 1.x.x
+description: Intel SGX 芯片指令支持(需先启用 intel-device-operator)
+name: intel-device-sgx
+version: 0.25.1

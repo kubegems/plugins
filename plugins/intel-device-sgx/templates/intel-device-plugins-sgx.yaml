@@ -1,0 +1,14 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: intel-device-plugins-sgx
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://intel.github.io/helm-charts
+  version: "{{ .Chart.AppVersion }}"
+  values: 
+    name: intel-sgxdeviceplugin
+    enclaveLimit: 110
+    provisionLimit: 110
+    logLevel: 4

@@ -1,0 +1,10 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: intel-device-plugins-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://intel.github.io/helm-charts
+  version: "{{ .Chart.AppVersion }}"
+  values: 
