@@ -109,6 +109,7 @@ spec:
               - zipkin
     image:
       {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "otel/opentelemetry-collector-contrib" "context" .) }}
+      tag: 0.66.0
     mode: deployment
     replicaCount: {{ .Values.opentelemetry.replicaCount }}
     ports:
