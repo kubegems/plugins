@@ -1,5 +1,5 @@
 annotations:
-  plugins.kubegems.io/category: kubernetes/intel
+  plugins.kubegems.io/category: kubernetes/Intel
   plugins.kubegems.io/health-check: statefulsets.apps/*,deployments.apps/*
   plugins.kubegems.io/install-namespace: intel-system
   plugins.kubegems.io/is-plugin: 'true'

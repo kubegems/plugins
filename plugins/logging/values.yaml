@@ -10,6 +10,7 @@ logging-operator:
     maxMemory: "512Mi"
   fluentbit:
     containerLogPath: /data
+    Mem_Buf_Limit: 256M
     enableUpstream: false
     maxCpu: "1"
     maxMemory: "1Gi"

@@ -34,7 +34,7 @@ spec:
         tag: 1.8.8-largebuf
       inputTail:
         Docker_Mode: "false"
-        Mem_Buf_Limit: 256M
+        Mem_Buf_Limit: {{ index .Values "logging-operator" "fluentbit" "Mem_Buf_Limit" }}
         Buffer_Chunk_Size: 256k
         Buffer_Max_Size: 256k
         {{- if eq .Values.global.runtime "docker" }}

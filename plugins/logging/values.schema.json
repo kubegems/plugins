@@ -43,6 +43,12 @@
               "default": false,
               "form": true
             },
+            "Mem_Buf_Limit": {
+              "type": "string",
+              "title": "内存缓冲空间, 参考官方文档: https://docs.fluentbit.io/manual/administration/backpressure#mem_buf_limit",
+              "default": "256M",
+              "form": true
+            },
             "maxCpu": {
               "type": "string",
               "title": "最大限制 CPU",

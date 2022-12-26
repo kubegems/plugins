@@ -43,6 +43,12 @@
               "default": false,
               "form": true
             },
+            "Mem_Buf_Limit": {
+              "type": "string",
+              "title": "Memory Buffer Limit, more refer: https://docs.fluentbit.io/manual/administration/backpressure#mem_buf_limit",
+              "default": "256M",
+              "form": true
+            },
             "maxCpu": {
               "type": "string",
               "title": "Max Limit CPU",
