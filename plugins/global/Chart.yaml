@@ -10,3 +10,4 @@ description: 全局变量配置
 annotations:
   plugins.kubegems.io/is-plugin: "true"
   plugins.kubegems.io/category: "core/Global"
+  plugins.kubegems.io/required: "true"
