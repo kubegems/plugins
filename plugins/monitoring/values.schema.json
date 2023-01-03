@@ -83,13 +83,13 @@
         "externalHost": {
           "type": "string",
           "title": "对外暴露的地址",
-          "default": "alertmanagerkubegems.io",
+          "default": "alertmanager.kubegems.io",
           "form": true
         },
         "externalPort": {
           "type": "string",
           "title": "对外暴露的端口号",
-          "default": "9090",
+          "default": "9093",
           "form": true
         }
       }
