@@ -57,7 +57,7 @@ spec:
         externalLabels:
           cluster: {{ .Values.global.clusterName }}
         # TODO: use correct port when we can get default-gateway's nodeport
-        externalUrl: http://prometheus.{{ .Values.global.clusterName }}.kubegems.io:9090
+        externalUrl: {{ .Values.prometheus.externalHost }}:{{ .Values.prometheus.externalPort }}
         ruleSelector:
           matchExpressions:
             - key: prometheusrule.kubegems.io/name
@@ -113,7 +113,7 @@ spec:
         ingressClassName: default-gateway
         labels:
           networking.kubegems.io/ingressClass: default-gateway        
-        hosts: [prometheus.{{ .Values.global.clusterName }}.kubegems.io]
+        hosts: [{{ .Values.prometheus.externalHost }}]
     alertmanager:
       # templateFiles:
       alertmanagerSpec:
@@ -143,7 +143,7 @@ spec:
                   storage: {{ .Values.alertmanager.volumeCapacity }}
               volumeMode: Filesystem
         # TODO: use correct port when we can get default-gateway's nodeport
-        externalUrl: http://alertmanager.{{ .Values.global.clusterName }}.kubegems.io:9093
+        externalUrl: {{ .Values.alertmanager.externalHost }}:{{ .Values.alertmanager.externalPort }}
         resources:
           limits:
             cpu: {{ .Values.alertmanager.maxCpu }}
@@ -156,7 +156,7 @@ spec:
         ingressClassName: default-gateway
         labels:
           networking.kubegems.io/ingressClass: default-gateway
-        hosts: [alertmanager.{{ .Values.global.clusterName }}.kubegems.io]
+        hosts: [{{ .Values.alertmanager.externalHost }}]
     nodeExporter:
       enabled: false
     # metrics

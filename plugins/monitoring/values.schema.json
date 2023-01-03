@@ -30,6 +30,18 @@
           "title": "最大限制内存",
           "default": "16Gi",
           "form": true
+        },
+        "externalHost": {
+          "type": "string",
+          "title": "对外暴露的地址",
+          "default": "prometheus.kubegems.io",
+          "form": true
+        },
+        "externalPort": {
+          "type": "string",
+          "title": "对外暴露的端口号",
+          "default": "9090",
+          "form": true
         }
       }
     },
@@ -66,6 +78,18 @@
           "type": "string",
           "title": "最大限制内存",
           "default": "256Mi",
+          "form": true
+        },
+        "externalHost": {
+          "type": "string",
+          "title": "对外暴露的地址",
+          "default": "alertmanagerkubegems.io",
+          "form": true
+        },
+        "externalPort": {
+          "type": "string",
+          "title": "对外暴露的端口号",
+          "default": "9090",
           "form": true
         }
       }

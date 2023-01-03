@@ -1,13 +1,15 @@
 global:
   imageRegistry: ""
 prometheus:
-  address: "" # set to override default
+  externalHost: "prometheus.kubegems.io"
+  externalPort: "9090"
   retention: 30d
   volumeCapacity: 200Gi
   maxCpu: "4"
   maxMemory: "8Gi"
 alertmanager:
-  address: "" # set to override default
+  externalHost: "alertmanager.kubegems.io"
+  externalPort: "9093"
   replicas: 1
   retention: 168h
   volumeCapacity: 10Gi
