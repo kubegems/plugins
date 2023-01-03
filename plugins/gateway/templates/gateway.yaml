@@ -312,7 +312,7 @@ spec:
         resources:
           limits:
             cpu: {{ .Values.gateway.maxCpu }}
-            memory: {{ .Values.alertmanager.maxCpu }}
+            memory: {{ .Values.gateway.maxMemory }}
           requests:
             cpu: 10m
             memory: 64Mi
