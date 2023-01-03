@@ -1,31 +1,43 @@
 {
-  "$schema": "http://json-schema.org/schema#",
   "type": "object",
   "properties": {
     "gateway": {
       "type": "object",
-      "title": "网关插件配置",
-      "form": true,
+      "required": [
+        "maxCpu",
+        "maxMemory"
+      ],
       "properties": {
         "maxCpu": {
           "type": "string",
-          "title": "最大限制 CPU",
           "default": "500m",
-          "form": true
+          "form": true,
+          "title": "最大限制 CPU"
         },
         "maxMemory": {
           "type": "string",
-          "title": "最大限制内存",
-          "default": "512Mi",
-          "form": true
+          "default": "512M",
+          "form": true,
+          "title": "最大限制内存"
         },
         "scrapeInterval": {
           "type": "string",
-          "title": "监控采集间隔，默认30秒",
           "default": "30s",
-          "form": true
+          "form": true,
+          "title": "监控采集间隔，默认30秒"
+        }
+      },
+      "form": true,
+      "title": "网关插件配置"
+    },
+    "global": {
+      "type": "object",
+      "properties": {
+        "imageRegistry": {
+          "type": "string"
         }
       }
     }
-  }
+  },
+  "$schema": "http://json-schema.org/schema#"
 }

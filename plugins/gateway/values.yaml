@@ -1,6 +1,15 @@
 global:
   imageRegistry: ""
+# @form true
+# @schema required=maxCpu,maxMemory
+# @title "网关插件配置"
 gateway:
+  # @form true
+  # @title "最大限制 CPU"
   maxCpu: "500m"
+  # @form true
+  # @title "最大限制内存"
   maxMemory: "512M"
+  # @form true
+  # @title "监控采集间隔，默认30秒"
   scrapeInterval: "30s"

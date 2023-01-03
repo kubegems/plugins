@@ -1,25 +1,45 @@
 {
-  "$schema": "http://json-schema.org/schema#",
   "type": "object",
   "properties": {
     "eventer": {
       "type": "object",
-      "title": "k8s事件导出器配置",
-      "form": true,
       "properties": {
-        "kubeQPS": {
-          "type": "integer",
-          "title": "k8s client 最大QPS",
-          "default": 60,
-          "form": true
-        },
         "kubeBurst": {
           "type": "integer",
-          "title": "k8s client 最大并发数",
           "default": 60,
-          "form": true
+          "form": true,
+          "title": "k8s client 最大并发数"
+        },
+        "kubeQPS": {
+          "type": "integer",
+          "default": 60,
+          "form": true,
+          "title": "k8s client 最大QPS"
+        }
+      },
+      "form": true,
+      "title": "k8s事件导出插件配置"
+    },
+    "global": {
+      "type": "object",
+      "properties": {
+        "imageRegistry": {
+          "type": "string"
+        }
+      }
+    },
+    "healthCheck": {
+      "type": "array"
+    },
+    "logging": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
         }
       }
     }
-  }
+  },
+  "$schema": "http://json-schema.org/schema#"
 }
