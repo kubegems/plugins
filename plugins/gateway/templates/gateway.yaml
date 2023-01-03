@@ -311,8 +311,8 @@ spec:
           periodSeconds: 10
         resources:
           limits:
-            cpu: 500m
-            memory: 128Mi
+            cpu: {{ .Values.gateway.maxCpu }}
+            memory: {{ .Values.alertmanager.maxCpu }}
           requests:
             cpu: 10m
             memory: 64Mi

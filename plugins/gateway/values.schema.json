@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "gateway": {
+      "type": "object",
+      "title": "网关插件配置",
+      "form": true,
+      "properties": {
+        "maxCpu": {
+          "type": "string",
+          "title": "最大限制 CPU",
+          "default": "500m",
+          "form": true
+        },
+        "maxMemory": {
+          "type": "string",
+          "title": "最大限制内存",
+          "default": "512Mi",
+          "form": true
+        },
+        "scrapeInterval": {
+          "type": "string",
+          "title": "监控采集间隔，默认30秒",
+          "default": "30s",
+          "form": true
+        }
+      }
+    }
+  }
+}

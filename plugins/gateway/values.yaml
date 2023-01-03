@@ -1,2 +1,6 @@
 global:
   imageRegistry: ""
+gateway:
+  maxCpu: "500m"
+  maxMemory: "512M"
+  scrapeInterval: "30s"
