@@ -2,5 +2,8 @@ global:
   imageRegistry: ""
 logging:
   enabled: false
+eventer:
+  kubeQPS: 60
+  kubeBurst: 60
 healthCheck:
   - deployments.apps/*

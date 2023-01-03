@@ -14,8 +14,8 @@ spec:
       {{ include "common.images.repository" ( dict "repository" "bitnami/kubernetes-event-exporter" "context" .) }}
       tag: v1.0-kubegems
     config:
-      kubeQPS: 60
-      kubeBurst: 60
+      kubeQPS: {{ .Values.eventer.kubeQPS }}
+      kubeBurst: {{ .Values.eventer.kubeBurst }}
       logLevel: error
       logFormat: json
       route:
