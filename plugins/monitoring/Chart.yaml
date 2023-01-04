@@ -2,14 +2,14 @@ annotations:
   plugins.kubegems.io/category: core/可观测性
   plugins.kubegems.io/health-check: statefulsets.apps/*,deployments.apps/*
   plugins.kubegems.io/install-namespace: kubegems-monitoring
-  plugins.kubegems.io/is-plugin: 'true'
+  plugins.kubegems.io/is-plugin: "true"
   plugins.kubegems.io/values-from: kubegems-local
 apiVersion: v2
-appVersion: 41.3.2 # monitoring operator version
+appVersion: 43.2.1 # monitoring operator version
 dependencies:
-- name: common
-  repository: file://../common
-  version: 1.x.x
+  - name: common
+    repository: file://../common
+    version: 1.x.x
 description: KubeGems平台监控&告警控制器,包含Prometheus和AlertManager服务
 name: monitoring
-version: 41.3.2
+version: 43.2.1
