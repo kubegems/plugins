@@ -61,7 +61,7 @@ spec:
         externalLabels:
           cluster: {{ .Values.global.clusterName }}
         # TODO: use correct port when we can get default-gateway's nodeport
-        externalUrl: {{ .Values.prometheus.externalHost }}:{{ .Values.prometheus.externalPort }}
+        externalUrl: http://{{ .Values.prometheus.externalHost }}:{{ .Values.prometheus.externalPort }}
         ruleSelector:
           matchExpressions:
             - key: prometheusrule.kubegems.io/name
@@ -149,7 +149,7 @@ spec:
                   storage: {{ .Values.alertmanager.volumeCapacity }}
               volumeMode: Filesystem
         # TODO: use correct port when we can get default-gateway's nodeport
-        externalUrl: {{ .Values.alertmanager.externalHost }}:{{ .Values.alertmanager.externalPort }}
+        externalUrl: http://{{ .Values.alertmanager.externalHost }}:{{ .Values.alertmanager.externalPort }}
         resources:
           limits:
             cpu: {{ .Values.alertmanager.maxCpu }}
