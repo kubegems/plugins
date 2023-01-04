@@ -38,19 +38,23 @@ spec:
       admissionWebhooks:
         enabled: false
       image:
-        # repository: quay.io/prometheus-operator/prometheus-operator
-        {{ include "common.images.repository" ( dict "registry" "quay.io" "repository" "prometheus-operator/prometheus-operator" "context" .) }}
-        # tag: v0.50.1-gems
+          # registry: quay.io
+          # repository: prometheus-operator/prometheus-operator
+        {{ include "common.images.registry" . }}
+        {{ include "common.images.repository" ( dict "repository" "prometheus-operator/prometheus-operator" "context" .) }}
       prometheusConfigReloader:
         image:
-          # repository: quay.io/prometheus-operator/prometheus-config-reloader
-          {{ include "common.images.repository" ( dict "registry" "quay.io" "repository" "prometheus-operator/prometheus-config-reloader" "context" .) }}
-          # tag: v0.50.1-gems
+          # registry: quay.io
+          # repository: prometheus-operator/prometheus-config-reloader
+          {{ include "common.images.registry" . }}
+          {{ include "common.images.repository" ( dict "repository" "prometheus-operator/prometheus-config-reloader" "context" .) }}
     prometheus:
       prometheusSpec:
         image:
-          # repository: quay.io/prometheus/prometheus
-          {{ include "common.images.repository" ( dict "registry" "quay.io" "repository" "prometheus/prometheus" "context" .) }}
+          # registry: quay.io
+          # repository: prometheus/prometheus
+          {{ include "common.images.registry" . }}
+          {{ include "common.images.repository" ( dict "repository" "prometheus/prometheus" "context" .) }}
         enableAdminAPI: true
         enableFeatures: 
           - remote-write-receiver
@@ -118,8 +122,10 @@ spec:
       # templateFiles:
       alertmanagerSpec:
         image:
-          # repository: quay.io/prometheus/alertmanager
-          {{ include "common.images.repository" ( dict "registry" "quay.io" "repository" "prometheus/alertmanager" "context" .) }}
+          # registry: quay.io
+          # repository: prometheus/alertmanager
+          {{ include "common.images.registry" . }}
+          {{ include "common.images.repository" ( dict "repository" "prometheus/alertmanager" "context" .) }}
         alertmanagerConfigSelector:
           matchExpressions:
             - key: alertmanagerconfig.kubegems.io/name
