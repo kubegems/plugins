@@ -32,3 +32,179 @@ spec:
           url: http://loki-headless.kubegems-logging:3100
           access: proxy
           isDefault: false
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+        - name: 'prometheus'
+          orgId: 1
+          folder: 'kubegems-monitoring'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/prometheus
+        - name: 'alert-manager'
+          orgId: 1
+          folder: 'kubegems-monitoring'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/alert-manager
+        - name: 'node-exporter'
+          orgId: 1
+          folder: 'kubegems-monitoring'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/node-exporter
+        - name: 'coredns'
+          orgId: 1
+          folder: 'kubernetes'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/coredns
+        - name: 'apiserver'
+          orgId: 1
+          folder: 'kubernetes'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/apiserver
+        - name: 'kubelet'
+          orgId: 1
+          folder: 'kubernetes'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/kubelet
+        - name: 'controller-manager'
+          orgId: 1
+          folder: 'kubernetes'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/controller-manager
+        - name: 'scheduler'
+          orgId: 1
+          folder: 'kubernetes'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/scheduler
+        - name: 'proxy'
+          orgId: 1
+          folder: 'kubernetes'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/proxy
+        - name: 'etcd'
+          orgId: 1
+          folder: 'kubernetes'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/etcd
+        - name: 'resource-cluster'
+          orgId: 1
+          folder: 'workload'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/resource-cluster
+        - name: 'resource-ns-pod'
+          orgId: 1
+          folder: 'workload'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/resource-ns-pod
+        - name: 'resource-ns-workload'
+          orgId: 1
+          folder: 'workload'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/resource-ns-workload
+        - name: 'resource-node-pod'
+          orgId: 1
+          folder: 'workload'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/resource-node-pod
+        - name: 'logging'
+          orgId: 1
+          folder: 'kubegems-logging'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/logging
+        - name: 'fluentbit'
+          orgId: 1
+          folder: 'kubegems-logging'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/fluentbit
+        - name: 'fluentd'
+          orgId: 1
+          folder: 'kubegems-logging'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/fluentd
+        - name: 'loki'
+          orgId: 1
+          folder: 'kubegems-logging'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/loki
+        - name: 'opentelemetry'
+          orgId: 1
+          folder: 'observabilitry'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/opentelemetry
+    dashboardsConfigMaps:
+      prometheus: "prometheus"
+      alert-manager: "alert-manager"
+      node-exporter: "node-exporter"
+      coredns: "coredns"
+      apiserver: "apiserver"
+      kubelet: "kubelet"
+      controller-manager: "controller-manager"
+      scheduler: "scheduler"
+      proxy: "proxy"
+      etcd: "etcd"
+      resource-cluster: "resource-cluster"
+      resource-ns-pod: "resource-ns-pod"
+      resource-ns-workload: "resource-ns-workload"
+      resource-node-pod: "resource-node-pod"
+      fluentbit: "fluentbit"
+      fluentd: "fluentd"
+      logging: "logging"
+      loki: "loki"
+      opentelemetry: "opentelemetry"

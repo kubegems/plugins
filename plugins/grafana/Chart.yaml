@@ -4,11 +4,11 @@ annotations:
   plugins.kubegems.io/install-namespace: kubegems-monitoring
   plugins.kubegems.io/is-plugin: 'true'
 apiVersion: v2
-appVersion: 6.29.5
+appVersion: 6.29.6
 dependencies:
 - name: common
   repository: file://../common
   version: 1.x.x
-description: 开源的监控数据查询和可视化平台
+description: 开源的监控数据查询和可视化平台(插件自动生成监控大盘)
 name: grafana
-version: 6.29.5
+version: 6.29.6
