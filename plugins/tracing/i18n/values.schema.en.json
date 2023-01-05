@@ -3,19 +3,19 @@
   "properties": {
     "elasticsearch": {
       "type": "object",
-      "title": "Elasticsearch 设置",
+      "title": "Elasticsearch Setting",
       "properties": {
         "embedded": {
-          "description": "注意这仅用于测试，不要用于生产环境",
+          "description": "Note this is for testing only, not for production",
           "type": "boolean",
-          "title": "内置 Elasticsearch 单实例",
+          "title": "Embedded Elasticsearch Single Instance",
           "default": true,
           "x-order": "1",
           "form": true
         },
         "address": {
           "type": "string",
-          "title": "Elasticsearch 地址",
+          "title": "Elasticsearch Address",
           "form": true,
           "hidden": {
             "path": "elasticsearch.embedded",
@@ -25,7 +25,7 @@
         },
         "num-replicas": {
           "type": "integer",
-          "title": "Elasticsearch Index 副本数",
+          "title": "Elasticsearch Index Replicas",
           "default": 1,
           "form": true,
           "hidden": {
@@ -35,7 +35,7 @@
         },
         "num-shards": {
           "type": "integer",
-          "title": "Elasticsearch Index 分片数",
+          "title": "Elasticsearch Index Shards",
           "default": 5,
           "form": true,
           "hidden": {
@@ -45,7 +45,7 @@
         },
         "timeout": {
           "type": "string",
-          "title": "Elasticsearch 连接超时时间",
+          "title": "Elasticsearch Connect Timeout",
           "default": "30s",
           "form": true,
           "hidden": {

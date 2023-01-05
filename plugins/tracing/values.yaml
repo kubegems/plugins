@@ -1,10 +1,38 @@
 global:
   imageRegistry: ""
   imageRepository: ""
+# @title Elasticsearch 设置
+# @title.en Elasticsearch Setting
+# @title.jp Elasticsearch 設定
 elasticsearch:
-  address: "" # override the default address
+  # @title 内置 Elasticsearch 单实例
+  # @title.en Embedded Elasticsearch Single Instance
+  # @title.jp 組み込みの Elasticsearch シングル インスタンス
+  # @description 注意这仅用于测试，不要用于生产环境
+  # @description.en Note this is for testing only, not for production
+  # @description.jp これはテスト用であり、本番用ではないことに注意してください
+  # @order 1
+  embedded: true
+  # @hidden elasticsearch.embedded=true
+  # @title Elasticsearch 地址
+  # @title.en Elasticsearch Address
+  # @title.jp エラスティックサーチ アドレス
+  # @placeholder http://elasticsearch:9200
+  address: ""
+  # @title Elasticsearch Index 分片数
+  # @title.en Elasticsearch Index Shards
+  # @title.jp Elasticsearch インデックス シャード
+  # @hidden elasticsearch.embedded=true
   num-shards: 5
-  num-replicas: 1 
+  # @title Elasticsearch Index 副本数
+  # @title.en Elasticsearch Index Replicas
+  # @title.jp Elasticsearch インデックス レプリカ
+  # @hidden elasticsearch.embedded=true
+  num-replicas: 1
+  # @title Elasticsearch 连接超时时间
+  # @title.en Elasticsearch Connect Timeout
+  # @title.jp Elasticsearch 接続タイムアウト
+  # @hidden elasticsearch.embedded=true
   timeout: 30s
 jaeger:
   tag: 1.36.0

@@ -1,19 +1,25 @@
 # @title 镜像仓库地址
-# @form true
+# @title.en Registry Address
+# @title.jp レジストリ アドレス
 imageRegistry: ""
 # @title 镜像路径
-# @form true
+# @title.en Image Repository
+# @title.jp イメージ リポジトリ
 imageRepository: ""
 # @title 集群名称
-# @form true
+# @title.jp クラスター名
+# @title.en Cluster Name
 clusterName: "manager-cluster"
 # @title 存储类名称
-# @form true
+# @title.en StorageClass Name
+# @title.jp ストレージクラス名
 storageClass: "local-path"
 # @title kubegems 版本
-# @form true
+# @title.en kubegems version
+# @title.jp kubegems バージョン
 kubegemsVersion: ""
 # @title 运行时
-# @schema enum=docker,containerd,""
-# @form true
-runtime: ""
+# @title.en CRI Runtime
+# @title.jp CRI ランタイム
+# @schema enum=docker,containerd
+runtime: containerd

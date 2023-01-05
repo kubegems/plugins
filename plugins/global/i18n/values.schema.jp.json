@@ -3,28 +3,28 @@
   "properties": {
     "clusterName": {
       "type": "string",
-      "title": "集群名称",
+      "title": "クラスター名",
       "default": "manager-cluster",
       "form": true
     },
     "imageRegistry": {
       "type": "string",
-      "title": "镜像仓库地址",
+      "title": "レジストリ アドレス",
       "form": true
     },
     "imageRepository": {
       "type": "string",
-      "title": "镜像路径",
+      "title": "イメージ リポジトリ",
       "form": true
     },
     "kubegemsVersion": {
       "type": "string",
-      "title": "kubegems 版本",
+      "title": "kubegems バージョン",
       "form": true
     },
     "runtime": {
       "type": "string",
-      "title": "运行时",
+      "title": "CRI ランタイム",
       "default": "containerd",
       "enum": [
         "docker",
@@ -34,7 +34,7 @@
     },
     "storageClass": {
       "type": "string",
-      "title": "存储类名称",
+      "title": "ストレージクラス名",
       "default": "local-path",
       "form": true
     }

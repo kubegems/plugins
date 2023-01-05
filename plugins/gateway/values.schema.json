@@ -3,6 +3,7 @@
   "properties": {
     "gateway": {
       "type": "object",
+      "title": "网关插件配置",
       "required": [
         "maxCpu",
         "maxMemory"
@@ -10,33 +11,24 @@
       "properties": {
         "maxCpu": {
           "type": "string",
+          "title": "最大限制 CPU",
           "default": "500m",
-          "form": true,
-          "title": "最大限制 CPU"
+          "form": true
         },
         "maxMemory": {
           "type": "string",
+          "title": "最大限制内存",
           "default": "512M",
-          "form": true,
-          "title": "最大限制内存"
+          "form": true
         },
         "scrapeInterval": {
           "type": "string",
+          "title": "监控采集间隔，默认30秒",
           "default": "30s",
-          "form": true,
-          "title": "监控采集间隔，默认30秒"
+          "form": true
         }
       },
-      "form": true,
-      "title": "网关插件配置"
-    },
-    "global": {
-      "type": "object",
-      "properties": {
-        "imageRegistry": {
-          "type": "string"
-        }
-      }
+      "form": true
     }
   },
   "$schema": "http://json-schema.org/schema#"

@@ -3,32 +3,112 @@ global:
   imageRepository: ""
   clusterName: ""
   storageClass: ""
-  runtime: "containerd" #  "containerd" or "docker"
+  runtime: "containerd"
+# @title Logging Operator 配置
+# @title.en Logging Operator Configuration
+# @title.jp ロギング オペレータの設定
 logging-operator:
+  # @title 日志 Controller 配置
+  # @title Log Controller Configuration
+  # @title.jp ログ コントローラの構成
   contorller:
+    # @title 最大限制 CPU
+    # @title.en Max Limit CPU
+    # @title.jp 最大制限 CPU
     maxCpu: "1"
+    # @title 最大限制内存
+    # @title.en Maximum memory limit
+    # @title.jp 最大メモリ制限
     maxMemory: "512Mi"
+  # @title Fluent-Bit 配置
   fluentbit:
-    containerLogPath: /data
-    Mem_Buf_Limit: 256M
+    # @title 启用Upstream 负载均衡模式(实验性质)
+    # @title.en Enable Upstream load balancing mode (experimental)
+    # @title.jp アップストリーム ロード バランシング モードを有効にする (実験的)
     enableUpstream: false
+    # @title 容器日志路径
+    # @title container log path
+    # @title.jp コンテナー ログのパス
+    containerLogPath: /data
+    # @title 内存缓冲空间
+    # @title.en memory buffer limit
+    # @title.jp メモリ バッファ スペース
+    # @description 参考官方文档: https://docs.fluentbit.io/manual/administration/backpressure#mem_buf_limit
+    Mem_Buf_Limit: 256M
+    # @title 最大限制 CPU
+    # @title.en Max Limit CPU
+    # @title.jp 最大制限 CPU
     maxCpu: "1"
+    # @title 最大限制内存
+    # @title.en Maximum memory limit
+    # @title.jp 最大メモリ制限
     maxMemory: "1Gi"
+  # @title Fluentd 配置
+  # @title.en Fluentd Configuration
+  # @title.jp Fluentdの設定
   fluentd:
+    # @title 实例副本数
+    # @title.en Number of instance replicas
+    # @title.jp インスタンス レプリカの数
     replicas: 2
+    # @title 日志数据盘容量
+    # @title.en Log data disk capacity
+    # @title.jp ログデータのディスク容量
+    # @schema format=quantity
     volumeCapacity: "20Gi"
+    # @title 最大限制 CPU
+    # @title.en Max Limit CPU
+    # @title.jp 最大制限 CPU
+    # @schema format=quantity
     maxCpu: "2"
+    # @title 最大限制内存
+    # @title.en Maximum memory limit
+    # @title.jp 最大メモリ制限
+    # @schema format=quantity
     maxMemory: "1Gi"
+# @title Loki 配置
+# @title Loki Configuration
 loki:
+  # @title 最大限制 CPU
+  # @title.en Max Limit CPU
+  # @title.jp 最大制限 CPU
+  # @schema format=quantity
   maxCpu: "4"
+  # @title 最大限制内存
+  # @title.en Maximum memory limit
+  # @title.jp 最大メモリ制限
+  # @schema format=quantity
   maxMemory: "8Gi"
+  # @title 日志存储配置
+  # @description 默认使用本地盘, 使用 s3 请参考官方文档(https://kubegems.io)
   storage:
+    # @title 日志数据磁盘容量
+    # @title.en Log data disk capacity
+    # @title.jp ログデータのディスク容量
+    # @description 根据实际日志产生规划容量
+    # @schema format=quantity
     volumeCapacity: 100Gi
+    # @title 使用S3作为日志存储
+    # @title.en Use S3 as log storage
+    # @title.jp S3 をログ ストレージとして使用する
     aws:
+      # @title 启用S3
+      # @title.en Enable S3
+      # @title.jp S3 を有効にする
+      # @order 10
       enabled: false
-      insecure: false
+      # @title S3 地址
+      # @title S3 Address
+      # @title.jp S3 アドレス
+      # @hidden loki.storage.aws.enabled=false
+      # @order 11
       s3: ""
-      s3forcepathstyle: "true"
+      # @title S3 Insecure
+      # @hidden loki.storage.aws.enabled=false
+      insecure: false
+      # @title S3 ForcePathStyle
+      # @hidden loki.storage.aws.enabled=false
+      s3forcepathstyle: true
   version: 2.11.1
   address: "" # set to override default
 monitoring:

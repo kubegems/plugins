@@ -8,13 +8,13 @@
         "externalHost": {
           "type": "string",
           "format": "hostname",
-          "title": "对外暴露地址",
+          "title": "外部公開アドレス",
           "default": "alertmanager.kubegems.io",
           "form": true
         },
         "externalPort": {
           "type": "integer",
-          "title": "对外暴露端口号",
+          "title": "ポート番号を外部に公開する",
           "default": 9093,
           "maximum": 65535,
           "minimum": 0,
@@ -23,34 +23,34 @@
         "maxCpu": {
           "type": "string",
           "format": "quantity",
-          "title": "最大限制 CPU",
+          "title": "最大制限 CPU",
           "default": "500m",
           "form": true
         },
         "maxMemory": {
           "type": "string",
           "format": "quantity",
-          "title": "最大限制内存",
+          "title": "最大メモリ制限",
           "default": "256Mi",
           "form": true
         },
         "replicas": {
           "type": "integer",
-          "title": "实例副本数",
+          "title": "インスタンス レプリカの数",
           "default": 1,
           "form": true
         },
         "retention": {
           "type": "string",
           "format": "duration",
-          "title": "数据保存时间",
+          "title": "データ保持時間",
           "default": "168h",
           "form": true
         },
         "volumeCapacity": {
           "type": "string",
           "format": "quantity",
-          "title": "数据卷容量",
+          "title": "データ容量",
           "default": "10Gi",
           "form": true
         }
@@ -64,13 +64,13 @@
         "externalHost": {
           "type": "string",
           "format": "hostname",
-          "title": "对外暴露地址",
+          "title": "外部公開アドレス",
           "default": "prometheus.kubegems.io",
           "form": true
         },
         "externalPort": {
           "type": "integer",
-          "title": "对外暴露端口号",
+          "title": "ポート番号を外部に公開する",
           "default": 9090,
           "maximum": 65535,
           "minimum": 0,
@@ -78,25 +78,25 @@
         },
         "maxCpu": {
           "type": "string",
-          "title": "最大限制 CPU",
+          "title": "最大制限 CPU",
           "default": 4,
           "form": true
         },
         "maxMemory": {
           "type": "string",
-          "title": "最大限制内存",
+          "title": "最大メモリ制限",
           "default": "8Gi",
           "form": true
         },
         "retention": {
           "type": "string",
-          "title": "数据保存时间",
+          "title": "データ保持時間",
           "default": "30d",
           "form": true
         },
         "volumeCapacity": {
           "type": "string",
-          "title": "数据卷容量",
+          "title": "データ容量",
           "default": "200Gi",
           "form": true
         }

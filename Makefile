@@ -7,7 +7,7 @@ CHARTMUSEUM_ADDR?=https://${HELM_REPO_USERNAME}:${HELM_REPO_PASSWORD}@charts.kub
 all: package check push
 
 generate: helm-schema
-	find ${CHARTS_DIR} -mindepth 1 -maxdepth 1 -type d | xargs -n1 \
+	find ${CHARTS_DIR} -mindepth 1 -maxdepth 1 -type d -not -name 'common' | xargs -n1 \
 	helm-schema {}
 
 TEMP_CHARTS_DIR := tmp

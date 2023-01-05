@@ -1,19 +1,68 @@
 global:
   imageRegistry: ""
+# @title Prometheus 配置
 prometheus:
+  # @title 对外暴露地址
+  # @title.en Exposed address
+  # @title.jp 外部公開アドレス
+  # @schema format=hostname
   externalHost: "prometheus.kubegems.io"
-  externalPort: "9090"
+  # @title 对外暴露端口号
+  # @title.en Exposed port number
+  # @title.jp ポート番号を外部に公開する
+  # @schema max=65535;min=0
+  externalPort: 9090
+  # @title 数据保存时间
+  # @title.en Data retention time
+  # @title.jp データ保持時間
   retention: 30d
+  # @title 数据卷容量
+  # @title.en Data volume capacity
+  # @title.jp データ容量
   volumeCapacity: 200Gi
+  # @title 最大限制 CPU
+  # @title.en Max Limit CPU
+  # @title.jp 最大制限 CPU
   maxCpu: "4"
+  # @title 最大限制内存
+  # @title.en Maximum memory limit
+  # @title.jp 最大メモリ制限
   maxMemory: "8Gi"
+# @title AlertManager 配置
 alertmanager:
+  # @title 对外暴露地址
+  # @title.en Exposed address
+  # @title.jp 外部公開アドレス
+  # @schema format=hostname
   externalHost: "alertmanager.kubegems.io"
-  externalPort: "9093"
+  # @title 对外暴露端口号
+  # @title.en Exposed port number
+  # @title.jp ポート番号を外部に公開する
+  # @schema max=65535;min=0
+  externalPort: 9093
+  # @title 实例副本数
+  # @title.en Number of instance replicas
+  # @title.jp インスタンス レプリカの数
   replicas: 1
+  # @title 数据保存时间
+  # @title.en Data retention time
+  # @title.jp データ保持時間
+  # @schema format=duration
   retention: 168h
+  # @title 数据卷容量
+  # @title.en Data volume capacity
+  # @title.jp データ容量
+  # @schema format=quantity
   volumeCapacity: 10Gi
+  # @title 最大限制 CPU
+  # @title.en Max Limit CPU
+  # @title.jp 最大制限 CPU
+  # @schema format=quantity
   maxCpu: "500m"
+  # @title 最大限制内存
+  # @title.en Maximum memory limit
+  # @title.jp 最大メモリ制限
+  # @schema format=quantity
   maxMemory: "256Mi"
 kubegems-local:
   alert:

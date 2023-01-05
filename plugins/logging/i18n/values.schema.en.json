@@ -3,7 +3,7 @@
   "properties": {
     "logging-operator": {
       "type": "object",
-      "title": "Logging Operator 配置",
+      "title": "Logging Operator Configuration",
       "properties": {
         "contorller": {
           "type": "object",
@@ -11,13 +11,13 @@
           "properties": {
             "maxCpu": {
               "type": "string",
-              "title": "最大限制 CPU",
+              "title": "Max Limit CPU",
               "default": 1,
               "form": true
             },
             "maxMemory": {
               "type": "string",
-              "title": "最大限制内存",
+              "title": "Maximum memory limit",
               "default": "512Mi",
               "form": true
             }
@@ -31,7 +31,7 @@
             "Mem_Buf_Limit": {
               "description": "参考官方文档: https://docs.fluentbit.io/manual/administration/backpressure#mem_buf_limit",
               "type": "string",
-              "title": "内存缓冲空间",
+              "title": "memory buffer limit",
               "default": "256M",
               "form": true
             },
@@ -39,23 +39,24 @@
               "type": "string",
               "title": "container log path",
               "default": "/data",
-              "form": true
+              "form": true,
+              "title.jp": "コンテナー ログのパス"
             },
             "enableUpstream": {
               "type": "boolean",
-              "title": "启用Upstream 负载均衡模式(实验性质)",
+              "title": "Enable Upstream load balancing mode (experimental)",
               "default": false,
               "form": true
             },
             "maxCpu": {
               "type": "string",
-              "title": "最大限制 CPU",
+              "title": "Max Limit CPU",
               "default": 1,
               "form": true
             },
             "maxMemory": {
               "type": "string",
-              "title": "最大限制内存",
+              "title": "Maximum memory limit",
               "default": "1Gi",
               "form": true
             }
@@ -64,32 +65,32 @@
         },
         "fluentd": {
           "type": "object",
-          "title": "Fluentd 配置",
+          "title": "Fluentd Configuration",
           "properties": {
             "maxCpu": {
               "type": "string",
               "format": "quantity",
-              "title": "最大限制 CPU",
+              "title": "Max Limit CPU",
               "default": 2,
               "form": true
             },
             "maxMemory": {
               "type": "string",
               "format": "quantity",
-              "title": "最大限制内存",
+              "title": "Maximum memory limit",
               "default": "1Gi",
               "form": true
             },
             "replicas": {
               "type": "integer",
-              "title": "实例副本数",
+              "title": "Number of instance replicas",
               "default": 2,
               "form": true
             },
             "volumeCapacity": {
               "type": "string",
               "format": "quantity",
-              "title": "日志数据盘容量",
+              "title": "Log data disk capacity",
               "default": "20Gi",
               "form": true
             }
@@ -106,14 +107,14 @@
         "maxCpu": {
           "type": "string",
           "format": "quantity",
-          "title": "最大限制 CPU",
+          "title": "Max Limit CPU",
           "default": 4,
           "form": true
         },
         "maxMemory": {
           "type": "string",
           "format": "quantity",
-          "title": "最大限制内存",
+          "title": "Maximum memory limit",
           "default": "8Gi",
           "form": true
         },
@@ -124,11 +125,11 @@
           "properties": {
             "aws": {
               "type": "object",
-              "title": "使用S3作为日志存储",
+              "title": "Use S3 as log storage",
               "properties": {
                 "enabled": {
                   "type": "boolean",
-                  "title": "启用S3",
+                  "title": "Enable S3",
                   "default": false,
                   "x-order": "10",
                   "form": true
@@ -141,7 +142,8 @@
                   "hidden": {
                     "path": "loki.storage.aws.enabled",
                     "value": false
-                  }
+                  },
+                  "title.jp": "S3 アドレス"
                 },
                 "insecure": {
                   "type": "boolean",
@@ -170,7 +172,7 @@
               "description": "根据实际日志产生规划容量",
               "type": "string",
               "format": "quantity",
-              "title": "日志数据磁盘容量",
+              "title": "Log data disk capacity",
               "default": "100Gi",
               "form": true
             }
