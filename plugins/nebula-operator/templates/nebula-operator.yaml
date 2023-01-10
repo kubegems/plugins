@@ -1,0 +1,23 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: nebula-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://vesoft-inc.github.io/nebula-operator/charts 
+  chart: nebula-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:
+    image:
+      nebulaOperator:
+        imagePullPolicy: IfNotPresent
+      kubeRBACProxy:
+        imagePullPolicy: IfNotPresent 
+      kubeScheduler:
+        imagePullPolicy: IfNotPresent
+    controllerManager:
+      replicas: 1
+    scheduler:
+      replicas: 1
+    enableKruise: false

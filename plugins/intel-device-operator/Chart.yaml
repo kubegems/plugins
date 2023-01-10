@@ -1,5 +1,5 @@
 annotations:
-  plugins.kubegems.io/category: kubernetes/Intel
+  plugins.kubegems.io/category: operator/Device
   plugins.kubegems.io/health-check: statefulsets.apps/*,deployments.apps/*
   plugins.kubegems.io/install-namespace: intel-system
   plugins.kubegems.io/is-plugin: 'true'
@@ -9,6 +9,6 @@ dependencies:
 - name: common
   repository: file://../common
   version: 1.x.x
-description: Intel 芯片指令设备插件控制器,支持DSA、DLB、FPGA、GPU、IAA、QAT、Intel SGX
+description: Intel Device Plugins Operator is a Kubernetes custom controller whose goal is to serve the installation and lifecycle management of Intel device plugins for Kubernetes. It provides a single point of control for GPU, QAT, SGX, FPGA, DSA and DLB devices to a cluster administrators.
 name: intel-device-operator
 version: 0.25.1

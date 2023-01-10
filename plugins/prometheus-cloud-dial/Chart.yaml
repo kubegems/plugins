@@ -2,12 +2,13 @@ annotations:
   plugins.kubegems.io/category: kubernetes/可观测性
   plugins.kubegems.io/install-namespace: kubegems-monitoring
   plugins.kubegems.io/is-plugin: 'true'
+  plugins.kubegems.io/requirements: monitoring >= 0.0.0
 apiVersion: v2
 appVersion: 0.22.0
 dependencies:
 - name: common
   repository: file://../common
   version: 1.x.x
-description: 基于 blackbox-exporter的云拨测插件,支持协议 HTTP, HTTPS, DNS, TCP, ICMP and gRPC.
+description: KubeGems 可观测性云拨测模块,支持协议 HTTP, HTTPS, TCP, ICMP (DNS 和 gRPC).
 name: prometheus-cloud-dial 
 version: 0.22.0

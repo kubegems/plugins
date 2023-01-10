@@ -1,0 +1,12 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: mysql-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://radondb.github.io/radondb-mysql-kubernetes
+  chart: mysql-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:
+    replicaCount: {{ .Values.replicaCount }}
