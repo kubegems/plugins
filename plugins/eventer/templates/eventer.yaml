@@ -12,7 +12,6 @@ spec:
     image:
       {{ include "common.images.registry" . }}
       {{ include "common.images.repository" ( dict "repository" "bitnami/kubernetes-event-exporter" "context" .) }}
-      tag: v1.0-kubegems
     config:
       kubeQPS: {{ .Values.eventer.kubeQPS }}
       kubeBurst: {{ .Values.eventer.kubeBurst }}
@@ -21,10 +20,8 @@ spec:
       route:
         routes:
           - match:
-              - receiver: "dump"
-            drop:
-              - kind: "Lease"
+            - kind: "Pod|Deployment|ReplicaSet|StatefulSet|DaemonSet"
+              receiver: "dump"
       receivers:
         - name: "dump"
-          file:
-            path: "/dev/stdout"
+          stdout: { }
