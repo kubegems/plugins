@@ -1,6 +1,13 @@
 {
   "type": "object",
   "properties": {
+    "webhook": {
+      "type": "boolean",
+      "title": "启用 webhook",
+      "default": false,
+      "x-order": "1",
+      "form": true
+    },
     "elasticsearch": {
       "type": "object",
       "title": "Elasticsearch 设置",

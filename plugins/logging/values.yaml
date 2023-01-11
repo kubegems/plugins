@@ -26,8 +26,8 @@ logging-operator:
     # @title.en Enable Upstream load balancing mode (experimental)
     # @title.jp アップストリーム ロード バランシング モードを有効にする (実験的)
     enableUpstream: false
-    # @title 容器日志路径
-    # @title container log path
+    # @title 容器日志路径,默认路径在/var/log/pods，如果改过配置请配置新路径
+    # @title.en container log path, default path /var/log/pods
     # @title.jp コンテナー ログのパス
     containerLogPath: /data
     # @title 内存缓冲空间

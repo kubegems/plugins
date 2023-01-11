@@ -1,6 +1,13 @@
 {
   "type": "object",
   "properties": {
+    "webhook": {
+      "type": "boolean",
+      "title": "Webhook enabled",
+      "default": false,
+      "x-order": "1",
+      "form": true
+    },
     "elasticsearch": {
       "type": "object",
       "title": "Elasticsearch Setting",

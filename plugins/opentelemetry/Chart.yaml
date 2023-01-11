@@ -4,6 +4,7 @@ annotations:
   plugins.kubegems.io/install-namespace: observability
   plugins.kubegems.io/is-plugin: "true"
   plugins.kubegems.io/values-from: tracing,monitoring
+  plugins.kubegems.io/requirements: tracing >= 0.0.0,monitoring >= 0.0.0
 apiVersion: v2
 appVersion: 0.28.0
 dependencies:

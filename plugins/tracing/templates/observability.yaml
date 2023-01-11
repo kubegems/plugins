@@ -16,6 +16,16 @@ spec:
       tag: {{ .Values.jaeger.tag }}
     rbac:
       clusterRole: true
+    certs:
+      issuer:
+        create: false
+      certificate:
+        create: false
+    webhooks:
+      mutatingWebhook:
+        create: {{ .Values.webhook }}
+      validatingWebhook:
+        create: {{ .Values.webhook }}
     jaeger:
       create: true
       spec: 

@@ -1,6 +1,13 @@
 global:
   imageRegistry: ""
   imageRepository: ""
+
+# @title 启用 webhook 
+# @title.en Webhook enabled
+# @title.jp Webhookを起動します
+# @order 1
+webhook: false
+
 # @title Elasticsearch 设置
 # @title.en Elasticsearch Setting
 # @title.jp Elasticsearch 設定
@@ -16,7 +23,7 @@ elasticsearch:
   # @hidden elasticsearch.embedded=true
   # @title Elasticsearch 地址
   # @title.en Elasticsearch Address
-  # @title.jp エラスティックサーチ アドレス
+  # @title.jp Elasticsearchアドレス
   # @placeholder http://elasticsearch:9200
   address: ""
   # @title Elasticsearch Index 分片数

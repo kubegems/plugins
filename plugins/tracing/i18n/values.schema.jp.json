@@ -1,6 +1,13 @@
 {
   "type": "object",
   "properties": {
+    "webhook": {
+      "type": "boolean",
+      "title": "Webhookを起動します",
+      "default": false,
+      "x-order": "1",
+      "form": true
+    },
     "elasticsearch": {
       "type": "object",
       "title": "Elasticsearch 設定",
@@ -15,7 +22,7 @@
         },
         "address": {
           "type": "string",
-          "title": "エラスティックサーチ アドレス",
+          "title": "Elasticsearchアドレス",
           "form": true,
           "hidden": {
             "path": "elasticsearch.embedded",

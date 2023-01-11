@@ -12,3 +12,4 @@ annotations:
   plugins.kubegems.io/install-namespace: argo-rollouts
   plugins.kubegems.io/values-from: "monitoring"
   plugins.kubegems.io/category: core/应用管理
+  plugins.kubegems.io/requirements: istio >= 0.0.0

@@ -2,6 +2,7 @@ annotations:
   plugins.kubegems.io/category: kubernetes/可观测性
   plugins.kubegems.io/install-namespace: kubegems-monitoring
   plugins.kubegems.io/is-plugin: 'true'
+  plugins.kubegems.io/requirements: monitoring >= 0.0.0
 apiVersion: v2
 appVersion: 0.22.0
 dependencies:
