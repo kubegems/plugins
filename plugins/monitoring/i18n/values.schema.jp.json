@@ -79,7 +79,7 @@
         "maxCpu": {
           "type": "string",
           "title": "最大制限 CPU",
-          "default": 4,
+          "default": "4",
           "form": true
         },
         "maxMemory": {

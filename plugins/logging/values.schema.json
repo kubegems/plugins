@@ -12,7 +12,7 @@
             "maxCpu": {
               "type": "string",
               "title": "最大限制 CPU",
-              "default": 1,
+              "default": "1",
               "form": true
             },
             "maxMemory": {
@@ -50,7 +50,7 @@
             "maxCpu": {
               "type": "string",
               "title": "最大限制 CPU",
-              "default": 1,
+              "default": "1",
               "form": true
             },
             "maxMemory": {
@@ -70,7 +70,7 @@
               "type": "string",
               "format": "quantity",
               "title": "最大限制 CPU",
-              "default": 2,
+              "default": "2",
               "form": true
             },
             "maxMemory": {
@@ -107,7 +107,7 @@
           "type": "string",
           "format": "quantity",
           "title": "最大限制 CPU",
-          "default": 4,
+          "default": "4",
           "form": true
         },
         "maxMemory": {

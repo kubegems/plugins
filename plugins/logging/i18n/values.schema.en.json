@@ -12,7 +12,7 @@
             "maxCpu": {
               "type": "string",
               "title": "Max Limit CPU",
-              "default": 1,
+              "default": "1",
               "form": true
             },
             "maxMemory": {
@@ -39,8 +39,7 @@
               "type": "string",
               "title": "container log path",
               "default": "/data",
-              "form": true,
-              "title.jp": "コンテナー ログのパス"
+              "form": true
             },
             "enableUpstream": {
               "type": "boolean",
@@ -51,7 +50,7 @@
             "maxCpu": {
               "type": "string",
               "title": "Max Limit CPU",
-              "default": 1,
+              "default": "1",
               "form": true
             },
             "maxMemory": {
@@ -71,7 +70,7 @@
               "type": "string",
               "format": "quantity",
               "title": "Max Limit CPU",
-              "default": 2,
+              "default": "2",
               "form": true
             },
             "maxMemory": {
@@ -108,7 +107,7 @@
           "type": "string",
           "format": "quantity",
           "title": "Max Limit CPU",
-          "default": 4,
+          "default": "4",
           "form": true
         },
         "maxMemory": {
