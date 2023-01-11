@@ -181,18 +181,25 @@ spec:
 
 ### 定义新插件
 
-要能够部署上述的 plugin，就需要一个插件来生成上述的 plugin。那么上述的 plugin 就被作为被 template 的资源。
+要能够部署上述的 plugin，就需要一个插件来生成上述的 plugin,那么上述的 plugin 就被作为被 template 的资源。
+就是用 plugin 来创建我们想要的 plugin。
 
 > 插件没有模板，新增插件时可以参考 [plugins/cert-manager](plugins/cert-manager) 来编写。
 
-插件用到的 annotations 可以从 [这里](README.md) 查看。
+所有的 plugin 都在放在 plugins 下以插件名称单独建立文件夹:
+
+```sh
+mkdir plugins/nginx-ingress-controller
+```
+
+在插件目录下新增一个 `Chart.yaml` 文件，用于描述插件的基本信息，插件用到的特别的 annotations 可以从 [这里](README.md) 查看。
 
 ```yaml
 # plugins/nginx-ingress-controller/Chart.yaml
 apiVersion: v2
 name: nginx-ingress-controller
 version: 9.3.25 # 建议保持与上游一致
-appVersion: 1.6.0
+appVersion: 9.3.25
 description: NGINX Ingress Controller 是一个 Ingress 控制器，它使用 NGINX 管理 Kubernetes 集群中对 HTTP 服务的外部访问。
 dependencies:
   - name: common
@@ -203,6 +210,35 @@ annotations:
   plugins.kubegems.io/install-namespace: ingress-nginx # 插件需要被安装的namespace，即templates中的资源应当被安装的位置。如果为空则为 `kubegems-installer`
   plugins.kubegems.io/category: kubernetes/网络 # 插件分类，用于web ui 分类展示
 ```
+
+增加 `values.yaml` 文件，将常用选项提出到 values 中，以便于 web ui 渲染。
+
+为了 web ui 能够正常渲染还需要使用 [kubegems/tools/helm-schema](https://github.com/kubegems/kubegems/blob/main/tools/helm-schema)来生成 schema，
+需要在 values 中增加一些注释。
+
+```yaml
+# plugins/nginx-ingress-controller/values.yaml
+# global 字段下的值会从 global 插件注入,为了正常渲染,这里先占位
+global:
+  imageRegistry: ""
+  imageRepository: ""
+# @title 额外参数
+# @title.en Extra Args
+# @title.jp 额外変数
+# @schema additionalProperties=true
+extraArgs: {}
+# @title 指标采集
+# @title.en Metrics
+# @title.jp 指標
+metrics:
+  # @title 启用
+  # @title.en Enable
+  enabled: false
+```
+
+> 更多可用注释，需要查看 helm-schema 使用说明
+
+根据 `values.yaml` 中的值为上面的的 nginx-ingress-controller plugin 创建模板文件,将里面的变量用 helm 模板语法替换:
 
 ```template
 # plugins/nginx-ingress-controller/templates/nginx-ingress-controller.yaml
@@ -230,33 +266,7 @@ spec:
 
 > common.images.repository 在 [plugins/common](plugins/common/templates/_helpers.tpl) 下,更多使用示例可以参照已有使用。
 
-增加 values 文件，将常用选项提出到 values 中，以便于 web ui 渲染。
-为了 web ui 能够正常渲染还需要使用 [kubegems/tools/helm-schema](https://github.com/kubegems/kubegems/blob/main/tools/helm-schema)来生成 schema，
-需要在 values 中增加一些注释。
-
-```yaml
-# plugins/nginx-ingress-controller/values.yaml
-# global 字段下的值会从 global 插件注入
-global:
-  imageRegistry: ""
-  imageRepository: ""
-# @title 额外参数
-# @title.en Extra Args
-# @title.jp 额外変数
-# @schema additionalProperties=true
-extraArgs: {}
-# @title 指标采集
-# @title.en Metrics
-# @title.jp 指標
-metrics:
-  # @title 启用
-  # @title.en Enable
-  enabled: false
-```
-
-> 更多可用注释，需要查看 helm-schema 使用说明
-
-完成后执行 schema 自动生成:
+插件编写完成后需要执行 schema 自动生成，会生成附带国际化的 schema:
 
 ```sh
 $ helm-schema plugins/nginx-ingress-controller
@@ -286,7 +296,7 @@ spec:
   kind: helm
   url: https://charts.bitnami.com/bitnami
   chart: nginx-ingress-controller
-  version: 1.6.0
+  version: 9.3.25
   values:
     defaultBackend:
       image:
@@ -299,7 +309,7 @@ spec:
       repository: kubegems/nginx-ingress-controller
 ```
 
-可以看到能够正常渲染出我们需要的 位于 ingress-nginx 空间下的 plugin 。
+可以看到能够正常渲染出我们需要的位于 ingress-nginx 空间下的 plugin 。
 
 ### 集成测试
 
@@ -332,7 +342,7 @@ kubectl -n kubegems-installer label secrets plugin-repository-local plugins.kube
 
 ![plugin-ingress-nginx](docs/assets/plugin-ingress-nginx.png)
 
-选择 “启用” 即可看到使用 schema 渲染出的 form,确认启用后会创建如下 plugin:
+选择 “启用” 即可看到使用 schema 渲染出的 form,确认启用后会在 `kubegems-installer` 空间创建如下 plugin:
 
 ```sh
 $ kubectl -n kubegems-installer get plugins.plugins.kubegems.io nginx-ingress-controller -oyaml
@@ -361,6 +371,38 @@ spec:
     optional: true
     prefix: global.
   version: 9.3.25
+```
+
+查看 `ingress-nginx` 空间下也创建了名称为 `nginx-ingress-controller` 的 plugin:
+
+```sh
+$ kubectl -n ingress-nginx get plugins.plugins.kubegems.io nginx-ingress-controller -oyaml
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+...
+  finalizers:
+  - plugins.kubegems.io/finalizer
+  generation: 2
+  name: nginx-ingress-controller
+  namespace: ingress-nginx
+...
+spec:
+  chart: nginx-ingress-controller
+  kind: helm
+  url: https://charts.bitnami.com/bitnami
+  values:
+    defaultBackend:
+      image:
+        registry: registry.cn-beijing.aliyuncs.com
+        repository: kubegems
+    global:
+      imageRegistry: registry.cn-beijing.aliyuncs.com
+    image:
+      repository: kubegems/nginx-ingress-controller
+  version: 9.3.25
+status:
+  ...
 ```
 
 需要特别注意的是：
