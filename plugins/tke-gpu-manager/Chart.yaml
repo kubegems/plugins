@@ -1,5 +1,5 @@
 annotations:
-  plugins.kubegems.io/category: kubernetes/GPU
+  plugins.kubegems.io/category: kubernetes/Devices
   plugins.kubegems.io/install-namespace: kube-system
   plugins.kubegems.io/is-plugin: 'true'
 apiVersion: v2

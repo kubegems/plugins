@@ -10,4 +10,4 @@ description: An open source platform to deploy your machine learning models on K
 annotations:
   plugins.kubegems.io/is-plugin: "true"
   plugins.kubegems.io/install-namespace: seldon-system
-  plugins.kubegems.io/category: operator/mlops
+  plugins.kubegems.io/category: operator控制器/MLOps

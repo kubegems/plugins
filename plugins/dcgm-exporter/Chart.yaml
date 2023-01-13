@@ -1,8 +1,9 @@
 annotations:
-  plugins.kubegems.io/category: kubernetes/GPU
+  plugins.kubegems.io/category: kubernetes/可观测性
   plugins.kubegems.io/health-check: daemonsets.apps/dcgm-exporter
   plugins.kubegems.io/install-namespace: kubegems-monitoring
   plugins.kubegems.io/is-plugin: 'true'
+  plugins.kubegems.io/requirements: nvidia-device-plugin >= 0.0.0
 apiVersion: v2
 appVersion: 2.6.9
 dependencies:
