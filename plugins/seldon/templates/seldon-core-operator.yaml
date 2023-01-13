@@ -27,7 +27,7 @@ spec:
       HUGGINGFACE_SERVER:
         protocols:
           v2:
-            defaultImageVersion: "v1.2.0.dev3-huggingface-custom1"
+            defaultImageVersion: "1.3.0-huggingface-custom1"
             {{- if.Values.global.imageRegistry }}
             image: {{ .Values.global.imageRegistry }}/kubegems/mlserver
             {{- else }}
