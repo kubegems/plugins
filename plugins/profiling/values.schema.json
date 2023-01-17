@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "profiling": {
+      "type": "object",
+      "title": "Profiling 配置",
+      "properties": {
+        "host": {
+          "type": "string",
+          "title": "Ingress 域名",
+          "default": "profiling.kubegems.io",
+          "form": true
+        },
+        "ingress": {
+          "type": "string",
+          "title": "Ingress Classs",
+          "default": "default-gateway",
+          "form": true
+        },
+        "maxCpu": {
+          "type": "string",
+          "format": "quantity",
+          "title": "最大限制 CPU",
+          "default": "2",
+          "form": true
+        },
+        "maxMemory": {
+          "type": "string",
+          "format": "quantity",
+          "title": "最大限制内存",
+          "default": "4Gi",
+          "form": true
+        },
+        "volumeCapacity": {
+          "type": "string",
+          "title": "数据盘容量",
+          "default": "20Gi",
+          "form": true
+        }
+      },
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

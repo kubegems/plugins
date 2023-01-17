@@ -1,0 +1,32 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: pyroscope
+  namespace: 
+spec:
+  kind: helm
+  url: https://pyroscope-io.github.io/helm-chart
+  chart: pyroscope
+  version: {{ .Chart.AppVersion }}
+  values:
+    serviceAccount:
+      create: false
+    persistence:
+      enabled: true
+      storageClassName: {{ .Values.global.storageClass }}
+      size: {{ .Values.profiling.volumeCapacity }}
+    resources:
+      limits:
+        cpu: {{ .Values.profiling.maxCpu }}
+        memory: {{ .Values.profiling.maxMemory }}
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    ingress:
+      enabled: true
+      className: {{ .Values.profiling.ingress }}
+      hosts:
+        - host: {{ .Values.profiling.host }}
+          paths:
+          - path: /
+            pathType: Prefix

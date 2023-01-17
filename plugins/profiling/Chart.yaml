@@ -1,0 +1,16 @@
+apiVersion: v2
+name: profiling
+version: 0.2.86
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+appVersion: 0.2.86
+description: KubeGems平台应用性能分析套件,包含pyroscope服务
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: observability
+  plugins.kubegems.io/health-check: deployments.apps/pyroscope*
+  plugins.kubegems.io/category: core/可观测性
+  plugins.kubegems.io/requirements: gateway >= 0.0.0
+  plugins.kubegems.io/values-from: kubegems-local

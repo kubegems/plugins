@@ -1,0 +1,30 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+
+# @title Profiling 配置
+# @title.en Profiling Configuration
+# @title.jp プロファイリング設定
+profiling:
+  # @title Ingress 域名
+  # @title.en  Ingress host
+  # @title.jp ドメイン名
+  host: profiling.kubegems.io
+  # @title Ingress Classs
+  # @title.en  Ingress Class
+  # @title.jp Ingress Class
+  ingress: default-gateway
+  # @title 数据盘容量
+  # @title.en Capacity of PVC  
+  # @title.jp データディスク容量
+  volumeCapacity: "20Gi"
+  # @title 最大限制 CPU
+  # @title.en Max Limit CPU
+  # @title.jp 最大制限 CPU
+  # @schema format=quantity
+  maxCpu: "2"
+  # @title 最大限制内存
+  # @title.en Maximum memory limit
+  # @title.jp 最大メモリ制限
+  # @schema format=quantity
+  maxMemory: "4Gi"

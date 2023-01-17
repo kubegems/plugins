@@ -18,6 +18,8 @@ Annotations used by kubegems plugin system in `Chart.yaml` `.annotations` field:
 | `plugins.kubegems.io/values-from`       | (optional) "logging,tracing"     | use values from other plugins                                        |
 | `plugins.kubegems.io/required`          | (optional) "true"                | this plugin is required for init installation and can't be uninstall |
 | `plugins.kubegems.io/health-check`      | (optional) "deployments.apps/\*" | health check targets                                                 |
+| `plugins.kubegems.io/requirements`      | (optional) "inter-device-operator >= 0.25.1" | dependency plugins |
+
 
 ## Plugin Schema Generate
 
