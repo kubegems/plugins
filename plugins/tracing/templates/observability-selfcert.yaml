@@ -1,0 +1,12 @@
+{{- $ca := genCA ("selfsigned-issuer") 3650 }}
+{{- $cert := genSignedCert ("jaeger-operator-service-cert") nil (list (printf "jaeger-operator-webhook-service.%s.svc" .Release.Namespace) (printf "jaeger-operator-webhook-service.%s.svc.cluster.local" .Release.Namespace)) 3650 $ca }}
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "jaeger-operator-service-cert"
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ $cert.Cert | b64enc | quote }}
+  tls.key: {{ $cert.Key | b64enc | quote }}
+  ca.crt: {{ $ca.Cert | b64enc | quote }}
