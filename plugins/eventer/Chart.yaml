@@ -4,12 +4,13 @@ annotations:
   plugins.kubegems.io/install-namespace: kubegems-eventer
   plugins.kubegems.io/is-plugin: 'true'
   plugins.kubegems.io/values-from: logging
+  plugins.kubegems.io/requirements: logging >= 0.0.0
 apiVersion: v2
-appVersion: 2.1.5
+appVersion: 2.1.6
 dependencies:
 - name: common
   repository: file://../common
   version: 1.x.x
 description: Kubernetes集群事件收集器(需开启 logging 套件)
 name: eventer
-version: 2.1.5
+version: 2.1.6
