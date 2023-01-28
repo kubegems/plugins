@@ -6,7 +6,7 @@ annotations:
   plugins.kubegems.io/values-from: logging
   plugins.kubegems.io/requirements: logging >= 0.0.0
 apiVersion: v2
-appVersion: 2.1.6
+appVersion: 2.1.5
 dependencies:
 - name: common
   repository: file://../common
