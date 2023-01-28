@@ -136,6 +136,9 @@ spec:
           - configMap:
               key: kubegems-email.tmpl
               name: kubegems-email-template
+        # do not force add namespace label matcher
+        alertmanagerConfigMatcherStrategy:
+          type: None
         replicas: {{ .Values.alertmanager.replicas }}
         retention: {{ .Values.alertmanager.retention }}
         storage:
