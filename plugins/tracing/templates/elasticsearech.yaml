@@ -12,6 +12,7 @@ spec:
   values:
     replicas: 1
     minimumMasterNodes: 1
+    clusterHealthCheckParams: "wait_for_status=yellow&timeout=1s"
     # image: "docker.elastic.co/elasticsearch/elasticsearch"
     {{ include "common.images.repository" ( dict "key" "image" "registry" "docker.elastic.co" "repository" "elasticsearch/elasticsearch" "context" .) }}
     volumeClaimTemplate:
