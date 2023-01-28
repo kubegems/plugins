@@ -5,11 +5,11 @@ annotations:
   plugins.kubegems.io/is-plugin: "true"
   plugins.kubegems.io/values-from: kubegems-local
 apiVersion: v2
-appVersion: 43.2.1 # monitoring operator version
+appVersion: 44.3.0 # monitoring operator version
 dependencies:
   - name: common
     repository: file://../common
     version: 1.x.x
 description: KubeGems平台监控&告警控制器,包含Prometheus和AlertManager服务
 name: monitoring
-version: 43.2.1
+version: 44.3.0
