@@ -7,4 +7,3 @@ spec:
   kind: helm
   url: https://intel.github.io/helm-charts
   version: "{{ .Chart.AppVersion }}"
-  values: 

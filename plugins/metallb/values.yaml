@@ -5,4 +5,6 @@ metallb:
   speaker:
     frr:
       enabled: true
+      image:
+        tag: 7.5.0
 
