@@ -3,7 +3,7 @@ annotations:
   plugins.kubegems.io/health-check: statefulsets.apps/*,deployments.apps/*
   plugins.kubegems.io/install-namespace: intel-system
   plugins.kubegems.io/is-plugin: 'true'
-  plugins.kubegems.io/requirements: inter-device-operator >= 0.25.1
+  plugins.kubegems.io/requirements: intel-device-operator >= 0.25.1
 apiVersion: v2
 appVersion: 0.25.1
 dependencies:
