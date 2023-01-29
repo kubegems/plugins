@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-
+    # Publish semver tags as releases.
+    tags: ["v*.*.*"]
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -15,7 +16,12 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v3
 
+      - name: package check local
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: make local
+
       - name: Upload
+        if: startsWith(github.event.ref, 'refs/tags/v')
         run: make all
         env:
           HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
