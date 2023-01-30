@@ -1,0 +1,11 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: spark-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://googlecloudplatform.github.io/spark-on-k8s-operator
+  chart: spark-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:

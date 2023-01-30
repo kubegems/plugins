@@ -1,0 +1,11 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: gitlab-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://gitlab.com/api/v4/projects/18899486/packages/helm/stable
+  chart: gitlab-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:

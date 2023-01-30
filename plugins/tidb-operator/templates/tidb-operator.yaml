@@ -1,0 +1,11 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: tidb-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://charts.pingcap.org
+  chart: tidb-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:

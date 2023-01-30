@@ -1,0 +1,14 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: clickhouse-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://docs.altinity.com/clickhouse-operator
+  chart: altinity-clickhouse-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:
+    secret: 
+      username: {{ .Values.clickhouse.username }}
+      password: {{ .Values.clickhouse.password }}

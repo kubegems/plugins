@@ -1,0 +1,15 @@
+annotations:
+  plugins.kubegems.io/category: operator控制器/database
+  plugins.kubegems.io/health-check: deployments.apps/*
+  plugins.kubegems.io/install-namespace: mysql-system
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/values-from: kubegems-local
+apiVersion: v2
+appVersion: v2.3.0
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: Open Source，High Availability Cluster，based on MySQL.
+name: radondb-mysql-operator
+version: 2.3.0

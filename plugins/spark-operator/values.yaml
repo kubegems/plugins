@@ -1,0 +1,8 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+  clusterName: ""
+  storageClass: ""
+  runtime: ""
+
+

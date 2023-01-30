@@ -1,0 +1,11 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+  clusterName: ""
+  storageClass: ""
+  runtime: ""
+
+
+clickhouse:
+  username: kubegems
+  password: "demo!@#admin"

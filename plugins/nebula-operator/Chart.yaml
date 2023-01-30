@@ -1,0 +1,15 @@
+annotations:
+  plugins.kubegems.io/category: operator控制器/database
+  plugins.kubegems.io/health-check: deployments.apps/*
+  plugins.kubegems.io/install-namespace: nebula-system
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/values-from: kubegems-local
+apiVersion: v2
+appVersion: 1.3.0
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: Nebula Operator plugin for KubeGems
+name: nebula-operator
+version: 1.3.0

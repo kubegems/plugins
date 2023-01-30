@@ -1,0 +1,11 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: mongodb-community-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://mongodb.github.io/helm-charts
+  chart: community-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:

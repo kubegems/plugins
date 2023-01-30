@@ -1,0 +1,15 @@
+annotations:
+  plugins.kubegems.io/category: operator控制器/message
+  plugins.kubegems.io/health-check: deployments.apps/*
+  plugins.kubegems.io/install-namespace: kafka-system
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/values-from: kubegems-local
+apiVersion: v2
+appVersion: 0.32.0
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: Strimzi provides a way to run an Apache Kafka cluster on Kubernetes or OpenShift in various deployment configurations. 
+name: strimzi-kafka-operator
+version: 0.32.0

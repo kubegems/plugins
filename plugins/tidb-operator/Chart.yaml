@@ -1,0 +1,15 @@
+annotations:
+  plugins.kubegems.io/category: operator控制器/database
+  plugins.kubegems.io/health-check: deployments.apps/*
+  plugins.kubegems.io/install-namespace: tidb-system
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/values-from: kubegems-local
+apiVersion: v2
+appVersion: v1.4.1
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: TiDB Operator manages TiDB clusters on Kubernetes and automates tasks related to operating a TiDB cluster. It makes TiDB a truly cloud-native database.
+name: tidb-operator
+version: v1.4.1

@@ -1,0 +1,11 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: kafka-operator
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://strimzi.io/charts/
+  chart: strimzi-kafka-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:

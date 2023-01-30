@@ -1,0 +1,16 @@
+annotations:
+  plugins.kubegems.io/category: operator控制器/develop
+  plugins.kubegems.io/health-check: deployments.apps/*
+  plugins.kubegems.io/install-namespace: gitlab-system
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/values-from: kubegems-local
+  plugins.kubegems.io/requirements: cert-manager >= 1.8.0,metrics-server >= 3.8.2,gateway >= 0.3.2,monitoring >= 43.2.1 
+apiVersion: v2
+appVersion: 0.15.3
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: From planning to production, GitLab brings teams together to shorten cycle times, reduce costs, strengthen security, and increase developer productivity.
+name: gitlab-operator
+version: 0.15.3
