@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "proxy": {
+      "type": "object",
+      "title": "Istio Proxy Settings",
+      "properties": {
+        "maxCpu": {
+          "type": "string",
+          "title": "Max Limit CPU",
+          "default": "1",
+          "form": true
+        },
+        "maxMemory": {
+          "type": "string",
+          "title": "Maximum memory limit",
+          "default": "1Gi",
+          "form": true
+        }
+      },
+      "form": true
+    },
+    "tracing": {
+      "type": "object",
+      "title": "Istio Tracing Configuration",
+      "properties": {
+        "sampling": {
+          "type": "integer",
+          "title": "sampling 1-100",
+          "default": 50,
+          "form": true
+        }
+      },
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -26,7 +26,7 @@ spec:
       prometheus:
         url: {{ .Values.monitoring.prometheus.address }}
       tracing:
-        url: {{ .Values.tracing.jaeger.address }}
+        url: {{ .Values.tracing.jaeger }}
 ---
 # https://github.com/istio/istio/tree/master/manifests/charts/istio-operator
 apiVersion: plugins.kubegems.io/v1beta1
@@ -60,47 +60,47 @@ spec:
           - name: PILOT_FILTER_GATEWAY_CLUSTER_CONFIG
             value: "true"
     cni:
-      enabled: true
+      enabled: {{ .Values.operator.istioCNI }}
   {{ include "common.images.repository" ( dict "key" "hub" "registry" "gcr.io" "repository" "istio" "context" .) }}
   tag: {{ .Chart.AppVersion }}
   meshConfig:
     defaultConfig:
       proxyMetadata:
-        ISTIO_META_DNS_AUTO_ALLOCATE: "true"
-        ISTIO_META_DNS_CAPTURE: "true"
+        ISTIO_META_DNS_AUTO_ALLOCATE: {{ .Values.operator.istioDNS | quote }}
+        ISTIO_META_DNS_CAPTURE: {{ .Values.operator.istioDNS | quote }}
       tracing:
-        sampling: {{ .Values.operator.tracing.sampling }}
+        sampling: {{ .Values.tracing.sampling }}
         zipkin:
-          address: {{ .Values.tracing.jaeger.zipkin.address }}
-    enableTracing: true
+          address: {{ .Values.tracing.jaeger }}
+    enableTracing: {{ .Values.tracing.enabled }}
   values:
     gateways:
       istio-ingressgateway:
         injectionTemplate: gateway
     global:
-      meshID: mesh-default
+      meshID: {{ .Values.operator.meshID }}
       multiCluster:
         clusterName: {{ .Values.global.clusterName }}
       network: {{ .Values.global.clusterName }}
       proxy_init:
         resources:
           limits:
-            cpu: 200m
-            memory: 512Mi
+            cpu: 50m
+            memory: 128Mi
           requests:
             cpu: 10m
-            memory: 10Mi
+            memory: 32Mi
       proxy:
-        autoInject: disabled
+        autoInject: {{ .Values.proxy.autoInject }}
         resources:
           limits:
-            cpu: "1"
-            memory: 2048Mi
+            cpu: {{ .Values.proxy.maxCpu }}
+            memory: {{ .Values.proxy.maxMemory }}
           requests:
-            cpu: 100m
+            cpu: 50m
             memory: 128Mi
       tracer:
         zipkin:
-          address: {{ .Values.tracing.jaeger.zipkin.address }}
+          address: {{ .Values.tracing.jaeger }}
     istio_cni:
-      enabled: true
+      enabled: {{ .Values.operator.istioCNI }}

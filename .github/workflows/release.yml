@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - "v-*"
     # Publish semver tags as releases.
     tags: ["v*.*.*"]
 jobs:
@@ -17,7 +18,7 @@ jobs:
         uses: azure/setup-helm@v3
 
       - name: package check local
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/v*'
         run: make local
 
       - name: Upload

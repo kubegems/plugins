@@ -8,12 +8,32 @@ chartVersion: 1.12.6 # must >1.12.0
 kiali:
   version: 1.38.1
 operator:
-  tracing:
-    sampling: 50
+  meshID: mesh-default
+  istioCNI: true
+  istioDNS: true
+# @title Istio 代理设置
+# @title.en  Istio Proxy Settings
+# @title.jp Istio Proxy の設定
+proxy:
+  autoInject: disabled
+  # @title 最大限制 CPU
+  # @title.en Max Limit CPU
+  # @title.jp 最大制限 CPU
+  maxCpu: 1000m
+  # @title 最大限制内存
+  # @title.en Maximum memory limit
+  # @title.jp 最大メモリ制限
+  maxMemory: 1Gi
+# @title Istio Tracing 配置
+# @title.en Istio Tracing Configuration
+# @title.jp Istio Tracingの設定
 tracing:
-  jaeger:
-    zipkin:
-      address: "jaeger-operator-jaeger-collector.observability:9411"
+  enabled: true
+  # @title 采样率 1-100
+  # @title.en sampling 1-100
+  # @title.jp サンプリングレート 1-100
+  sampling: 50
+  jaeger: "jaeger-operator-jaeger-collector.observability:9411"
 monitoring:
   prometheus:
     address: ""
