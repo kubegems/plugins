@@ -13,3 +13,4 @@ annotations:
   plugins.kubegems.io/values-from: "monitoring,tracing"
   plugins.kubegems.io/category: core/服务网格
   plugins.kubegems.io/health-check: "deployments.apps/*"
+  plugins.kubegems.io/requirements: monitoring >= 0.0.0,tracing >= 0.0.0

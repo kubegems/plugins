@@ -3,6 +3,7 @@ annotations:
   plugins.kubegems.io/health-check: statefulsets.apps/*,deployments.apps/*
   plugins.kubegems.io/install-namespace: kubegems-monitoring
   plugins.kubegems.io/is-plugin: 'true'
+  plugins.kubegems.io/requirements: monitoring >= 0.0.0
 apiVersion: v2
 appVersion: 6.29.6
 dependencies:
