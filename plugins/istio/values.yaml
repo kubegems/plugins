@@ -33,7 +33,9 @@ tracing:
   # @title.en sampling 1-100
   # @title.jp サンプリングレート 1-100
   sampling: 50
-  jaeger: "jaeger-operator-jaeger-collector.observability:9411"
+  jaeger:
+    zipkin:
+      address:
 monitoring:
   prometheus:
     address: ""
