@@ -1,6 +1,6 @@
 apiVersion: v2
 name: local-path
-version: 1.0.0
+version: 0.0.22
 appVersion: 0.0.22
 dependencies:
   - name: common
