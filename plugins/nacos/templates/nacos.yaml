@@ -17,7 +17,7 @@ spec:
       port: {{ .Values.service.port }}
       nodePort: {{ .Values.service.nodePort }}
     nacos:
-      replicaCount: {{ .Values.replicasCount }}
+      replicaCount: {{ .Values.replicaCount }}
       image:
         # repository: nacos/nacos-server
         {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "nacos/nacos-server" "context" .) }}
