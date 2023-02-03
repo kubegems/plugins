@@ -17,11 +17,6 @@
       "title": "イメージ リポジトリ",
       "form": true
     },
-    "kubegemsVersion": {
-      "type": "string",
-      "title": "kubegems バージョン",
-      "form": true
-    },
     "runtime": {
       "type": "string",
       "title": "CRI ランタイム",

@@ -17,11 +17,6 @@
       "title": "Image Repository",
       "form": true
     },
-    "kubegemsVersion": {
-      "type": "string",
-      "title": "kubegems version",
-      "form": true
-    },
     "runtime": {
       "type": "string",
       "title": "CRI Runtime",

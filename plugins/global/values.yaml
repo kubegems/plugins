@@ -14,10 +14,6 @@ clusterName: "manager-cluster"
 # @title.en StorageClass Name
 # @title.jp ストレージクラス名
 storageClass: "local-path"
-# @title kubegems 版本
-# @title.en kubegems version
-# @title.jp kubegems バージョン
-kubegemsVersion: ""
 # @title 运行时
 # @title.en CRI Runtime
 # @title.jp CRI ランタイム

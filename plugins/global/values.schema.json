@@ -17,11 +17,6 @@
       "title": "镜像路径",
       "form": true
     },
-    "kubegemsVersion": {
-      "type": "string",
-      "title": "kubegems 版本",
-      "form": true
-    },
     "runtime": {
       "type": "string",
       "title": "运行时",
