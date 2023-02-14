@@ -32,6 +32,11 @@ spec:
           url: http://loki-headless.kubegems-logging:3100
           access: proxy
           isDefault: false
+        - name: jaeger
+          type: jaeger
+          url: http://jaeger-query.observability:16686
+          access: proxy
+          isDefault: false
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
