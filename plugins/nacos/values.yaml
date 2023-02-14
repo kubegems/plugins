@@ -6,7 +6,7 @@ global:
   runtime: ""
 
 mode: cluster
-replicaCount: 1
+replicaCount: 3
 domainName: cluster.local
 
 storage: 

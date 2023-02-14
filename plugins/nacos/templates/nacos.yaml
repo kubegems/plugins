@@ -17,7 +17,11 @@ spec:
       port: {{ .Values.service.port }}
       nodePort: {{ .Values.service.nodePort }}
     nacos:
+      {{ if eq "standalone" .Values.mode }}
+      replicaCount: 1
+      {{ else }}
       replicaCount: {{ .Values.replicaCount }}
+      {{- end }}
       image:
         # repository: nacos/nacos-server
         {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "nacos/nacos-server" "context" .) }}
