@@ -1,0 +1,6 @@
+ghcr.io/chaos-mesh/chaos-mesh:v2.5.1
+ghcr.io/chaos-mesh/chaos-dlv:v2.5.1
+ghcr.io/chaos-mesh/chaos-daemon:v2.5.1
+ghcr.io/chaos-mesh/chaos-kernel:v2.5.1
+ghcr.io/chaos-mesh/chaos-dashboard:v2.5.1
+pingcap/coredns:v0.2.1

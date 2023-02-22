@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "controllerManager": {
+      "type": "object",
+      "title": "ChaosMesh Controller の設定",
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "title": "インスタンス レプリカの数",
+          "default": 1,
+          "form": true
+        }
+      },
+      "x-order": "1",
+      "form": true
+    },
+    "dashboard": {
+      "type": "object",
+      "title": "ChaosMesh WebUI の設定",
+      "properties": {
+        "host": {
+          "type": "string",
+          "title": "ドメイン名",
+          "default": "chaosmesh.kubegems.io",
+          "form": true
+        },
+        "ingressClassName": {
+          "type": "string",
+          "title": "IngressClassName 名",
+          "default": "default-gateway",
+          "form": true
+        },
+        "volumeCapacity": {
+          "type": "string",
+          "format": "quantity",
+          "title": "ディスク容量",
+          "default": "5Gi",
+          "form": true
+        }
+      },
+      "x-order": "2",
+      "form": true
+    },
+    "dnsServer": {
+      "type": "boolean",
+      "title": "DNS Serverを有効にするかどうか",
+      "default": true,
+      "x-order": "3",
+      "form": true
+    },
+    "chaosDlv": {
+      "type": "boolean",
+      "title": "chaosDLVを有効にするかどうか",
+      "default": true,
+      "x-order": "4",
+      "form": true
+    },
+    "bpfki": {
+      "type": "boolean",
+      "title": "bpfkiを有効にするかどうか",
+      "default": true,
+      "x-order": "5",
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

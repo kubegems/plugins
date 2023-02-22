@@ -1,0 +1,49 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: chaos-mesh
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  kind: helm
+  url: https://charts.chaos-mesh.org
+  version: "{{ .Chart.AppVersion }}"
+  values:
+    controllerManager:
+      replicaCount: {{ .Values.controllerManager.replicaCount }}
+    chaosDaemon:
+      {{- if eq .Values.global.runtime "docker" }}
+      runtime: docker
+      socketPath: /var/run/docker.sock
+      {{- else if eq .Values.global.runtime "containerd" }}
+      runtime: containerd
+      socketPath: /run/containerd/containerd.sock
+      {{- else if eq .Values.global.runtime "crio" }}
+      runtime: crio
+      socketPath: /var/run/crio/crio.sock
+      {{ else }}
+      runtime: containerd
+      socketPath: /run/containerd/containerd.sock
+      {{- end }}
+    dashboard:
+      persistentVolume:
+        enabled: true
+        storageClassName: {{ .Values.global.storageClass }}
+        size: {{ .Values.dashboard.volumeCapacity }}
+      ingress:
+        enabled: true
+        ingressClassName: {{ .Values.dashboard.ingressClassName }}
+        hosts:
+          - name: {{ .Values.dashboard.host }}
+    {{- if .Values.dnsServer }}
+    dnsServer:
+      create: true
+      replicas: 1
+    {{- end }}
+    {{- if .Values.bpfki }}
+    bpfki:
+      create: true
+    {{- end }}
+    {{- if .Values.chaosDlv }}
+    chaosDlv:
+      enable: true
+    {{- end }}
