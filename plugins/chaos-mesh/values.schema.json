@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "controllerManager": {
+      "type": "object",
+      "title": "ChaosMesh Controller 配置",
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "title": "实例副本数",
+          "default": 1,
+          "form": true
+        }
+      },
+      "x-order": "1",
+      "form": true
+    },
+    "dashboard": {
+      "type": "object",
+      "title": "ChaosMesh WebUI 配置",
+      "properties": {
+        "host": {
+          "type": "string",
+          "title": "Web 域名",
+          "default": "chaosmesh.kubegems.io",
+          "form": true
+        },
+        "ingressClassName": {
+          "type": "string",
+          "title": "IngressClassName 名称",
+          "default": "default-gateway",
+          "form": true
+        },
+        "volumeCapacity": {
+          "type": "string",
+          "format": "quantity",
+          "title": "持久化化数据容量",
+          "default": "5Gi",
+          "form": true
+        }
+      },
+      "x-order": "2",
+      "form": true
+    },
+    "dnsServer": {
+      "type": "boolean",
+      "title": "是否启用 DNS Server",
+      "default": true,
+      "x-order": "3",
+      "form": true
+    },
+    "chaosDlv": {
+      "type": "boolean",
+      "title": "是否启用 chaosDLV",
+      "default": true,
+      "x-order": "4",
+      "form": true
+    },
+    "bpfki": {
+      "type": "boolean",
+      "title": "是否启用 bpfki",
+      "default": true,
+      "x-order": "5",
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

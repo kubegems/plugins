@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "controllerManager": {
+      "type": "object",
+      "title": "ChaosMesh Controller Configuration",
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "title": "Number of instance replicas",
+          "default": 1,
+          "form": true
+        }
+      },
+      "x-order": "1",
+      "form": true
+    },
+    "dashboard": {
+      "type": "object",
+      "title": "ChaosMesh WebUI Configuration",
+      "properties": {
+        "host": {
+          "type": "string",
+          "title": "Host of Dashboard",
+          "default": "chaosmesh.kubegems.io",
+          "form": true
+        },
+        "ingressClassName": {
+          "type": "string",
+          "title": "IngressClassName",
+          "default": "default-gateway",
+          "form": true
+        },
+        "volumeCapacity": {
+          "type": "string",
+          "format": "quantity",
+          "title": "Volume Capacity",
+          "default": "5Gi",
+          "form": true
+        }
+      },
+      "x-order": "2",
+      "form": true
+    },
+    "dnsServer": {
+      "type": "boolean",
+      "title": "Enable DNS Server which required by DNSChaos",
+      "default": true,
+      "x-order": "3",
+      "form": true
+    },
+    "chaosDlv": {
+      "type": "boolean",
+      "title": "Enable chaosDLV",
+      "default": true,
+      "x-order": "4",
+      "form": true
+    },
+    "bpfki": {
+      "type": "boolean",
+      "title": "Enable chaos-kernel",
+      "default": true,
+      "x-order": "5",
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -1,0 +1,50 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+  clusterName: ""
+  storageClass: ""
+  runtime: ""
+
+# @title ChaosMesh Controller 配置
+# @title.en ChaosMesh Controller Configuration
+# @title.jp ChaosMesh Controller の設定
+# @order 1
+controllerManager:
+  # @title 实例副本数
+  # @title.en Number of instance replicas
+  # @title.jp インスタンス レプリカの数
+  replicaCount: 1
+# @title ChaosMesh WebUI 配置
+# @title.en ChaosMesh WebUI Configuration
+# @title.jp ChaosMesh WebUI の設定
+# @order 2
+dashboard:
+  # @title 持久化化数据容量
+  # @title.en Volume Capacity
+  # @title.jp ディスク容量
+  # @schema format=quantity
+  volumeCapacity: 5Gi  
+  # @title IngressClassName 名称
+  # @title.en IngressClassName
+  # @title.jp IngressClassName 名
+  ingressClassName: default-gateway
+  # @title Web 域名
+  # @title.en Host of Dashboard
+  # @title.jp ドメイン名
+  host: "chaosmesh.kubegems.io"
+
+# @title 是否启用 DNS Server
+# @title.en Enable DNS Server which required by DNSChaos
+# @title.jp DNS Serverを有効にするかどうか
+# @order 3
+dnsServer: true
+# @title 是否启用 chaosDLV
+# @title.en Enable chaosDLV
+# @title.jp chaosDLVを有効にするかどうか
+# @order 4
+chaosDlv: true
+# @title 是否启用 bpfki
+# @title.en Enable chaos-kernel
+# @title.jp bpfkiを有効にするかどうか
+# @order 5
+bpfki: true
