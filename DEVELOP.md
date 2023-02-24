@@ -16,6 +16,85 @@
 | 插件         | 仓库中 helm chart 格式存放的 chart.                                                                                |
 | 插件管理     | kubegems web ui 中的插件控制部分功能，插件的启用/禁用本质上是创建/删除 `kubegems-installer` 空间下的 plugin 资源。 |
 
+## 了解 Helm 基础
+
+- Helm Cli: helm 命令行工具。
+- Helm Chart: Helm 使用的包格式称为 chart。 chart 就是一个描述 Kubernetes 相关资源的文件集合。
+- Chart 仓库: Chart 仓库 是一个配置了 index.yaml 文件和一些已经打包 chart 的 HTTP 服务器。
+
+可以看一个标准的 Chart 是什么结构的
+
+```sh
+helm pull --repo https://charts.bitnami.com/bitnami --untar nginx-ingress-controller
+```
+
+```txt
+nginx-ingress-controller/
+  Chart.yaml          # 包含了chart信息的YAML文件
+  LICENSE             # 可选: 包含chart许可证的纯文本文件
+  README.md           # 可选: 可读的README文件
+  values.yaml         # chart 默认的配置值
+  values.schema.json  # 可选: 一个使用JSON结构的values.yaml文件
+  crds/               # 自定义资源的定义
+  templates/          # 模板目录， 当和values 结合时，可生成有效的Kubernetes manifest文件
+  templates/deployment.yaml # 需要渲染的资源文件
+  templates/NOTES.txt # 可选: 包含简要使用说明的纯文本文件
+```
+
+模板文件：
+
+```tmplate
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: deis-database
+  namespace: deis
+  labels:
+    app.kubernetes.io/managed-by: deis
+spec:
+  replicas: 1
+  selector:
+    app.kubernetes.io/name: deis-database
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: deis-database
+    spec:
+      serviceAccount: deis-database
+      containers:
+        - name: deis-database
+          image: {{ .Values.imageRegistry }}/postgres:{{ .Values.dockerTag }}
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - containerPort: 5432
+          env:
+            - name: DATABASE_STORAGE
+              value: {{ default "minio" .Values.storage }}
+```
+
+模板文件使用的 GO template 模板语法，加上了 helm 的扩展。
+要完整学习 helm chart 可以看看 [Chart 模板开发者指南](https://helm.sh/zh/docs/chart_template_guide)
+
+在 helm 模板语法中 `.Values` 对应 `values.yaml` 文件中的值，`.Chart` 对应 `Chart.yaml` 文件中的值。
+
+helm 渲染：
+
+```sh
+# 默认渲染结果
+helm template ./nginx-ingress-controller
+# 尝试更改 values 中的值
+helm template  nginx-ingress-controller ./nginx-ingress-controller --set global.imageRegistry="registry.cn-beijing.aliyuncs.com"
+```
+
+helm 部署：
+
+```sh
+# 部署本地 chart
+helm install nginx-ingress-controller ./nginx-ingress-controller --dry-run
+# 直接部署远程 chart
+helm install --repo https://charts.bitnami.com/bitnami nginx-ingress-controller nginx-ingress-controller --set global.imageRegistry="registry.cn-beijing.aliyuncs.com" --dry-run
+```
+
 ## 了解 Plugin 资源
 
 先来了解一下 `plugin` 资源，插件控制的主要资源就是`plugin`资源，
@@ -52,25 +131,31 @@ NAME                       KIND   STATUS      NAMESPACE       VERSION   APPVERSI
 nginx-ingress-controller   helm   Installed   ingress-nginx   9.3.25    1.6.0        2s                 68s
 ```
 
-plugin 还支持从 configmap/secret 填充 helm values 的功能，以 集群中的 `kubegems` 插件为例：
+plugin 还支持从 configmap/secret 填充 helm values 的功能：
+
+```sh
+kubectl -n ingress-nginx create configmap --from-literal=imageRegistry=registry.cn-beijing.aliyuncs.com global-values
+```
 
 ```yaml
 apiVersion: plugins.kubegems.io/v1beta1
 kind: Plugin
 metadata:
-...
-  name: kubegems
-  namespace: kubegems-installer
+  name: nginx-ingress-controller
+  namespace: ingress-nginx
 spec:
-  installNamespace: kubegems
-  kind: helm
-  url: https://charts.kubegems.io/kubegems
-  values: {}
+  kind: helm # 插件类型，helm kustomize template，不知道就选择 helm
+  url: https://charts.bitnami.com/bitnami # kind 为 helm 时，此值为 helm chart repo
+  chart: nginx-ingress-controller # chart 名称，默认为 .metadata.name
+  version: 9.3.25 # chart 版本
+  values: # helm chart 渲染时需要替换的值
+    extraArgs:
+      # https://kubernetes.github.io/ingress-nginx/user-guide/tls/#ssl-passthrough
+      enable-ssl-passthrough: true
   valuesFrom:
     - kind: ConfigMap
-      name: kubegems-global-values
+      name: global-values
       prefix: global.
-  version: 1.23.0
 ```
 
 其中的 `.spec.valuesFrom` 字段表示将名称为 `kubegems-global-values` 的 configmap 的 data 填充至 values 下的 并添加 `global.`前缀
@@ -78,22 +163,43 @@ spec:
 查看合并和后的 values:
 
 ```sh
-$ kubectl -n kubegems-installer get plugins.plugins.kubegems.io kubegems -ojsonpath='{.status.values}'  | yq -p json
+$ kubectl -n ingress-nginx get plugins.plugins.kubegems.io nginx-ingress-controller -ojsonpath='{.status.values}'  | yq -p json
+extraArgs:
+  enable-ssl-passthrough: true
 global:
-  clusterName: manager-cluster
-  enabled: true
-  imageRegistry: registry.k8s.fatalc.cn
-  imageRepository: kubegems
-  kubegemsVersion: release-1.23
-  runtime: containerd
-  storageClass: standard
+  imageRegistry: registry.cn-beijing.aliyuncs.com
 ```
 
 可以看到 configmap 中的 key 都合并到了 kubegems 的 values 中。
 
-此外: **修改 configmap 中的 data 值，也会触发引用该 configmap 的 plugin 进行更新**
+此外: **修改 configmap 中的 data 值，也会触发所有引用该 configmap 的 plugin 进行更新**
+
+这个特性可以用来帮助我们自动更新有引用关系的插件，
+一个例子是 monitoring 插件需要知道 kubegems 告警的地址以进行告警推送，
+kubegems 就提供了一个 configmap 供 monitoring 读取。
+
+好，现在已经了解了 plugin 资源的基本功能了，就是帮我们快捷的部署 helm chart 到集群中，能够自动监听相关配置的变动，实时的更新 chart 的 value 。
+
+## kubegems 插件系统
+
+kubegems 的插件系统是基于 plugin 资源的，在这里`插件`实际上下面对应的就是 plugin 资源；
+插件系统提供了一个友好的用户界面，还增加了 plugin(chart) 的版本更新，控制插件之间的相互作用，控制插件之间的版本依赖等。
+
+![structure](docs/assets/structure.dio.png)
+
+**所有顶级 plugin 都是安装在 `kubegems-installer` 空间下的，也只有该空间下的 plugin 资源会展示在 web 界面的 “插件管理” 中。**
+
+插件安装的动作，就是在集群上为插件生成其对应的 plugin 资源。
+
+这些顶级插件，也会增加一些特别的注解：
+
+- 插件系统依赖 chart repo 作为插件源，会将 repo 中所有有 annotation `plugins.kubegems.io/is-plugin: "true"` 的 chart 识别为插件。插件源通过 secret 配置。
+- annotation `plugins.kubegems.io/values-from: logging` 表示该插件会从 logging 插件读取部分配置
+- annotaion `plugins.kubegems.io/install-namespace` 会制定插件中的内容会被安装在哪个空间。
 
 ### 特别的 global 插件
+
+上面说的了 valuesFrom 功能。
 
 插件系统中有一个默认使用的 [global plugin](https://github.com/kubegems/plugins/blob/main/plugins/global)，
 用于维护全局配置。
@@ -122,66 +228,14 @@ spec:
 
 ## 编写插件
 
-**所有顶级 plugin 都是安装在 `kubegems-installer` 空间下的，也只有该空间下的 plugin 资源会展示在 web 界面的 “插件管理” 中。**
+为了统一插件的行为(例如统一镜像仓库)，保留更多的灵活性，一般我们在制作在插件系统中展示的插件时，会在原始 plugin 上进行套壳。
+使用一个父级插件，来将目标插件渲染出来并部署。
 
-以为 `nginx-ingress-controller` 编写一个 kubegems 风格的插件为例:
-
-### 镜像本地化
-
-如果需要支持统一配置镜像仓库，需要完成镜像的本地化配置。global 中有两个参数，`global.imageRegistry` 以及 `global.imageRepository`
-
-例如，如果配置了 `global.imageRepository`为`registry.cn-beijing.aliyuncs.com`, `global.imageRepository`为`kubegems`。
-
-例如如果使用到的镜像是 `docker.io/library/nginx:latest`应当被渲染为为`registry.cn-beijing.aliyuncs.com/kubegems/nginx:latest`.
-
-```sh
-$ helm template  --repo https://charts.bitnami.com/bitnami nginx-ingress-controller | grep 'image: '
-          image: docker.io/bitnami/nginx-ingress-controller:1.6.0-debian-11-r11
-          image: docker.io/bitnami/nginx:1.22.1-debian-11-r26
-$ #参考 https://artifacthub.io/packages/helm/bitnami/nginx-ingress-controller 进行values更改以满足需求
-$ helm template  --repo https://charts.bitnami.com/bitnami nginx-ingress-controller \
-    --set 'defaultBackend.image.registry=registry.cn-beijing.aliyuncs.com' \
-    --set 'defaultBackend.image.repository=kubegems' \
-    --set 'image.repository=kubegems/nginx-ingress-controller' \
-    --set 'global.imageRegistry=registry.cn-beijing.aliyuncs.com' |  grep 'image: '
-          image: registry.cn-beijing.aliyuncs.com/kubegems/nginx-ingress-controller:1.6.0-debian-11-r11
-          image: registry.cn-beijing.aliyuncs.com/kubegems:1.22.1-debian-11-r26
-```
-
-由于镜像本地化需要将镜像 copy 到 kubgems 镜像仓库中，可以执行：
-
-```sh
-skopeo copy -a docker://docker.io/bitnami/nginx-ingress-controller:1.6.0-debian-11-r11 docker://registry.cn-beijing.aliyuncs.com/kubegems/nginx-ingress-controller:1.6.0-debian-11-r11
-skopeo copy -a docker://docker.io/bitnami/nginx:1.22.1-debian-11-r26 docker://registry.cn-beijing.aliyuncs.com/kubegems/nginx:1.22.1-debian-11-r26
-```
-
-在 plugin 资源中，如果要达到上述功能需要更改 `nginx-ingress-controller` plugin values 为：
-
-```yaml
-apiVersion: plugins.kubegems.io/v1beta1
-kind: Plugin
-metadata:
-  name: nginx-ingress-controller
-  namespace: ingress-nginx
-spec:
-  kind: helm
-  url: https://charts.bitnami.com/bitnami
-  chart: nginx-ingress-controller
-  version: 9.3.25
-  values:
-    defaultBackend:
-      image:
-        registry: registry.cn-beijing.aliyuncs.com
-        repository: kubegems
-    global:
-      imageRegistry: registry.cn-beijing.aliyuncs.com
-    image:
-      repository: kubegems/nginx-ingress-controller
-```
+以对 `nginx-ingress-controller` 编写一个 kubegems 风格的插件为例:
 
 ### 定义新插件
 
-要能够部署上述的 plugin，就需要一个插件来生成上述的 plugin,那么上述的 plugin 就被作为被 template 的资源。
+要能够部署上述 `nginx-ingress-controller` 的 plugin，就需要一个插件来生成上述的 plugin,那么上述的 plugin 就被作为被 template 的资源。
 就是用 plugin 来创建我们想要的 plugin。
 
 > 插件没有模板，新增插件时可以参考 [plugins/cert-manager](plugins/cert-manager) 来编写。
@@ -222,21 +276,13 @@ annotations:
 global:
   imageRegistry: ""
   imageRepository: ""
-# @title 额外参数
-# @title.en Extra Args
-# @title.jp 额外変数
-# @schema additionalProperties=true
-extraArgs: {}
-# @title 指标采集
-# @title.en Metrics
-# @title.jp 指標
+extraArgs:
+  enable-ssl-passthrough: true
 metrics:
-  # @title 启用
-  # @title.en Enable
   enabled: false
 ```
 
-> 更多可用注释，需要查看 helm-schema 使用说明
+> 更多可用注释，需要查看 [helm-schema example](https://github.com/kubegems/kubegems/blob/main/tools/helm-schema/test/values.yaml)
 
 根据 `values.yaml` 中的值为上面的的 nginx-ingress-controller plugin 创建模板文件,将里面的变量用 helm 模板语法替换:
 
@@ -253,20 +299,117 @@ spec:
   chart: nginx-ingress-controller
   version: {{ .Chart.AppVersion }}
   values:
-    defaultBackend:
-      image:
-        registry: {{ .Values.global.imageRegistry }}
-        repository: {{ .Values.global.imageRepository }}
-    global:
-      imageRegistry: {{ .Values.global.imageRegistry }}
-    image:
-      # repository: bitnami/nginx-ingress-controller
-      {{ include "common.images.repository" ( dict "repository" "bitnami/nginx-ingress-controller" "context" .) }}
+    extraArgs: {{ .Values.extraArgs  | toYaml | indent 6 }}
 ```
 
 > common.images.repository 在 [plugins/common](plugins/common/templates/_helpers.tpl) 下,更多使用示例可以参照已有使用。
 
-插件编写完成后需要执行 schema 自动生成，会生成附带国际化的 schema:
+### 镜像本地化
+
+如果需要支持统一配置镜像仓库，需要完成镜像的本地化配置。global 中有两个参数，`global.imageRegistry` 以及 `global.imageRepository` 用于配置镜像本地化。
+
+例如，如果配置了 `global.imageRepository`为`registry.cn-beijing.aliyuncs.com`, `global.imageRepository`为`kubegems`。
+
+如果使用到的镜像是 `docker.io/library/nginx:latest`应当被渲染为为`registry.cn-beijing.aliyuncs.com/kubegems/nginx:latest`.
+
+查看一下原始 chart 生成使用到的镜像，要把这些镜像替换成对应的格式。
+
+```sh
+$ helm template  --repo https://charts.bitnami.com/bitnami nginx-ingress-controller | grep 'image: '
+          image: docker.io/bitnami/nginx-ingress-controller:1.6.0-debian-11-r11
+          image: docker.io/bitnami/nginx:1.22.1-debian-11-r26
+$ #参考 https://artifacthub.io/packages/helm/bitnami/nginx-ingress-controller 进行values更改以满足需求
+$ helm template  --repo https://charts.bitnami.com/bitnami nginx-ingress-controller \
+    --set 'defaultBackend.image.registry=registry.cn-beijing.aliyuncs.com' \
+    --set 'defaultBackend.image.repository=kubegems' \
+    --set 'image.repository=kubegems/nginx-ingress-controller' \
+    --set 'global.imageRegistry=registry.cn-beijing.aliyuncs.com' |  grep 'image: '
+          image: registry.cn-beijing.aliyuncs.com/kubegems/nginx-ingress-controller:1.6.0-debian-11-r11
+          image: registry.cn-beijing.aliyuncs.com/kubegems:1.22.1-debian-11-r26
+```
+
+由于镜像本地化需要将镜像 copy 到 kubgems 镜像仓库中，可以执行：
+
+```sh
+skopeo copy -a docker://docker.io/bitnami/nginx-ingress-controller:1.6.0-debian-11-r11 docker://registry.cn-beijing.aliyuncs.com/kubegems/nginx-ingress-controller:1.6.0-debian-11-r11
+skopeo copy -a docker://docker.io/bitnami/nginx:1.22.1-debian-11-r26 docker://registry.cn-beijing.aliyuncs.com/kubegems/nginx:1.22.1-debian-11-r26
+```
+
+在 plugin 资源中，如果要达到上述命令行的功能则需要更改 `nginx-ingress-controller` plugin values 为：
+
+```yaml
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: nginx-ingress-controller
+  namespace: ingress-nginx
+spec:
+  kind: helm
+  url: https://charts.bitnami.com/bitnami
+  chart: nginx-ingress-controller
+  version: 9.3.25
+  values:
+    defaultBackend:
+      image:
+        registry: registry.cn-beijing.aliyuncs.com
+        repository: kubegems
+    global:
+      imageRegistry: registry.cn-beijing.aliyuncs.com
+    image:
+      repository: kubegems/nginx-ingress-controller
+```
+
+对应的模板就需要更改为:
+
+```diff
+# plugins/nginx-ingress-controller/templates/nginx-ingress-controller.yaml
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: nginx-ingress-controller
+  namespace: {{ .Release.Namespace }}
+spec:
+...
+  values:
+    extraArgs: {{ .Values.extraArgs  | toYaml | indent 6 }}
++    defaultBackend:
++      image:
++        registry: {{ .Values.global.imageRegistry }}
++        repository: {{ .Values.global.imageRepository }}
++    global:
++      imageRegistry: {{ .Values.global.imageRegistry }}
++    image:
++      # repository: bitnami/nginx-ingress-controller
++      {{ include "common.images.repository" ( dict "repository" "bitnami/nginx-ingress-controller" "context" .) }}
+```
+
+> 可以查看 [plugins/common](plugins/common/templates/_helpers.tpl) 了解 `common.images.repository` 的具体实现。
+
+### 生成用户可配置项
+
+为了 web ui 能够正常渲染出配置页面还需要使用 [kubegems/tools/helm-schema](https://github.com/kubegems/kubegems/blob/main/tools/helm-schema)来生成 schema，需要在 values 中增加一些注释。
+
+```yaml
+# plugins/nginx-ingress-controller/values.yaml
+# global 字段下的值会从 global 插件注入,不用在插件配置界面渲染，所以不加注解。
+global:
+  imageRegistry: ""
+  imageRepository: ""
+# @title 额外参数
+# @title.en Extra Args
+# @title.jp 额外変数
+# @schema additionalProperties=true
+extraArgs: {}
+# @title 指标采集
+# @title.en Metrics
+# @title.jp 指標
+metrics:
+  # @title 启用
+  # @title.en Enable
+  enabled: false
+```
+
+插件编写完成后需要执行 helm-schema 生成，会生成附带国际化的 schema:
 
 ```sh
 $ helm-schema plugins/nginx-ingress-controller
@@ -275,6 +418,43 @@ Writing plugins/nginx-ingress-controller/i18n/values.schema.en.json
 Writing plugins/nginx-ingress-controller/i18n/values.schema.jp.json
 Writing plugins/nginx-ingress-controller/values.schema.json
 ```
+
+要测试生成的 schema 是否满足预期，可以访问 kubegems UI "/jsonschema/validate"路径下的测试工具检测 schema 渲染结果。
+
+### 插件间配置共享
+
+如果一个插件依赖于另一个插件的值来动态配置自己，那么就需要被依赖的插件提供出自己的配置（就像 global 插件那样）。
+引出的配置存放在一个 configmap 中，以便于依赖插件使用。
+
+例如 nginx ingress 如果用户配置了非默认的 ingress class 名称，若使用者要动态获取到这个名称，则可以使用这种方式。
+
+增加共享 configmap 的生成：
+
+```diff
+# plugins/nginx-ingress-controller/templates/nginx-ingress-controller.yaml
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: nginx-ingress-controller
+  namespace: {{ .Release.Namespace }}
+spec:
+...
+  values:
+...
++    ingressClassResource:
++      name: {{ .Values.ingressClassName }}
+```
+
+```template
+# plugins/nginx-ingress-controller/configmap-values.yaml
+{{ include "common.component.configmap" . }}
+data:
+  ingressClassName: {{ .Values.ingressClassName }}
+```
+
+> 共享的 configmap 始终生成在 `kubegems-installer` 空间下，因为 `plugin` 中的 `.spec.valuesFrom` 始终读取相同空间下的对象。
+
+对于要使用该插件的插件，只需要在 Chart.yaml 中增加注解 `plugins.kubegems.io/values-from: nginx-ingress-controller` 即可(引用多个时使用 ',' 分割)。
 
 ## 测试插件
 
@@ -419,3 +599,7 @@ make generate package check
 ```
 
 发布插件只需要将插件的 chart 文件放在对应的目录，然后按照 kubgems 贡献流程提出 PR 即可。
+
+```
+
+```
