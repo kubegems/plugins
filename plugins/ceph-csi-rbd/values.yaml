@@ -1,0 +1,28 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+# @title Ceph Keyring
+secret:
+  # @title User ID
+  userID: ""
+  # @title User Key
+  userKey: ""
+# @title Ceph RBD storageClass
+storageClass:
+  # @title StorageClass Name
+  name: "csi-rbd-sc"
+  # @title Ceph clusterID
+  clusterID: ""
+  # @title Pool into which the RBD image shall be created 
+  pool: "rbd"
+  # @title Filesystem type of the volume
+  fstype: "ext4"
+# @title Ceph Monitors
+csiConfig:
+  - # @title ClusterID
+    clusterID: ""
+    # @title Monitors
+    monitors:
+      - ""
+      - ""
+      - ""

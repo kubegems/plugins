@@ -1,0 +1,14 @@
+apiVersion: v2
+name: ceph-csi-rbd
+version: 3.7.0
+appVersion: 3.7.0
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: RBD CSI插件能够提供新的 RBD 映像并将其附加和装载到工作负载.
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: ceph-csi-rbd
+  plugins.kubegems.io/category: kubernetes/存储插件
+

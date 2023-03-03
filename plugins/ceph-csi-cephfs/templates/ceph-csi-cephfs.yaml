@@ -1,0 +1,46 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: ceph-csi-cephfs
+  namespace: {{ .Release.Namespace }}
+spec:
+  kind: helm
+  url: https://github.com/ceph/ceph-csi/archive/refs/tags/v{{ .Chart.AppVersion }}.tar.gz
+  path: ceph-csi-{{ .Chart.AppVersion }}/charts/ceph-csi-cephfs
+  version: {{ .Chart.AppVersion }}
+  values:
+    csiConfig: {{ .Values.csiConfig | toYaml | nindent 6}}
+    secret:
+      create: true
+      adminID: {{ .Values.secret.adminID }}
+      adminKey: {{ .Values.secret.adminKey }}
+    storageClass:
+      create: true
+      name: {{ .Values.storageClass.name }}
+      clusterID: {{ .Values.storageClass.clusterID }}
+      fsName: {{ .Values.storageClass.fsName }}
+    provisioner:
+      attacher:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "registry.k8s.io" "repository" "sig-storage/csi-attacher" "context" .) }}
+      snapshotter:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "registry.k8s.io" "repository" "sig-storage/csi-snapshotter" "context" .) }}
+      resizer:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "registry.k8s.io" "repository" "sig-storage/csi-resizer" "context" .) }}
+      provisioner:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "registry.k8s.io" "repository" "sig-storage/csi-provisioner" "context" .) }}
+      replicaCount: 1
+      httpMetrics:
+        enabled: false
+    nodeplugin:
+      plugin:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "quay.io" "repository" "cephcsi/cephcsi" "context" .) }}
+      registrar:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "registry.k8s.io" "repository" "sig-storage/csi-node-driver-registrar" "context" .) }}
+      httpMetrics:
+        enabled: false
