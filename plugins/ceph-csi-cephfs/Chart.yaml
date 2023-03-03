@@ -1,0 +1,14 @@
+apiVersion: v2
+name: ceph-csi-cephfs
+version: 3.7.0
+appVersion: 3.7.2
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: CephFS csi插件既可以提供新的 CephFS 卷，也可以将现有卷附加和挂载到工作负载。
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: ceph-csi-cephfs
+  plugins.kubegems.io/category: kubernetes/存储插件
+

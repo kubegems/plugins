@@ -1,0 +1,70 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: openebs
+  namespace: {{ .Release.Namespace }}
+spec:
+  kind: helm
+  url: https://github.com/openebs/charts/releases/download/openebs-{{ .Chart.AppVersion }}/openebs-{{ .Chart.AppVersion }}.tgz
+  path: openebs/charts/cstor
+  version: {{ .Chart.AppVersion }}
+  values:
+    cleanup:
+      image:
+        {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "bitnami/kubectl" "context" .) }}
+    admissionServer:
+      image:
+        {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cstor-webhook" "context" .) }}
+    csiNode:
+      driverRegistrar:
+        image:
+          {{ include "common.images.registry" . }}/
+          {{ include "common.images.repository" ( dict "repository" "sig-storage/csi-node-driver-registrar" "context" .) }}
+    cstorCSIPlugin:
+      image:
+        {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cstor-csi-driver" "context" .) }}
+    csiController:
+      resizer:
+        image:
+          {{ include "common.images.registry" . }}/
+          {{ include "common.images.repository" ( dict "repository" "sig-storage/csi-resizer" "context" .) }}
+      snapshotter:
+        image:
+          {{ include "common.images.registry" . }}/
+          {{ include "common.images.repository" ( dict "repository" "sig-storage/csi-snapshotter" "context" .) }}
+      snapshotController:
+        image:
+          {{ include "common.images.registry" . }}/
+          {{ include "common.images.repository" ( dict "repository" "sig-storage/snapshot-controller" "context" .) }}
+      attacher:
+        image:
+          {{ include "common.images.registry" . }}/
+          {{ include "common.images.repository" ( dict "repository" "sig-storage/csi-attacher" "context" .) }}
+      provisioner:
+        image:
+          {{ include "common.images.registry" . }}/
+          {{ include "common.images.repository" ( dict "repository" "sig-storage/csi-provisioner" "context" .) }}
+    cvcOperator:
+      target:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cstor-istgt" "context" .) }}
+      volumeMgmt:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cstor-volume-manager" "context" .) }}
+      volumeExporter:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/m-exporter" "context" .) }}
+      image:
+        {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cvc-operator" "context" .) }}
+    cspcOperator:
+      poolManager:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cstor-pool-manager" "context" .) }}
+      cstorPool:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cstor-pool" "context" .) }}
+      cstorPoolExporter:
+        image:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/m-exporter" "context" .) }}
+      image:
+        {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "openebs/cspc-operator" "context" .) }}

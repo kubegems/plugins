@@ -1,0 +1,80 @@
+{
+  "type": "object",
+  "properties": {
+    "csiConfig": {
+      "type": "array",
+      "title": "Ceph Monitors",
+      "items": {
+        "type": "object",
+        "properties": {
+          "clusterID": {
+            "type": "string",
+            "title": "ClusterID",
+            "form": true
+          },
+          "monitors": {
+            "type": "array",
+            "title": "Monitors",
+            "items": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+			"additionalItems": true,
+			"minItems": 1,
+			"maxItems" :3,
+            "form": true
+          }
+        }
+      },
+      "form": true
+    },
+    "secret": {
+      "type": "object",
+      "title": "Ceph Keyring",
+      "properties": {
+        "adminID": {
+          "type": "string",
+          "title": "Admin ID",
+          "form": true
+        },
+        "adminKey": {
+          "type": "string",
+          "title": "Admin Key",
+          "form": true
+        }
+      },
+      "form": true
+    },
+    "storageClass": {
+      "type": "object",
+      "title": "Ceph RBD storageClass",
+      "properties": {
+        "clusterID": {
+          "type": "string",
+          "title": "Ceph clusterID",
+          "form": true
+        },
+        "fsName": {
+          "type": "string",
+          "title": "CephFS filesystem name into which the volume shall be created",
+          "form": true
+        },
+        "name": {
+          "type": "string",
+          "title": "StorageClass Name",
+          "default": "csi-cephfs-sc",
+          "form": true
+        }
+      },
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

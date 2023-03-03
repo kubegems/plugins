@@ -1,0 +1,26 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+# @title Ceph Keyring
+secret:
+  # @title Admin ID
+  adminID: ""
+  # @title Admin Key
+  adminKey: ""
+# @title Ceph RBD storageClass
+storageClass:
+  # @title StorageClass Name
+  name: "csi-cephfs-sc"
+  # @title Ceph clusterID
+  clusterID: ""
+  # @title CephFS filesystem name into which the volume shall be created
+  fsName: ""
+# @title Ceph Monitors
+csiConfig:
+  - # @title ClusterID
+    clusterID: ""
+    # @title Monitors
+    monitors:
+      - ""
+      - ""
+      - ""

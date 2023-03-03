@@ -1,0 +1,14 @@
+apiVersion: v2
+name: openebs
+version: 3.3.0
+appVersion: 3.3.0
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: OpenEBS-cStor是一个非常轻量且功能丰富的存储引擎。它提供企业级功能，包含同步数据复制、快照、克隆、数据自动精简配置、数据的高弹性、数据一致性以及按需增加容量或性能。
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: openebs
+  plugins.kubegems.io/category: kubernetes/存储插件
+

@@ -1,0 +1,63 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: longhorn-storage
+  namespace: {{ .Release.Namespace }}
+spec:
+  kind: helm
+  url: https://github.com/longhorn/charts/releases/download/longhorn-{{ .Chart.AppVersion }}/longhorn-{{ .Chart.AppVersion }}.tgz
+  path: longhorn
+  version: {{ .Chart.AppVersion }}
+  values:
+    csi:
+      attacherReplicaCount: 1
+      provisionerReplicaCount: 1
+      resizerReplicaCount: 1
+      snapshotterReplicaCount: 1
+    longhornAdmissionWebhook:
+      replicas: 1
+    longhornConversionWebhook:
+      replicas: 1
+    longhornUI:
+      replicas: 1
+    longhornRecoveryBackend:
+      replicas: 1
+    image:
+      csi:
+        attacher:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/csi-attacher" "context" .) }}
+        provisioner:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/csi-provisioner" "context" .) }}
+        nodeDriverRegistrar:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/csi-node-driver-registrar" "context" .) }}
+        resizer:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/csi-resizer" "context" .) }}
+        snapshotter:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/csi-snapshotter" "context" .) }}
+        livenessProbe:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/livenessprobe" "context" .) }}
+      longhorn:
+        engine:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/longhorn-engine" "context" .) }}
+        manager:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/longhorn-manager" "context" .) }}
+        ui:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/longhorn-ui" "context" .) }}
+        instanceManager:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/longhorn-instance-manager" "context" .) }}
+        shareManager:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/longhorn-share-manager" "context" .) }}
+        backingImageManager:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/backing-image-manager" "context" .) }}
+        supportBundleKit:
+          {{ include "common.images.repository" ( dict "registry" "docker.io" "repository" "longhornio/support-bundle-kit" "context" .) }}
+    service:
+      ui:
+        type: NodePort
+      manager:
+        type: NodePort
+    persistence:
+      defaultClass: false
+      defaultFsType: ext4
+      defaultMkfsParams: ""
+      defaultClassReplicaCount: 3
