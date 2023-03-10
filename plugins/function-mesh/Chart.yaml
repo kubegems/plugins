@@ -1,0 +1,13 @@
+apiVersion: v2
+name: function-mesh-operator
+version: 0.2.13
+appVersion: 0.11.1
+description: Function Mesh 是为事件流应用而设的 Serverless 框架。
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: function-mesh
+  plugins.kubegems.io/category: operator控制器/Serverless
