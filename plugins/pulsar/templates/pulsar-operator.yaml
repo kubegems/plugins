@@ -1,0 +1,42 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: pulsar-operator
+  namespace: pulsar
+spec:
+  kind: helm
+  url: https://charts.streamnative.io
+  chart: pulsar-operator
+  version: {{ .Chart.AppVersion }}
+  values:
+    components:
+      zookeeper: true
+      bookkeeper: true
+      pulsar: true
+    images:
+      registry: "docker.cloudsmith.io"
+      tag: "v0.15.2"
+    zookeeper:
+      resources:
+        limits:
+          cpu: {{ index .Values "pulsar-operator" "zookeeper" "resources" "limits" "cpu" }}
+          memory: {{ index .Values "pulsar-operator" "zookeeper" "resources" "limits" "memory" }}
+        requests:
+          cpu: 100m
+          memory: 128Mi
+    bookkeeper:
+      resources:
+        limits:
+          cpu: {{ index .Values "pulsar-operator" "bookkeeper" "resources" "limits" "cpu" }}
+          memory: {{ index .Values "pulsar-operator" "bookkeeper" "resources" "limits" "memory" }}
+        requests:
+          cpu: 100m
+          memory: 256Mi
+    pulsar:
+      resources:
+        limits:
+          cpu: {{ index .Values "pulsar-operator" "pulsar" "resources" "limits" "cpu" }}
+          memory: {{ index .Values "pulsar-operator" "pulsar" "resources" "limits" "memory" }}
+        requests:
+          cpu: 100m
+          memory: 256Mi
