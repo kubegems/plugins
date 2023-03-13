@@ -12,4 +12,4 @@ dependencies:
     version: 1.x.x
 description: KubeGems平台监控&告警控制器,包含Prometheus和AlertManager服务
 name: monitoring
-version: 44.3.0
+version: 44.3.1

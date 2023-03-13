@@ -70,4 +70,4 @@ kubegems-local:
 alertproxy:
   image:
     repository: kubegems/alertproxy
-    tag: v0.4.0
+    tag: v0.4.2
