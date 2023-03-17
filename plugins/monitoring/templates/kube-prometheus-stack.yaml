@@ -87,6 +87,10 @@ spec:
               volumeMode: Filesystem
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
+        {{- if .Values.prometheus.additionalScrapeConfigs }}
+        additionalScrapeConfigs:
+{{ toYaml .Values.prometheus.additionalScrapeConfigs | indent 10 }}
+        {{- end }}
       additionalServiceMonitors:
         - name: kubegems-local-agent
           namespaceSelector:

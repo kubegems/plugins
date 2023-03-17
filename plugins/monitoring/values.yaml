@@ -28,6 +28,11 @@ prometheus:
   # @title.en Maximum memory limit
   # @title.jp 最大メモリ制限
   maxMemory: "8Gi"
+  # @title additionalScrapeConfigs
+  # @title.en additionalScrapeConfigs
+  # @title.jp additionalScrapeConfigs
+  # @schema nullable=true;items={"type":"object","properties":{"job_name":{"title":"job_name","form":true,"type":"string"},"static_configs":{"type":"array","title":"static_configs","form":true,"items":{"type":"object","properties":{"targets":{"title":"targets","form":true,"type":"array","additionalItems":true,"items":[{"type":"string"}]}}}}}}
+  additionalScrapeConfigs: []
 # @title AlertManager 配置
 alertmanager:
   # @title 对外暴露地址

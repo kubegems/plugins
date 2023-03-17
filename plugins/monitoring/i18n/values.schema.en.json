@@ -61,6 +61,43 @@
       "type": "object",
       "title": "Prometheus 配置",
       "properties": {
+        "additionalScrapeConfigs": {
+          "type": "array",
+          "nullable": true,
+          "title": "additionalScrapeConfigs",
+          "items": {
+            "type": "object",
+            "properties": {
+              "job_name": {
+                "type": "string",
+                "title": "job_name",
+                "form": true
+              },
+              "static_configs": {
+                "type": "array",
+                "title": "static_configs",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "targets": {
+                      "type": "array",
+                      "title": "targets",
+                      "items": [
+                        {
+                          "type": "string"
+                        }
+                      ],
+                      "additionalItems": true,
+                      "form": true
+                    }
+                  }
+                },
+                "form": true
+              }
+            }
+          },
+          "form": true
+        },
         "externalHost": {
           "type": "string",
           "format": "hostname",
