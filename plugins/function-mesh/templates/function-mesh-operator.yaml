@@ -1,0 +1,35 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: function-mesh-operator
+  namespace: function-mesh
+spec:
+  kind: helm
+  url: http://charts.functionmesh.io/
+  chart: function-mesh-operator
+  version: {{ .Chart.Version }}
+  values:
+    rbac:
+      create: true
+    operatorImage: {{ index .Values "function-mesh-operator" "operatorImage" }}
+    imagePullPolicy: IfNotPresent
+    imagePullSecrets: []
+    controllerManager:
+      create: true
+      serviceAccount: function-mesh-controller-manager
+      replicas: {{ index .Values "function-mesh-operator" "controllerManager" "replicas" }}
+      resources:
+        requests:
+          cpu: 80m
+          memory: 50Mi
+      metrics:
+        port: 8080
+      healthProbe:
+        port: 8000
+      pprof:
+        enable: false
+        port: 8090
+      enableInitContainers: false
+      grpcurlPersistentVolumeClaim: ""
+    admissionWebhook:
+      enabled: true

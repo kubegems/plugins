@@ -1,0 +1,13 @@
+apiVersion: v2
+name: pulsar-operator
+version: 0.14.0
+appVersion: 0.14.2
+description: Apache Pulsar Operators 是下一代云原生分布式消息流平台 Pulsar 的控制器，它可以为用户快速搭建一个 Pulsar 集群。
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: pulsar
+  plugins.kubegems.io/category: operator控制器/消息中间件
