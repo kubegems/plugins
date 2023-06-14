@@ -9,6 +9,9 @@ spec:
   url: https://kubernetes-charts.banzaicloud.com
   version: {{ .Chart.AppVersion }}
   values:
+    rbac:
+      psp:
+        enabled: false
     image:
       # repository: ghcr.io/banzaicloud/logging-operator
       {{ include "common.images.repository" ( dict "registry" "ghcr.io" "repository" "banzaicloud/logging-operator" "context" .) }}

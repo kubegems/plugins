@@ -8,6 +8,8 @@ spec:
   url: https://grafana.github.io/helm-charts
   version: "{{ .Chart.AppVersion }}"
   values:
+    rbac:
+      pspEnabled: false
     adminPassword: "demo!@#admin"
     image:
       # repository: quay.io/prometheus/node-exporter
