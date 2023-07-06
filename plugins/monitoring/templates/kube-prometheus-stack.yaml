@@ -21,8 +21,13 @@ spec:
       image:
         # repository: k8s.gcr.io/kube-state-metrics/kube-state-metrics
         {{ include "common.images.repository" ( dict "registry" "k8s.gcr.io" "repository" "kube-state-metrics/kube-state-metrics" "context" .) }}
+      metricAnnotationsAllowList:
+      - pods=[pai.kubegems.io/sku-raw-name,volcano.sh/queue-name,pai.kubegems.io/creator]
+      - persistentvolumeclaims=[pai.kubegems.io/creator]
       metricLabelsAllowlist:
-        - namespaces=[*] # scrape namespace labels
+      - namespaces=[*]
+      - pods=[pai.kubegems.io/job-name,pai.kubegems.io/tenant]
+      - persistentvolumeclaims=[pai.kubegems.io/storageset-kind,pai.kubegems.io/tenant]
       prometheus:
         monitor:
           metricRelabelings:
