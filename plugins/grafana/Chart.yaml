@@ -12,4 +12,4 @@ dependencies:
   version: 1.x.x
 description: 开源的监控数据查询和可视化平台(插件自动生成监控大盘)
 name: grafana
-version: 6.29.7
+version: 6.29.8
