@@ -45,7 +45,7 @@ spec:
         providers:
         - name: 'prometheus'
           orgId: 1
-          folder: 'kubegems-monitoring'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
@@ -53,7 +53,7 @@ spec:
             path: /var/lib/grafana/dashboards/prometheus
         - name: 'alert-manager'
           orgId: 1
-          folder: 'kubegems-monitoring'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
@@ -61,7 +61,7 @@ spec:
             path: /var/lib/grafana/dashboards/alert-manager
         - name: 'node-exporter'
           orgId: 1
-          folder: 'kubegems-monitoring'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
@@ -125,7 +125,7 @@ spec:
             path: /var/lib/grafana/dashboards/etcd
         - name: 'resource-cluster'
           orgId: 1
-          folder: 'workload'
+          folder: 'KubeGems'
           type: file
           disableDeletion: false
           editable: true
@@ -133,7 +133,7 @@ spec:
             path: /var/lib/grafana/dashboards/resource-cluster
         - name: 'resource-ns-pod'
           orgId: 1
-          folder: 'workload'
+          folder: 'KubeGems'
           type: file
           disableDeletion: false
           editable: true
@@ -141,7 +141,7 @@ spec:
             path: /var/lib/grafana/dashboards/resource-ns-pod
         - name: 'resource-ns-workload'
           orgId: 1
-          folder: 'workload'
+          folder: 'KubeGems'
           type: file
           disableDeletion: false
           editable: true
@@ -149,7 +149,7 @@ spec:
             path: /var/lib/grafana/dashboards/resource-ns-workload
         - name: 'resource-node-pod'
           orgId: 1
-          folder: 'workload'
+          folder: 'KubeGems'
           type: file
           disableDeletion: false
           editable: true
@@ -157,7 +157,7 @@ spec:
             path: /var/lib/grafana/dashboards/resource-node-pod
         - name: 'logging'
           orgId: 1
-          folder: 'kubegems-logging'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
@@ -165,7 +165,7 @@ spec:
             path: /var/lib/grafana/dashboards/logging
         - name: 'fluentbit'
           orgId: 1
-          folder: 'kubegems-logging'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
@@ -173,7 +173,7 @@ spec:
             path: /var/lib/grafana/dashboards/fluentbit
         - name: 'fluentd'
           orgId: 1
-          folder: 'kubegems-logging'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
@@ -181,7 +181,7 @@ spec:
             path: /var/lib/grafana/dashboards/fluentd
         - name: 'loki'
           orgId: 1
-          folder: 'kubegems-logging'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
@@ -189,12 +189,20 @@ spec:
             path: /var/lib/grafana/dashboards/loki
         - name: 'opentelemetry'
           orgId: 1
-          folder: 'observabilitry'
+          folder: 'ObserGems'
           type: file
           disableDeletion: false
           editable: true
           options:
             path: /var/lib/grafana/dashboards/opentelemetry
+        - name: 'pai'
+          orgId: 1
+          folder: 'AIGems'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/pai
     dashboardsConfigMaps:
       prometheus: "prometheus"
       alert-manager: "alert-manager"
