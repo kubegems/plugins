@@ -1,0 +1,25 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+  clusterName: ""
+  storageClass: ""
+  runtime: ""
+
+metadata:
+  name: tidb-operator
+  namespace: tidb-operator
+
+tidbCluster:
+  replicas: 3
+  version: "v1.5.1"
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "2Gi"
+  limits:
+    cpu: "2"
+    memory: "2Gi"
+persistence:
+  enabled: true
+  size: 5Gi
