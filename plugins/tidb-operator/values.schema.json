@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "properties": {
+    "persistence": {
+      "type": "object",
+      "title": "持久化存储配置",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "是否启用持久化存储",
+          "default": true,
+          "form": true
+        },
+        "size": {
+          "type": "string",
+          "title": "持久化存储大小",
+          "default": "5Gi",
+          "form": true
+        }
+      },
+      "form": true
+    },
+    "resources": {
+      "type": "object",
+      "title": "tidb-operator 配置",
+      "properties": {
+        "requests": {
+          "type": "object",
+          "title": "资源配置",
+          "form": true
+        }
+      },
+      "form": true
+    },
+    "tidbCluster": {
+      "type": "object",
+      "title": "TiDB集群配置",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "title": "TiDB集群副本数",
+          "default": 3,
+          "form": true
+        }
+      },
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}

@@ -8,18 +8,30 @@ global:
 metadata:
   name: tidb-operator
   namespace: tidb-operator
-
+# @title TiDB集群配置
+# @title.en TiDB Cluster Configuration
 tidbCluster:
+  # @title TiDB集群副本数
+  # @title.en TiDB Cluster Replicas
   replicas: 3
   version: "v1.5.1"
-
+# @title tidb-operator 配置
+# @title.en tidb-operator Configuration
 resources:
+  # @title 资源配置
+  # @title.en resources Configuration
   requests:
     cpu: "500m"
     memory: "2Gi"
   limits:
     cpu: "2"
     memory: "2Gi"
+# @title 持久化存储配置
+# @title.en Persistence Storage Configuration
 persistence:
+  # @title 是否启用持久化存储
+  # @title.en Enable Persistence
   enabled: true
+  # @title 持久化存储大小
+  # @title.en Persistence Storage Size
   size: 5Gi
