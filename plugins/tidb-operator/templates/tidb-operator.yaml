@@ -9,14 +9,14 @@ spec:
   chart: tidb-operator
   version: "{{ .Chart.AppVersion }}"
   values:
-    namespace: "{{ .Release.Namespace }}"
+    namespace: {{ .Release.Namespace }}
     tidbCluster:
-      replicas: "{{ .Values.replicaCount }}"
-      version: "{{ .Values.tidbVersion }}"
+      replicaCount: {{ .Values.tidbCluster.replicaCount }}
+      tidbVersion: {{ .Values.tidbCluster.tidbVersion }}
     resources:
       requests:
-        cpu: "{{ .Values.cpuRequest }}"
-        memory: "{{ .Values.memoryRequest }}"
+        cpuRequest: {{ .Values.resources.requests.cpuRequest }}
+        memoryReques: {{ .Values.resources.requests.memoryRequest }}
       limits:
-        cpu: "{{ .Values.cpuLimit }}"
-        memory: "{{ .Values.memoryLimit }}"
+        cpuLimit: {{ .Values.resources.limits.cpuLimit }}
+        memoryLimit: {{ .Values.resources.limits.memoryLimit }}

@@ -4,7 +4,6 @@ global:
   clusterName: ""
   storageClass: ""
   runtime: ""
-
 metadata:
   name: tidb-operator
   namespace: tidb-operator
@@ -13,19 +12,19 @@ metadata:
 tidbCluster:
   # @title TiDB集群副本数
   # @title.en TiDB Cluster Replicas
-  replicas: 3
-  version: "v1.5.1"
+  replicaCount: 3
+  tidbVersion: v1.5.1
 # @title tidb-operator 配置
 # @title.en tidb-operator Configuration
 resources:
   # @title 资源配置
   # @title.en resources Configuration
   requests:
-    cpu: "500m"
-    memory: "2Gi"
+    cpuRequest: 500m
+    memoryRequest: 2Gi
   limits:
-    cpu: "2"
-    memory: "2Gi"
+    cpuLimit: 2
+    memoryLimit: 2Gi
 # @title 持久化存储配置
 # @title.en Persistence Storage Configuration
 persistence:

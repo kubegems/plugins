@@ -36,7 +36,7 @@
       "type": "object",
       "title": "TiDB Cluster Configuration",
       "properties": {
-        "replicas": {
+        "replicaCount": {
           "type": "integer",
           "title": "TiDB Cluster Replicas",
           "default": 3,
