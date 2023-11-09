@@ -1,0 +1,14 @@
+apiVersion: v2
+name: tidb-operator
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+description: 一个tidb-operator的插件
+type: application
+version: 1.5.1
+appVersion: 1.5.1
+annotations:
+  plugins.kubegems.io/is-plugin: "true"
+  plugins.kubegems.io/install-namespace: tidb-operator
+  plugins.kubegems.io/category: operator控制器/database

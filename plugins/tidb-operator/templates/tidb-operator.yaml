@@ -1,0 +1,22 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: tidb-operator
+  namespace: tidb-operator
+spec:
+  kind: helm
+  url: https://charts.pingcap.org
+  chart: tidb-operator
+  version: "{{ .Chart.AppVersion }}"
+  values:
+    namespace: {{ .Release.Namespace }}
+    tidbCluster:
+      replicaCount: {{ .Values.tidbCluster.replicaCount }}
+      tidbVersion: {{ .Values.tidbCluster.tidbVersion }}
+    resources:
+      requests:
+        cpuRequest: {{ .Values.resources.requests.cpuRequest }}
+        memoryReques: {{ .Values.resources.requests.memoryRequest }}
+      limits:
+        cpuLimit: {{ .Values.resources.limits.cpuLimit }}
+        memoryLimit: {{ .Values.resources.limits.memoryLimit }}

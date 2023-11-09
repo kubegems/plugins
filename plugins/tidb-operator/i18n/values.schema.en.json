@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "properties": {
+    "persistence": {
+      "type": "object",
+      "title": "Persistence Storage Configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Enable Persistence",
+          "default": true,
+          "form": true
+        },
+        "size": {
+          "type": "string",
+          "title": "Persistence Storage Size",
+          "default": "5Gi",
+          "form": true
+        }
+      },
+      "form": true
+    },
+    "resources": {
+      "type": "object",
+      "title": "tidb-operator Configuration",
+      "properties": {
+        "requests": {
+          "type": "object",
+          "title": "resources Configuration",
+          "form": true
+        }
+      },
+      "form": true
+    },
+    "tidbCluster": {
+      "type": "object",
+      "title": "TiDB Cluster Configuration",
+      "properties": {
+        "replicaCount": {
+          "type": "integer",
+          "title": "TiDB Cluster Replicas",
+          "default": 3,
+          "form": true
+        }
+      },
+      "form": true
+    }
+  },
+  "$schema": "http://json-schema.org/schema#"
+}
