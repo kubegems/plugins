@@ -171,3 +171,5 @@ spec:
     useExistingAlertingGroup:
       enabled: true
       configmapName: kubegems-loki-rules
+    rbac:
+      pspEnabled: false
