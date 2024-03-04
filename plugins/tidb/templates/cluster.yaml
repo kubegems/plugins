@@ -1,0 +1,44 @@
+apiVersion: pingcap.com/v1alpha1
+kind: TidbCluster
+metadata:
+  name: {{ include "tidb.cluster.name" .}}
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  version: {{ .Values.cluster.version }}
+  configUpdateStrategy: {{ .Values.cluster.configUpdateStrategy }}
+  pvReclaimPolicy: {{ .Values.cluster.pvReclaimPolicy }}
+  enableDynamicConfiguration: {{ .Values.cluster.enableDynamicConfiguration }}
+  pd: {{ .Values.cluster.pd | toYaml | nindent 4 }}
+    storageClassName: {{ .Values.global.storageClass | quote }}
+    # baseImage: pingcap/pd
+    {{ include "common.images.repository" ( dict "key" "baseImage" "registry" "docker.io" "repository" "pingcap/pd" "context" .) }}
+  tidb: {{ .Values.cluster.tidb | toYaml | nindent 4 }}
+    storageClassName: {{ .Values.global.storageClass | quote }}
+    # baseImage: pingcap/tidb
+    {{ include "common.images.repository" ( dict "key" "baseImage" "registry" "docker.io" "repository" "pingcap/tidb" "context" .) }}
+  tikv: {{ .Values.cluster.tikv | toYaml | nindent 4 }}
+    storageClassName: {{ .Values.global.storageClass | quote }}
+    # baseImage: pingcap/tikv
+    {{ include "common.images.repository" ( dict "key" "baseImage" "registry" "docker.io" "repository" "pingcap/tikv" "context" .) }}
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: {{ include "tidb.secret.name" .}}
+  namespace: {{ .Release.Namespace | quote }}
+data:
+  root: {{ include "tidb.root.password" . | b64enc | quote }}
+---
+apiVersion: pingcap.com/v1alpha1
+kind: TidbInitializer
+metadata:
+  name: {{ include "common.names.fullname" .}}-init
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  # image: tnir/mysqlclient
+  {{ include "common.images.repository" ( dict "key" "image" "registry" "docker.io" "repository" "tnir/mysqlclient" "context" .) }}
+  cluster:
+    namespace: {{ .Release.Namespace | quote }}
+    name: {{ include "tidb.cluster.name" .}}
+  passwordSecret: {{ include "tidb.secret.name" .}}

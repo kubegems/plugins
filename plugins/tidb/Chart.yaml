@@ -1,0 +1,9 @@
+apiVersion: v2
+name: tidb
+version: 1.0.0
+dependencies:
+  - name: common
+    repository: file://../common
+    version: 1.x.x
+appVersion: 7.5.0
+description: An open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads.

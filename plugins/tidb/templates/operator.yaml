@@ -1,0 +1,13 @@
+apiVersion: plugins.kubegems.io/v1beta1
+kind: Plugin
+metadata:
+  name: tidb-operator
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  chart: tidb-operator
+  kind: helm
+  url: https://charts.pingcap.org
+  version: {{ .Values.operator.version | quote }}
+  values: {{ .Values.operator | toYaml | nindent 4 }}
+    # operatorImage: pingcap/tidb-operator:v1.5.2
+    {{ include "common.images.repository" ( dict "key" "operatorImage" "registry" "docker.io" "repository" " pingcap/tidb-operator" "tag" .Values.operator.version "context" .) }}

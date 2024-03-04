@@ -1,0 +1,40 @@
+global:
+  imageRegistry: ""
+  imageRepository: ""
+  storageClass: ""
+operator:
+  version: v1.5.2
+  clusterScoped: false
+  scheduler:
+    create: false
+cluster:
+  version: v7.5.0
+  rootPassword: ""
+  configUpdateStrategy: RollingUpdate
+  pvReclaimPolicy: Retain
+  enableDynamicConfiguration: true
+  pd:
+    config: |
+      [dashboard]
+        internal-proxy = true
+    replicas: 3
+    maxFailoverCount: 0
+    requests:
+      storage: 10Gi
+    mountClusterClientSecret: true
+  tidb:
+    config: |
+      [performance]
+        tcp-keep-alive = true
+    replicas: 3
+    maxFailoverCount: 0
+    service:
+      type: ClusterIP
+  tikv:
+    config: |
+      log-level = "info"
+    replicas: 3
+    maxFailoverCount: 0
+    requests:
+      storage: 10Gi
+    mountClusterClientSecret: true
