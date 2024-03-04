@@ -22,6 +22,22 @@ cluster:
     requests:
       storage: 10Gi
     mountClusterClientSecret: true
+    ## Affinity for pod scheduling
+    ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+    affinity:
+      podAntiAffinity:
+        # prefer not to run pd pods on the same node which runs pd pods
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - pd
+                      - tikv
+              topologyKey: kubernetes.io/hostname
+            weight: 100
   tidb:
     config: |
       [performance]
@@ -30,6 +46,19 @@ cluster:
     maxFailoverCount: 0
     service:
       type: ClusterIP
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          # prefer not to run tidb pods on the same node which runs tidb pods
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - tidb
+              topologyKey: kubernetes.io/hostname
+            weight: 100
   tikv:
     config: |
       log-level = "info"
@@ -38,3 +67,17 @@ cluster:
     requests:
       storage: 10Gi
     mountClusterClientSecret: true
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          # prefer not to run tikv pods on the same node which runs pd pods
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - pd
+                      - tikv
+              topologyKey: kubernetes.io/hostname
+            weight: 100
