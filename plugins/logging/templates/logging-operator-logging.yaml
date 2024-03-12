@@ -65,7 +65,7 @@ spec:
           cpu: 100m
           memory: 128Mi
       security:
-        podSecurityPolicyCreate: true
+        podSecurityPolicyCreate: false
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:
@@ -126,7 +126,7 @@ spec:
       security:
         podSecurityContext:
           fsGroup: 101
-        podSecurityPolicyCreate: true
+        podSecurityPolicyCreate: false
         roleBasedAccessControlCreate: true
         securityContext:
           allowPrivilegeEscalation: false
