@@ -27,7 +27,7 @@ spec:
       metricLabelsAllowlist:
       - namespaces=[*]
       - pods=[pai.kubegems.io/job-name,pai.kubegems.io/tenant,app.kubernetes.io/instance]
-      - persistentvolumeclaims=[pai.kubegems.io/storageset-kind,pai.kubegems.io/tenant]
+      - persistentvolumeclaims=[pai.kubegems.io/storageset-kind,pai.kubegems.io/tenant,app.kubernetes.io/instance]
       prometheus:
         monitor:
           metricRelabelings:
