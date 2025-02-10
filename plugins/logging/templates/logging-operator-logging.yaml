@@ -5,7 +5,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   kind: helm
-  url: https://kubernetes-charts.banzaicloud.com
+  # url: oci://ghcr.io/kube-logging/helm-charts/logging-operator
+  # url: https://kubernetes-charts.banzaicloud.com
+  url: https://charts.kubegems.io/kube-logging
   version: {{ .Chart.AppVersion }}
   values:
     controlNamespace: {{ .Release.Namespace }}

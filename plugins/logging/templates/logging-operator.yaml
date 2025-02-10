@@ -6,7 +6,8 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   kind: helm
-  url: https://kubernetes-charts.banzaicloud.com
+  # url: https://kubernetes-charts.banzaicloud.com
+  url: https://charts.kubegems.io/kube-logging
   version: {{ .Chart.AppVersion }}
   values:
     rbac:
