@@ -33,7 +33,7 @@ spec:
           metricRelabelings:
             # drop this becase it has label service_name, which affect otel dashboard variables
             - sourceLabels: [__name__]
-              regex: kube_(ingress_path|persistentvolume_status_phase|pod_tolerations|pod_status_reason|pod_status_scheduled|pod_status_ready|persistentvolumeclaim_status_phase|configmap|_persistentvolumeclaim_status_phase).*
+              regex: kube_(ingress_path|persistentvolume_status_phase|pod_tolerations|pod_status_reason|pod_status_scheduled|persistentvolumeclaim_status_phase|configmap|_persistentvolumeclaim_status_phase).*
               action: drop
     grafana:
       enabled: false
