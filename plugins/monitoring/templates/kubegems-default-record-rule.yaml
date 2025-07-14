@@ -36,9 +36,9 @@ spec:
           expr: (gems_node_memory_usage_bytes / gems_node_memory_total_bytes) * 100
         # node storage
         - record: gems_node_disk_total_bytes
-          expr: max(node_filesystem_size_bytes{device=~"/dev/.*", device!~"/dev/loop\\d+"})by(node, device)
+          expr: max(node_filesystem_size_bytes{device=~"/dev/.*", device!~"/dev/loop\\d+"})by(node, device, mountpoint)
         - record: gems_node_disk_usage_bytes
-          expr: max(node_filesystem_size_bytes{device=~"/dev/.*", device!~"/dev/loop\\d+"} - node_filesystem_avail_bytes{device=~"/dev/.*", device!~"/dev/loop\\d+"})by(node, device)
+          expr: max(node_filesystem_size_bytes{device=~"/dev/.*", device!~"/dev/loop\\d+"} - node_filesystem_avail_bytes{device=~"/dev/.*", device!~"/dev/loop\\d+"})by(node, device, mountpoint)
         - record: gems_node_disk_usage_percent
           expr: (gems_node_disk_usage_bytes / gems_node_disk_total_bytes) * 100
         # node io
