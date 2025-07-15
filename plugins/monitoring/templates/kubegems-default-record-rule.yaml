@@ -140,15 +140,19 @@ spec:
     - name: pvc
       rules:
         - record: gems_pvc_usage_bytes
-          expr: sum(kubelet_volume_stats_used_bytes)by(namespace, node, persistentvolumeclaim)
+          expr: sum by (namespace, node, persistentvolumeclaim,storageclass) (kubelet_volume_stats_used_bytes  * on(namespace, persistentvolumeclaim) group_left(storageclass)
+kube_persistentvolumeclaim_info)
         - record: gems_pvc_total_bytes
-          expr: sum(kubelet_volume_stats_capacity_bytes)by(namespace, node, persistentvolumeclaim)
+          expr: sum by (namespace, node, persistentvolumeclaim,storageclass) (kubelet_volume_stats_capacity_bytes  * on(namespace, persistentvolumeclaim) group_left(storageclass)
+kube_persistentvolumeclaim_info)
         - record: gems_pvc_usage_percent
           expr: (gems_pvc_usage_bytes / gems_pvc_total_bytes) * 100
         - record: gems_pvc_inode_total
-          expr: sum(kubelet_volume_stats_inodes)by(namespace, node, persistentvolumeclaim)
+          expr: sum by (namespace, node, persistentvolumeclaim,storageclass) (kubelet_volume_stats_inodes  * on(namespace, persistentvolumeclaim) group_left(storageclass)
+kube_persistentvolumeclaim_info)
         - record: gems_pvc_inode_used
-          expr: sum(kubelet_volume_stats_inodes_used)by(namespace, node, persistentvolumeclaim)
+          expr: sum by (namespace, node, persistentvolumeclaim,storageclass) (kubelet_volume_stats_inodes_used  * on(namespace, persistentvolumeclaim) group_left(storageclass)
+kube_persistentvolumeclaim_info)
 
     - name: namespace
       rules:
